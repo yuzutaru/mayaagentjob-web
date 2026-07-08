@@ -1,0 +1,32 @@
+{
+  "src/data/dtos/UserDto.ts": {
+    "mtime": 1782905193.259011,
+    "ast_hash": "6a68de316ee385760ed37e5bfc592a8f",
+    "semantic_hash": "6a68de316ee385760ed37e5bfc592a8f"
+  },
+  "src/data/repositories/UserRepositoryImpl.ts": {
+    "mtime": 1782905195.2782695,
+    "ast_hash": "358f19dc53b214a111cb2ccf744e8872",
+    "semantic_hash": "358f19dc53b214a111cb2ccf744e8872"
+  },
+  "src/domain/entities/User.ts": {
+    "mtime": 1782905187.186928,
+    "ast_hash": "ca3a875fc742233515fa84ccf8ad39eb",
+    "semantic_hash": "ca3a875fc742233515fa84ccf8ad39eb"
+  },
+  "src/domain/repositories/UserRepository.ts": {
+    "mtime": 1782905189.2144175,
+    "ast_hash": "36d413a8bc06bff5c484e8f956eea7b9",
+    "semantic_hash": "36d413a8bc06bff5c484e8f956eea7b9"
+  },
+  "src/domain/usecases/GetUserProfileUseCase.ts": {
+    "mtime": 1782905191.2325268,
+    "ast_hash": "c582c91595a0c0eb4ab6c52a5fb30001",
+    "semantic_hash": "c582c91595a0c0eb4ab6c52a5fb30001"
+  },
+  "src/presentation/hooks/useUserProfile.ts": {
+    "mtime": 1782905197.2955158,
+    "ast_hash": "7f6a5f8e34bbb8c464e56d90f198f614",
+    "semantic_hash": "7f6a5f8e34bbb8c464e56d90f198f614"
+  }
+}

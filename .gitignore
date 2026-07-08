@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+dist/
+tmp/
+
+# Graphify cache
+graphify-out/cache/
+
+# OS files
+.DS_Store
