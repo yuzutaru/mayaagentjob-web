@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans;
+  }
+}
+
+/* Custom delicate dotted arrow styles for workflow section */
+.workflow-dotted-curve {
+  background-image: radial-gradient(circle, #22C55E 1.5px, transparent 1.5px);
+  background-size: 12px 12px;
+}

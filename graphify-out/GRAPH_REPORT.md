@@ -1,15 +1,16 @@
-# Graph Report - .  (2026-07-08)
+# Graph Report - mayaagentjob-web  (2026-07-10)
 
 ## Corpus Check
-- cluster-only mode — file stats not available
+- 30 files · ~5,641 words
+- Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 19 nodes · 41 edges · 3 communities (2 shown, 1 thin omitted)
+- 155 nodes · 196 edges · 14 communities
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `820a5165`
+- Built from commit: `1c901a62`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -17,45 +18,100 @@
 - [[_COMMUNITY_UserRepositoryImpl.ts|UserRepositoryImpl.ts]]
 - [[_COMMUNITY_User|User]]
 - [[_COMMUNITY_UserRepository|UserRepository]]
+- [[_COMMUNITY_compilerOptions|compilerOptions]]
+- [[_COMMUNITY_useTheme.tsx|useTheme.tsx]]
+- [[_COMMUNITY_Local Platform Blueprint React Web Portal (Maya)|Local Platform Blueprint: React Web Portal (Maya)]]
+- [[_COMMUNITY_Maya Web Portal (React Admin Dashboard)|Maya Web Portal (React Admin Dashboard)]]
+- [[_COMMUNITY_compilerOptions|compilerOptions]]
+- [[_COMMUNITY_MayaAgentJob Web Portal AI Rules & Protocol|MayaAgentJob Web Portal AI Rules & Protocol]]
+- [[_COMMUNITY_Claude Code AI Rules & Workspace Protocol (mayaagentjob-web)|Claude Code AI Rules & Workspace Protocol (mayaagentjob-web)]]
+- [[_COMMUNITY_Gemini CLI & AI Rules (mayaagentjob-web)|Gemini CLI & AI Rules (mayaagentjob-web)]]
 
 ## God Nodes (most connected - your core abstractions)
-1. `User` - 10 edges
-2. `UserRepository` - 6 edges
-3. `UserRepositoryImpl` - 4 edges
-4. `GetUserProfileUseCase` - 4 edges
-5. `mapUserDtoToDomain()` - 3 edges
-6. `UserDto` - 2 edges
-7. `UseUserProfileReturn` - 2 edges
-8. `useUserProfile()` - 2 edges
+1. `compilerOptions` - 18 edges
+2. `User` - 10 edges
+3. `Local Platform Blueprint: React Web Portal (Maya)` - 7 edges
+4. `UserRepository` - 6 edges
+5. `compilerOptions` - 6 edges
+6. `MayaAgentJob Web Portal AI Rules & Protocol` - 6 edges
+7. `Maya Web Portal (React Admin Dashboard)` - 6 edges
+8. `Claude Code AI Rules & Workspace Protocol (mayaagentjob-web)` - 5 edges
+9. `scripts` - 4 edges
+10. `UserRepositoryImpl` - 4 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `UserRepositoryImpl` --implements--> `UserRepository`  [EXTRACTED]
-  src/data/repositories/UserRepositoryImpl.ts → src/domain/repositories/UserRepository.ts
 - `UseUserProfileReturn` --references--> `User`  [EXTRACTED]
   src/presentation/hooks/useUserProfile.ts → src/domain/entities/User.ts
+- `UserRepositoryImpl` --implements--> `UserRepository`  [EXTRACTED]
+  src/data/repositories/UserRepositoryImpl.ts → src/domain/repositories/UserRepository.ts
+- `JobCategoriesBarProps` --references--> `JobCategoryCardContract`  [EXTRACTED]
+  src/presentation/components/home/JobCategoriesBar.tsx → src/domain/entities/HomePortalContract.ts
+- `PopularVacanciesSectionProps` --references--> `PopularVacancyContract`  [EXTRACTED]
+  src/presentation/components/home/PopularVacanciesSection.tsx → src/domain/entities/HomePortalContract.ts
+- `HowWeWorkSectionProps` --references--> `HowWeWorkStepContract`  [EXTRACTED]
+  src/presentation/components/home/HowWeWorkSection.tsx → src/domain/entities/HomePortalContract.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (3 total, 1 thin omitted)
+## Communities (14 total, 0 thin omitted)
 
 ### Community 0 - "UserRepositoryImpl.ts"
-Cohesion: 0.43
-Nodes (3): mapUserDtoToDomain(), UserDto, UserRepositoryImpl
+Cohesion: 0.24
+Nodes (8): mapUserDtoToDomain(), UserDto, UserRepositoryImpl, User, UserRepository, GetUserProfileUseCase, useUserProfile(), UseUserProfileReturn
+
+### Community 1 - "User"
+Cohesion: 0.12
+Nodes (22): homePortalMockData, CtaBannerContract, FooterColumnContract, HomePortalContract, HowWeWorkStepContract, JobCategoryCardContract, PopularVacancyContract, QuickLinkItemContract (+14 more)
 
 ### Community 2 - "UserRepository"
+Cohesion: 0.09
+Nodes (21): dependencies, lucide-react, react, react-dom, devDependencies, autoprefixer, postcss, tailwindcss (+13 more)
+
+### Community 3 - "compilerOptions"
+Cohesion: 0.09
+Nodes (21): compilerOptions, allowImportingTsExtensions, baseUrl, isolatedModules, jsx, lib, module, moduleResolution (+13 more)
+
+### Community 4 - "useTheme.tsx"
+Cohesion: 0.23
+Nodes (8): App(), HomeNavbar(), ThemeContext, ThemeContextType, ThemeMode, ThemeProvider(), useTheme(), HomeLandingPage()
+
+### Community 5 - "Local Platform Blueprint: React Web Portal (Maya)"
+Cohesion: 0.18
+Nodes (10): Core Architecture & Multi-Repo Ecosystem, 🎨 Design System: Web Desktop Blue & White, Global System Map: MayaAgentJob, Local Platform Blueprint: React Web Portal (Maya), Local Project Directory Architecture, 🔒 Session & Entitlement Handling, 📡 Shared TypeScript Contracts, Strict Local Rules for Code Generation (+2 more)
+
+### Community 6 - "Maya Web Portal (React Admin Dashboard)"
+Cohesion: 0.22
+Nodes (8): 🏗️ Clean Architecture & Directory Structure, 🎨 Desktop Layout: Split-Pane Master-Detail Grid, Maya Web Portal (React Admin Dashboard), 🏗️ Repository Role & Platform Context, 🔒 Session & Entitlement Handling, 🛠️ Technical Stack, The 2026 Testing Guarantee (100% Pure Domain), ⚡ Tooling & Token Optimization
+
+### Community 7 - "compilerOptions"
+Cohesion: 0.25
+Nodes (7): compilerOptions, allowSyntheticDefaultImports, composite, module, moduleResolution, skipLibCheck, include
+
+### Community 8 - "MayaAgentJob Web Portal AI Rules & Protocol"
+Cohesion: 0.29
+Nodes (6): 1. Unified Multi-Repo Ecosystem & Architecture, 2. Mandatory Platform Context Loading, 3. Clean Architecture & The 2026 Testing Guarantee, 4. Platform-Specific Architectural Boundaries, 5. Autonomous Planning Protocol, MayaAgentJob Web Portal AI Rules & Protocol
+
+### Community 9 - "Claude Code AI Rules & Workspace Protocol (mayaagentjob-web)"
+Cohesion: 0.33
+Nodes (5): 🏗️ Architectural Boundaries, Claude Code AI Rules & Workspace Protocol (mayaagentjob-web), 🎨 Design System & CSS Rules, ⚡ Development & Build Commands, ⚡ Token Optimization (RTK)
+
+### Community 10 - "Gemini CLI & AI Rules (mayaagentjob-web)"
 Cohesion: 0.40
-Nodes (3): UserRepository, GetUserProfileUseCase, useUserProfile()
+Nodes (4): Gemini CLI & AI Rules (mayaagentjob-web), 📋 Mandatory Workflow: Platform Context Loading, 🔒 Strict Local Rules & Constraints, ⚡ Tooling: RTK Usage
 
 ## Knowledge Gaps
-- **1 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **73 isolated node(s):** `name`, `private`, `version`, `type`, `dev` (+68 more)
+  These have ≤1 connection - possible missing edges or undocumented components.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `User` connect `User` to `UserRepositoryImpl.ts`, `UserRepository`?**
-  _High betweenness centrality (0.306) - this node is a cross-community bridge._
-- **Why does `UserRepository` connect `UserRepository` to `UserRepositoryImpl.ts`, `User`?**
-  _High betweenness centrality (0.148) - this node is a cross-community bridge._
-- **Why does `UserRepositoryImpl` connect `UserRepositoryImpl.ts` to `UserRepository`?**
-  _High betweenness centrality (0.128) - this node is a cross-community bridge._
+- **What connects `name`, `private`, `version` to the rest of the system?**
+  _73 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `User` be split into smaller, more focused modules?**
+  _Cohesion score 0.11612903225806452 - nodes in this community are weakly interconnected._
+- **Should `UserRepository` be split into smaller, more focused modules?**
+  _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
+- **Should `compilerOptions` be split into smaller, more focused modules?**
+  _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
