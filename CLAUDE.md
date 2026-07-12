@@ -47,6 +47,9 @@ All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clea
    - Do **NOT** write Stripe form elements, checkout buttons, or invoice gateways in the web dashboard.
    - Entitlements must be read directly from the user profile: `profiles.subscription_status`.
 
+4. **Autonomous Planning Protocol**:
+   - Always output an Implementation Plan and Checklist (`task.md`) before writing any UI routes, layouts, or data hooks. Refer to [MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md](file:///Users/yuzutaru/Development/mayaagentjob-workspace/MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md) in the workspace root as a guideline.
+
 ---
 
 ## 🎨 Design System & Split-Pane Layout Rules

@@ -40,4 +40,4 @@ Before working on any feature:
 
 ## 5. Autonomous Planning Protocol
 
-- Always generate an Implementation Plan and a task checklist (`task.md`) before writing code changes to ensure all changes are tracked and consistent.
+- Always generate an Implementation Plan and a task checklist (`task.md`) before writing code changes to ensure all changes are tracked and consistent. Refer to [MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md](file:///Users/yuzutaru/Development/mayaagentjob-workspace/MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md) in the workspace root as a guideline.

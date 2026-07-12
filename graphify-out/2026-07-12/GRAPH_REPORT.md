@@ -1,16 +1,16 @@
-# Graph Report - mayaagentjob-web  (2026-07-12)
+# Graph Report - mayaagentjob-web  (2026-07-10)
 
 ## Corpus Check
-- 30 files · ~5,768 words
+- 30 files · ~5,641 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 156 nodes · 197 edges · 14 communities
+- 155 nodes · 196 edges · 14 communities
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0d7a3c74`
+- Built from commit: `1c901a62`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -81,8 +81,8 @@ Cohesion: 0.18
 Nodes (10): Core Architecture & Multi-Repo Ecosystem, 🎨 Design System: Web Desktop Blue & White, Global System Map: MayaAgentJob, Local Platform Blueprint: React Web Portal (Maya), Local Project Directory Architecture, 🔒 Session & Entitlement Handling, 📡 Shared TypeScript Contracts, Strict Local Rules for Code Generation (+2 more)
 
 ### Community 6 - "Maya Web Portal (React Admin Dashboard)"
-Cohesion: 0.20
-Nodes (9): 🏗️ Clean Architecture & Directory Structure, 🎨 Desktop Layout: Split-Pane Master-Detail Grid, Graphify Code Knowledge Graph, Maya Web Portal (React Admin Dashboard), 🏗️ Repository Role & Platform Context, 🔒 Session & Entitlement Handling, 🛠️ Technical Stack, The 2026 Testing Guarantee (100% Pure Domain) (+1 more)
+Cohesion: 0.22
+Nodes (8): 🏗️ Clean Architecture & Directory Structure, 🎨 Desktop Layout: Split-Pane Master-Detail Grid, Maya Web Portal (React Admin Dashboard), 🏗️ Repository Role & Platform Context, 🔒 Session & Entitlement Handling, 🛠️ Technical Stack, The 2026 Testing Guarantee (100% Pure Domain), ⚡ Tooling & Token Optimization
 
 ### Community 7 - "compilerOptions"
 Cohesion: 0.25
@@ -94,11 +94,11 @@ Nodes (6): 1. Unified Multi-Repo Ecosystem & Architecture, 2. Mandatory Platform
 
 ### Community 9 - "Claude Code AI Rules & Workspace Protocol (mayaagentjob-web)"
 Cohesion: 0.33
-Nodes (5): 🏗️ Architectural Boundaries & Synchronized Contracts, Claude Code AI Rules & Workspace Protocol (mayaagentjob-web), 🎨 Design System & Split-Pane Layout Rules, ⚡ Development & Build Commands, ⚡ Tooling: RTK & Graphify Usage
+Nodes (5): 🏗️ Architectural Boundaries, Claude Code AI Rules & Workspace Protocol (mayaagentjob-web), 🎨 Design System & CSS Rules, ⚡ Development & Build Commands, ⚡ Token Optimization (RTK)
 
 ### Community 10 - "Gemini CLI & AI Rules (mayaagentjob-web)"
 Cohesion: 0.40
-Nodes (4): Gemini CLI & AI Rules (mayaagentjob-web), 📋 Mandatory Workflow: Platform Context Loading, 🔒 Strict Local Rules & Constraints, ⚡ Tooling: RTK & Graphify Usage
+Nodes (4): Gemini CLI & AI Rules (mayaagentjob-web), 📋 Mandatory Workflow: Platform Context Loading, 🔒 Strict Local Rules & Constraints, ⚡ Tooling: RTK Usage
 
 ## Knowledge Gaps
 - **73 isolated node(s):** `name`, `private`, `version`, `type`, `dev` (+68 more)

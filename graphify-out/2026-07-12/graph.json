@@ -1384,34 +1384,34 @@
       "norm_label": "\u26a1 development & build commands"
     },
     {
-      "label": "\ud83c\udfd7\ufe0f Architectural Boundaries & Synchronized Contracts",
+      "label": "\ud83c\udfd7\ufe0f Architectural Boundaries",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L31",
+      "source_location": "L33",
       "_origin": "ast",
-      "id": "claude_architectural_boundaries_synchronized_contracts",
+      "id": "claude_architectural_boundaries",
       "community": 9,
-      "norm_label": "\ud83c\udfd7\ufe0f architectural boundaries & synchronized contracts"
+      "norm_label": "\ud83c\udfd7\ufe0f architectural boundaries"
     },
     {
-      "label": "\ud83c\udfa8 Design System & Split-Pane Layout Rules",
+      "label": "\ud83c\udfa8 Design System & CSS Rules",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L55",
+      "source_location": "L53",
       "_origin": "ast",
-      "id": "claude_design_system_split_pane_layout_rules",
+      "id": "claude_design_system_css_rules",
       "community": 9,
-      "norm_label": "\ud83c\udfa8 design system & split-pane layout rules"
+      "norm_label": "\ud83c\udfa8 design system & css rules"
     },
     {
-      "label": "\u26a1 Tooling: RTK & Graphify Usage",
+      "label": "\u26a1 Token Optimization (RTK)",
       "file_type": "document",
       "source_file": "CLAUDE.md",
-      "source_location": "L63",
+      "source_location": "L61",
       "_origin": "ast",
-      "id": "claude_tooling_rtk_graphify_usage",
+      "id": "claude_token_optimization_rtk",
       "community": 9,
-      "norm_label": "\u26a1 tooling: rtk & graphify usage"
+      "norm_label": "\u26a1 token optimization (rtk)"
     },
     {
       "label": "GEMINI.md",
@@ -1447,21 +1447,21 @@
       "label": "\ud83d\udd12 Strict Local Rules & Constraints",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L17",
+      "source_location": "L16",
       "_origin": "ast",
       "id": "gemini_strict_local_rules_constraints",
       "community": 10,
       "norm_label": "\ud83d\udd12 strict local rules & constraints"
     },
     {
-      "label": "\u26a1 Tooling: RTK & Graphify Usage",
+      "label": "\u26a1 Tooling: RTK Usage",
       "file_type": "document",
       "source_file": "GEMINI.md",
-      "source_location": "L37",
+      "source_location": "L36",
       "_origin": "ast",
-      "id": "gemini_tooling_rtk_graphify_usage",
+      "id": "gemini_tooling_rtk_usage",
       "community": 10,
-      "norm_label": "\u26a1 tooling: rtk & graphify usage"
+      "norm_label": "\u26a1 tooling: rtk usage"
     },
     {
       "label": "README.md",
@@ -1537,7 +1537,7 @@
       "label": "The 2026 Testing Guarantee (100% Pure Domain)",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L53",
+      "source_location": "L52",
       "_origin": "ast",
       "id": "readme_the_2026_testing_guarantee_100_pure_domain",
       "community": 6,
@@ -1547,21 +1547,11 @@
       "label": "\u26a1 Tooling & Token Optimization",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L60",
+      "source_location": "L59",
       "_origin": "ast",
       "id": "readme_tooling_token_optimization",
       "community": 6,
       "norm_label": "\u26a1 tooling & token optimization"
-    },
-    {
-      "label": "Graphify Code Knowledge Graph",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "L71",
-      "_origin": "ast",
-      "id": "readme_graphify_code_knowledge_graph",
-      "community": 6,
-      "norm_label": "graphify code knowledge graph"
     }
   ],
   "links": [
@@ -3440,20 +3430,20 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L31",
+      "source_location": "L33",
       "weight": 1.0,
       "source": "claude_claude_code_ai_rules_workspace_protocol_mayaagentjob_web",
-      "target": "claude_architectural_boundaries_synchronized_contracts",
+      "target": "claude_architectural_boundaries",
       "confidence_score": 1.0
     },
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L55",
+      "source_location": "L53",
       "weight": 1.0,
       "source": "claude_claude_code_ai_rules_workspace_protocol_mayaagentjob_web",
-      "target": "claude_design_system_split_pane_layout_rules",
+      "target": "claude_design_system_css_rules",
       "confidence_score": 1.0
     },
     {
@@ -3470,10 +3460,10 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": "L63",
+      "source_location": "L61",
       "weight": 1.0,
       "source": "claude_claude_code_ai_rules_workspace_protocol_mayaagentjob_web",
-      "target": "claude_tooling_rtk_graphify_usage",
+      "target": "claude_token_optimization_rtk",
       "confidence_score": 1.0
     },
     {
@@ -3500,7 +3490,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "GEMINI.md",
-      "source_location": "L17",
+      "source_location": "L16",
       "weight": 1.0,
       "source": "gemini_gemini_cli_ai_rules_mayaagentjob_web",
       "target": "gemini_strict_local_rules_constraints",
@@ -3510,10 +3500,10 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "GEMINI.md",
-      "source_location": "L37",
+      "source_location": "L36",
       "weight": 1.0,
       "source": "gemini_gemini_cli_ai_rules_mayaagentjob_web",
-      "target": "gemini_tooling_rtk_graphify_usage",
+      "target": "gemini_tooling_rtk_usage",
       "confidence_score": 1.0
     },
     {
@@ -3570,7 +3560,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L60",
+      "source_location": "L59",
       "weight": 1.0,
       "source": "readme_maya_web_portal_react_admin_dashboard",
       "target": "readme_tooling_token_optimization",
@@ -3590,23 +3580,13 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "README.md",
-      "source_location": "L53",
+      "source_location": "L52",
       "weight": 1.0,
       "source": "readme_clean_architecture_directory_structure",
       "target": "readme_the_2026_testing_guarantee_100_pure_domain",
       "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "README.md",
-      "source_location": "L71",
-      "weight": 1.0,
-      "source": "readme_tooling_token_optimization",
-      "target": "readme_graphify_code_knowledge_graph",
-      "confidence_score": 1.0
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "0d7a3c74f6cc90e5a32df6369603d8cd19d83bdd"
+  "built_at_commit": "1c901a62472cd80935c53e053a7a14c91d5b3e89"
 }

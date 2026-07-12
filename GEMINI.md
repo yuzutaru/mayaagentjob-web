@@ -30,7 +30,7 @@ Before writing code or proposing changes:
    - All network and Supabase transactions must reside in `src/data/` following interfaces defined in `src/domain/`.
 
 4. **Autonomous Planning Protocol**:
-   - Always output an Implementation Plan and Checklist (`task.md`) before writing any UI routes, layouts, or data hooks.
+   - Always output an Implementation Plan and Checklist (`task.md`) before writing any UI routes, layouts, or data hooks. Refer to [MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md](file:///Users/yuzutaru/Development/mayaagentjob-workspace/MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md) in the workspace root as a guideline.
 
 ---
 
