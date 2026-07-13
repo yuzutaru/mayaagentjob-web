@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Briefcase, Sun, Moon, ChevronDown } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
+import { CandidateOnboardingModal } from '../auth/CandidateOnboardingModal';
 
 export const HomeNavbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
+
+  const handleOpenOnboarding = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setIsOnboardingOpen(true);
+  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/40 dark:border-slate-800/60 bg-white/80 dark:bg-[#090A0E]/85 backdrop-blur-md transition-colors duration-300">
@@ -70,6 +77,7 @@ export const HomeNavbar: React.FC = () => {
 
           <a
             href="#login"
+            onClick={handleOpenOnboarding}
             className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors px-2 py-1.5"
           >
             Login
@@ -77,12 +85,25 @@ export const HomeNavbar: React.FC = () => {
 
           <a
             href="#signup"
+            onClick={handleOpenOnboarding}
             className="px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm shadow-md shadow-emerald-500/30 hover:shadow-emerald-500/50 active:scale-95 transition-all duration-200"
           >
             Sign Up
           </a>
         </div>
       </div>
+
+      {/* Onboarding Wizard Modal */}
+      <CandidateOnboardingModal
+        isOpen={isOnboardingOpen}
+        onClose={() => setIsOnboardingOpen(false)}
+        onSuccess={(profile) => {
+          console.log('Onboarding process completed with profile:', profile);
+          // Auto close after 2.5s simulation completion
+          setTimeout(() => setIsOnboardingOpen(false), 2500);
+        }}
+      />
     </header>
   );
 };
+
