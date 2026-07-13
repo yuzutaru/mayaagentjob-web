@@ -1,3 +1,5 @@
+import { themeColors } from './src/core/theme/themeTokens';
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -9,12 +11,16 @@ export default {
     extend: {
       colors: {
         career: {
-          dark: '#090A0E',
-          cardDark: '#151821',
-          cardDarkHover: '#1E222E',
-          green: '#22C55E',
-          greenLight: '#4ADE80',
-          greenDark: '#16A34A',
+          dark: themeColors.dark.background,
+          cardDark: themeColors.dark.card,
+          cardDarkHover: themeColors.dark.cardHover,
+          modalDark: themeColors.dark.modal,
+          footerDark: themeColors.dark.footer,
+          gradientStart: themeColors.dark.gradientStart,
+          gradientEnd: themeColors.dark.gradientEnd,
+          green: themeColors.brand.green,
+          greenLight: themeColors.brand.greenLight,
+          greenDark: themeColors.brand.greenDark,
         }
       },
       fontFamily: {
@@ -24,3 +30,4 @@ export default {
   },
   plugins: [],
 }
+

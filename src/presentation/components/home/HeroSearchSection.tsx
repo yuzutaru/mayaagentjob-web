@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Search, MapPin, ArrowRight, ChevronDown, Laptop, Sparkles } from 'lucide-react';
+import { useTranslation } from '../../../core/i18n/TranslationContext';
 
 interface HeroSearchSectionProps {
   headline: string;
@@ -14,6 +15,7 @@ export const HeroSearchSection: React.FC<HeroSearchSectionProps> = ({
   quote,
   quoteHighlightWord,
 }) => {
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [location, setLocation] = useState('NewTown, Kolkata');
 
@@ -64,7 +66,7 @@ export const HeroSearchSection: React.FC<HeroSearchSectionProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Job title or keyword"
+              placeholder={t('hero.placeholderKeyword')}
               className="w-full bg-transparent text-sm sm:text-base text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none"
             />
           </div>

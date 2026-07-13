@@ -1,5 +1,6 @@
 import React from 'react';
 import { UserPlus, Upload, Search, CheckCircle2, LucideIcon } from 'lucide-react';
+import { useTranslation } from '../../../core/i18n/TranslationContext';
 import { HowWeWorkStepContract } from '../../../domain/entities/HomePortalContract';
 
 interface HowWeWorkSectionProps {
@@ -14,13 +15,15 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 export const HowWeWorkSection: React.FC<HowWeWorkSectionProps> = ({ steps }) => {
+  const { t } = useTranslation();
+
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-100/60 dark:bg-[#151821]/40 border-y border-slate-200/60 dark:border-slate-800/60">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-100/60 dark:bg-career-cardDark/40 border-y border-slate-200/60 dark:border-slate-800/60">
       <div className="max-w-6xl mx-auto">
         {/* Section Heading */}
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-            How we work
+            {t('howItWorks.title')}
           </h2>
         </div>
 
@@ -57,7 +60,7 @@ export const HowWeWorkSection: React.FC<HowWeWorkSectionProps> = ({ steps }) => 
                   className={`relative z-10 w-full h-full flex flex-col items-center justify-center p-8 rounded-3xl transition-all duration-300 ${
                     isActive
                       ? 'bg-white dark:bg-white text-slate-900 shadow-2xl shadow-emerald-500/15 scale-105 border border-emerald-500/20'
-                      : 'hover:bg-white/60 dark:hover:bg-[#1E222E] text-slate-900 dark:text-white'
+                      : 'hover:bg-white/60 dark:hover:bg-career-cardDarkHover text-slate-900 dark:text-white'
                   }`}
                 >
                   {/* Icon Circle */}
@@ -65,7 +68,7 @@ export const HowWeWorkSection: React.FC<HowWeWorkSectionProps> = ({ steps }) => 
                     className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-md transition-transform duration-300 group-hover:scale-110 ${
                       isActive
                         ? 'bg-emerald-500 text-white shadow-emerald-500/30'
-                        : 'bg-white dark:bg-[#1E222E] text-emerald-500 border border-slate-200 dark:border-slate-700'
+                        : 'bg-white dark:bg-career-cardDarkHover text-emerald-500 border border-slate-200 dark:border-slate-700'
                     }`}
                   >
                     <IconComponent className="w-7 h-7" />
@@ -77,7 +80,7 @@ export const HowWeWorkSection: React.FC<HowWeWorkSectionProps> = ({ steps }) => 
                       isActive ? 'text-slate-900' : 'text-slate-900 dark:text-white'
                     }`}
                   >
-                    {step.title}
+                    {t(`workSteps.step${step.stepNumber}.title`) || step.title}
                   </h3>
 
                   {/* Step Description */}
@@ -86,7 +89,7 @@ export const HowWeWorkSection: React.FC<HowWeWorkSectionProps> = ({ steps }) => 
                       isActive ? 'text-slate-600' : 'text-slate-500 dark:text-slate-400'
                     }`}
                   >
-                    {step.description}
+                    {t(`workSteps.step${step.stepNumber}.desc`) || step.description}
                   </p>
                 </div>
               </div>

@@ -12,7 +12,7 @@ export const HomeLandingPage: React.FC = () => {
   const data = homePortalMockData;
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-[#090A0E] text-slate-900 dark:text-white transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-career-dark text-slate-900 dark:text-white transition-colors duration-300">
       {/* Navigation */}
       <HomeNavbar />
 

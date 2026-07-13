@@ -29,7 +29,13 @@ Before writing code or proposing changes:
    - UI views (`HomeLandingPage.tsx`) must never execute raw PostgREST queries or fetch queries directly.
    - All network and Supabase transactions must reside in `src/data/` following interfaces defined in `src/domain/`.
 
-4. **Autonomous Planning Protocol**:
+4. **Centralized Theme Token Adherence**:
+   - UI styles extending Tailwind configurations must map to design tokens declared in `src/core/theme/themeTokens.ts`. Avoid hardcoded layout parameters.
+
+5. **Multi-Language Web Localization (i18n)**:
+   - All text copy exposed in layouts must use `useTranslation()` from `src/core/i18n/TranslationContext.tsx`. Do not write hardcoded labels or placeholders.
+
+6. **Autonomous Planning Protocol**:
    - Always output an Implementation Plan and Checklist (`task.md`) before writing any UI routes, layouts, or data hooks. Refer to [MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md](file:///Users/yuzutaru/Development/mayaagentjob-workspace/MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md) in the workspace root as a guideline.
 
 ---

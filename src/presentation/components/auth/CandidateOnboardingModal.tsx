@@ -18,6 +18,7 @@ import {
 import { useCandidateOnboardingViewModel } from '../../hooks/useCandidateOnboardingViewModel';
 import { MockCandidateOnboardingRepository } from '../../../data/repositories/MockCandidateOnboardingRepository';
 import { ParsedResumeProfile } from '../../../domain/entities/CandidateOnboardingContract';
+import { useTranslation } from '../../../core/i18n/TranslationContext';
 
 interface CandidateOnboardingModalProps {
   isOpen: boolean;
@@ -36,6 +37,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
     region: '',
   });
 
+  const { t } = useTranslation();
   const repository = new MockCandidateOnboardingRepository();
   const viewModel = useCandidateOnboardingViewModel(repository, onSuccess);
 
@@ -98,9 +100,9 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
 
   const renderStepsIndicator = () => {
     const steps = [
-      { id: 'AUTH_SELECTION', label: 'Auth' },
-      { id: 'RESUME_INGESTION', label: 'CV Parse' },
-      { id: 'PROFILE_CALIBRATION', label: 'Calibrate' },
+      { id: 'AUTH_SELECTION', label: t('onboarding.stepAuth') },
+      { id: 'RESUME_INGESTION', label: t('onboarding.stepCvParse') },
+      { id: 'PROFILE_CALIBRATION', label: t('onboarding.stepCalibrate') },
     ];
 
     const currentStepIndex = steps.findIndex(s => s.id === viewModel.currentStep);
@@ -136,7 +138,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
 
   const modalContent = (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-sm p-4 sm:p-6 overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-white dark:bg-[#0F111A] border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden transition-all duration-300 my-auto">
+      <div className="relative w-full max-w-2xl bg-white dark:bg-career-modalDark border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden transition-all duration-300 my-auto">
         
         {/* Close Button */}
         <button
@@ -151,8 +153,8 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
           {/* Header */}
           {viewModel.currentStep !== 'COMPLETED' && (
             <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">Join Maya</h2>
-              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">Accelerate your job matching journey with AI</p>
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{t('onboarding.joinMaya')}</h2>
+              <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{t('onboarding.tagline')}</p>
             </div>
           )}
 
@@ -167,7 +169,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                 className="w-full py-3.5 px-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50 hover:bg-slate-100 dark:bg-slate-900/50 dark:hover:bg-slate-900 flex items-center justify-center gap-3 font-semibold text-slate-800 dark:text-slate-100 transition-all duration-200 active:scale-[0.99]"
               >
                 <Github className="w-5 h-5 text-slate-900 dark:text-white" />
-                <span>Continue with GitHub</span>
+                <span>{t('onboarding.continueGithub')}</span>
               </button>
 
               <button
@@ -175,7 +177,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                 className="w-full py-3.5 px-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50 hover:bg-slate-100 dark:bg-slate-900/50 dark:hover:bg-slate-900 flex items-center justify-center gap-3 font-semibold text-slate-800 dark:text-slate-100 transition-all duration-200 active:scale-[0.99]"
               >
                 <Linkedin className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                <span>Continue with LinkedIn</span>
+                <span>{t('onboarding.continueLinkedin')}</span>
               </button>
 
               <button
@@ -183,12 +185,12 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                 className="w-full py-3.5 px-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-slate-50 hover:bg-slate-100 dark:bg-slate-900/50 dark:hover:bg-slate-900 flex items-center justify-center gap-3 font-semibold text-slate-800 dark:text-slate-100 transition-all duration-200 active:scale-[0.99]"
               >
                 <Chrome className="w-5 h-5 text-red-500" />
-                <span>Continue with Google</span>
+                <span>{t('onboarding.continueGoogle')}</span>
               </button>
 
               <div className="flex items-center gap-4 my-6">
                 <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800"></div>
-                <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-widest">or</span>
+                <span className="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-widest">{t('onboarding.or')}</span>
                 <div className="flex-1 h-px bg-slate-200 dark:bg-slate-800"></div>
               </div>
 
@@ -197,7 +199,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                 className="w-full py-3.5 px-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center gap-3 font-semibold shadow-lg shadow-blue-600/25 transition-all duration-200 active:scale-[0.99]"
               >
                 <Mail className="w-5 h-5" />
-                <span>Sign Up with Email</span>
+                <span>{t('onboarding.signUpEmail')}</span>
               </button>
             </div>
           )}
@@ -210,9 +212,9 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                     <Loader2 className="w-16 h-16 text-emerald-500 animate-spin" />
                     <div className="absolute inset-0 flex items-center justify-center text-xs font-bold text-emerald-500">AI</div>
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Parsing Profile Details...</h3>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">{t('onboarding.parsingTitle')}</h3>
                   <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xs text-center">
-                    Maya is reading & Converting {viewModel.fileName} to match domain structures.
+                    {t('onboarding.parsingDesc', { fileName: viewModel.fileName || '' })}
                   </p>
                 </div>
               ) : (
@@ -234,10 +236,10 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                         <Upload className="w-6 h-6" />
                       </div>
                       <p className="text-base font-semibold text-slate-800 dark:text-slate-200">
-                        Drag & drop CV / Resume or LinkedIn PDF Export
+                        {t('onboarding.dragDropText')}
                       </p>
                       <p className="text-xs text-slate-400 dark:text-slate-500 mt-2">
-                        Supports PDF, DOCX up to 10MB
+                        {t('onboarding.dragDropSub')}
                       </p>
                     </label>
                   </div>
@@ -245,25 +247,25 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                   <div className="bg-blue-50/50 dark:bg-blue-950/20 rounded-xl p-4 flex gap-3 text-sm text-blue-700 dark:text-blue-300">
                     <Info className="w-5 h-5 shrink-0 mt-0.5" />
                     <div>
-                      <span className="font-semibold">LinkedIn Tip:</span> Export your profile page to PDF using LinkedIn's "More → Save to PDF" feature, and drag it here for instant import.
+                      <span className="font-semibold">{t('onboarding.linkedinTip')}</span> {t('onboarding.linkedinTipText')}
                     </div>
                   </div>
 
                   {/* Simulator Shortcuts */}
                   <div className="bg-slate-50 dark:bg-slate-900/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
-                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Simulator Quick-Picks:</span>
+                    <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t('onboarding.quickPicks')}</span>
                     <div className="flex flex-wrap gap-2 mt-2">
                       <button
                         onClick={() => triggerMockUpload('cv_software_engineer.pdf')}
                         className="text-xs px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-500 text-slate-700 dark:text-slate-200 font-medium transition-all"
                       >
-                        📄 Software Engineer CV
+                        {t('onboarding.softwareEngineerCv')}
                       </button>
                       <button
                         onClick={() => triggerMockUpload('linkedin_product_manager_export.pdf')}
                         className="text-xs px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:border-blue-500 text-slate-700 dark:text-slate-200 font-medium transition-all"
                       >
-                        🔵 LinkedIn PDF (Product Mgr)
+                        {t('onboarding.linkedinProductMgr')}
                       </button>
                     </div>
                   </div>
@@ -273,7 +275,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                       onClick={viewModel.skipResume}
                       className="text-sm font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
                     >
-                      Skip and Fill Manually
+                      {t('onboarding.skipManual')}
                     </button>
                   </div>
                 </>
@@ -286,13 +288,13 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
               <div className="bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 p-4 rounded-xl flex gap-3 text-sm">
                 <CheckCircle className="w-5 h-5 shrink-0 mt-0.5" />
                 <div>
-                  <span className="font-semibold">AI Profile Parsed successfully!</span> Review and refine your details below to ensure precise matching.
+                  <span className="font-semibold">{t('onboarding.aiParsedSuccess')}</span> {t('onboarding.aiParsedSuccessDesc')}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Full Name</label>
+                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">{t('onboarding.fullName')}</label>
                   <input
                     type="text"
                     value={viewModel.profile.fullName}
@@ -301,7 +303,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Email Address</label>
+                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">{t('onboarding.emailAddress')}</label>
                   <input
                     type="email"
                     value={viewModel.profile.email}
@@ -313,7 +315,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
 
               {/* Target Domains (Roles) */}
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Target Roles</label>
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">{t('onboarding.targetRoles')}</label>
                 <div className="flex flex-wrap gap-2 mb-2">
                   {viewModel.profile.targetDomains.map((tag) => (
                     <span key={tag} className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/50 dark:border-slate-700">
@@ -325,7 +327,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                 <div className="flex gap-2">
                   <input
                     type="text"
-                    placeholder="Add target role (e.g., Frontend Developer)"
+                    placeholder={t('onboarding.placeholderRoles')}
                     value={tagInputs.domain}
                     onChange={(e) => setTagInputs({ ...tagInputs, domain: e.target.value })}
                     onKeyDown={(e) => e.key === 'Enter' && handleAddTag('targetDomains', 'domain')}
@@ -342,7 +344,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
 
               {/* Technical Stack / Skills */}
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Technical Stack & Skills</label>
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">{t('onboarding.technicalStack')}</label>
                 <div className="flex flex-wrap gap-1.5 mb-2">
                   {viewModel.profile.technicalStack.map((tag) => (
                     <span key={tag} className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/40 text-blue-700 dark:text-blue-300 border border-blue-100 dark:border-blue-900/40">
@@ -354,7 +356,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                 <div className="flex gap-2">
                   <input
                     type="text"
-                    placeholder="Add technology or skill (e.g., React)"
+                    placeholder={t('onboarding.placeholderTech')}
                     value={tagInputs.tech}
                     onChange={(e) => setTagInputs({ ...tagInputs, tech: e.target.value })}
                     onKeyDown={(e) => e.key === 'Enter' && handleAddTag('technicalStack', 'tech')}
@@ -371,7 +373,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
 
               {/* Work Arrangement Selector */}
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Work Arrangements</label>
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">{t('onboarding.workArrangements')}</label>
                 <div className="flex gap-2">
                   {['Remote', 'Hybrid', 'On-site'].map((opt) => {
                     const active = viewModel.profile?.arrangements.includes(opt);
@@ -395,7 +397,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
 
               {/* Target Regions / Cities */}
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">Target Locations / Regions</label>
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">{t('onboarding.targetLocations')}</label>
                 <div className="flex flex-wrap gap-2 mb-2">
                   {viewModel.profile.targetRegions.map((tag) => (
                     <span key={tag} className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200/50 dark:border-slate-700">
@@ -407,11 +409,11 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                 <div className="flex gap-2">
                   <input
                     type="text"
-                    placeholder="Add location (e.g., Singapore)"
+                    placeholder={t('onboarding.placeholderLocations')}
                     value={tagInputs.region}
                     onChange={(e) => setTagInputs({ ...tagInputs, region: e.target.value })}
                     onKeyDown={(e) => e.key === 'Enter' && handleAddTag('targetRegions', 'region')}
-                    className="flex-1 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-sm"
+                    className="flex-1 px-4 py-2 rounded-xl border border-slate-200/50 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-sm"
                   />
                   <button
                     onClick={() => handleAddTag('targetRegions', 'region')}
@@ -424,7 +426,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
 
               {/* AI profile summary */}
               <div>
-                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">AI Profile Summary</label>
+                <label className="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">{t('onboarding.aiProfileSummary')}</label>
                 <textarea
                   value={viewModel.profile.aiSummary}
                   onChange={(e) => viewModel.updateProfileField('aiSummary', e.target.value)}
@@ -438,7 +440,7 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                   onClick={() => viewModel.reset()}
                   className="flex-1 py-3 px-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 font-semibold text-slate-600 dark:text-slate-300 transition-all text-sm"
                 >
-                  Start Over
+                  {t('onboarding.startOver')}
                 </button>
                 <button
                   onClick={viewModel.submitProfile}
@@ -448,11 +450,11 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                   {viewModel.isSubmitting ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Saving profile...</span>
+                      <span>{t('onboarding.savingProfile')}</span>
                     </>
                   ) : (
                     <>
-                      <span>Save & Complete Onboarding</span>
+                      <span>{t('onboarding.saveComplete')}</span>
                       <ArrowRight className="w-4 h-4" />
                     </>
                   )}
@@ -467,16 +469,16 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
                 <CheckCircle className="w-10 h-10" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">All Set! Onboarding Complete</h3>
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{t('onboarding.completedTitle')}</h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 max-w-sm">
-                  We've successfully updated your candidate profile preferences. Redirecting you to your curated AI job matching feed...
+                  {t('onboarding.completedDesc')}
                 </p>
               </div>
               <button
                 onClick={onClose}
                 className="px-6 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm shadow-md transition-all active:scale-95"
               >
-                Let's Find Jobs!
+                {t('onboarding.letsFindJobs')}
               </button>
             </div>
           )}

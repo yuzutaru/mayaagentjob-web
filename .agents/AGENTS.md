@@ -35,6 +35,9 @@ Before working on any feature:
 - **Web Portal Boundary**:
   - The portal is an evaluative and administrative console.
   - Subscription entitlement clearance is checked strictly via the database column `subscription_status` on the user profile, which is cleared by mobile purchases. No direct payment processing gateways should be wired locally.
+- **Theme and Localization Rules**:
+  - Dynamic styles must adapt to tokens defined in `src/core/theme/themeTokens.ts` rather than raw ad-hoc classes.
+  - All user-facing layout copy must use the `useTranslation()` context in `src/core/i18n/TranslationContext.tsx`.
 
 ---
 

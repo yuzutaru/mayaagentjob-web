@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Briefcase, Sun, Moon, ChevronDown } from 'lucide-react';
 import { useTheme } from '../../hooks/useTheme';
+import { useTranslation } from '../../../core/i18n/TranslationContext';
 import { CandidateOnboardingModal } from '../auth/CandidateOnboardingModal';
 
 export const HomeNavbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
+  const { t } = useTranslation();
   const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
 
   const handleOpenOnboarding = (e: React.MouseEvent) => {
@@ -13,7 +15,7 @@ export const HomeNavbar: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200/40 dark:border-slate-800/60 bg-white/80 dark:bg-[#090A0E]/85 backdrop-blur-md transition-colors duration-300">
+    <header className="sticky top-0 z-50 w-full border-b border-slate-200/40 dark:border-slate-800/60 bg-white/80 dark:bg-career-dark/85 backdrop-blur-md transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand Logo */}
         <div className="flex items-center gap-3">
@@ -24,7 +26,7 @@ export const HomeNavbar: React.FC = () => {
             <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-1.5">
               Maya
               <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400 border border-emerald-500/20">
-                Asisten cari kerja Kamu
+                {t('nav.subtitle')}
               </span>
             </span>
           </div>
@@ -36,27 +38,27 @@ export const HomeNavbar: React.FC = () => {
             href="#community"
             className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
           >
-            Community
+            {t('nav.community')}
           </a>
           <a
             href="#find-jobs"
             className="flex items-center gap-1 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
           >
-            Find Jobs
+            {t('nav.findJobs')}
             <ChevronDown className="w-4 h-4 opacity-70" />
           </a>
           <a
             href="#companies"
             className="flex items-center gap-1 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
           >
-            Companies
+            {t('nav.companies')}
             <ChevronDown className="w-4 h-4 opacity-70" />
           </a>
           <a
             href="#salaries"
             className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
           >
-            Salaries
+            {t('nav.salaries')}
           </a>
         </nav>
 
@@ -80,7 +82,7 @@ export const HomeNavbar: React.FC = () => {
             onClick={handleOpenOnboarding}
             className="text-sm font-semibold text-slate-700 dark:text-slate-200 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors px-2 py-1.5"
           >
-            Login
+            {t('nav.login')}
           </a>
 
           <a
@@ -88,7 +90,7 @@ export const HomeNavbar: React.FC = () => {
             onClick={handleOpenOnboarding}
             className="px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm shadow-md shadow-emerald-500/30 hover:shadow-emerald-500/50 active:scale-95 transition-all duration-200"
           >
-            Sign Up
+            {t('nav.signUp')}
           </a>
         </div>
       </div>

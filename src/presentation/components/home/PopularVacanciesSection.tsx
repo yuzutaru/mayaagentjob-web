@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from '../../../core/i18n/TranslationContext';
 import { PopularVacancyContract } from '../../../domain/entities/HomePortalContract';
 
 interface PopularVacanciesSectionProps {
@@ -8,11 +9,13 @@ interface PopularVacanciesSectionProps {
 export const PopularVacanciesSection: React.FC<PopularVacanciesSectionProps> = ({
   vacancies,
 }) => {
+  const { t } = useTranslation();
+
   return (
     <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="mb-12 text-center sm:text-left">
         <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-          Most Popular Vacancies
+          {t('vacancies.title')}
         </h2>
       </div>
 
@@ -24,7 +27,7 @@ export const PopularVacanciesSection: React.FC<PopularVacanciesSectionProps> = (
             <a
               key={vacancy.id}
               href={`#vacancy/${vacancy.id}`}
-              className="group flex flex-col p-4 rounded-xl hover:bg-slate-100/70 dark:hover:bg-[#151821] transition-all duration-200"
+              className="group flex flex-col p-4 rounded-xl hover:bg-slate-100/70 dark:hover:bg-career-cardDark transition-all duration-200"
             >
               <h3
                 className={`text-base sm:text-lg font-bold transition-colors ${
@@ -36,7 +39,7 @@ export const PopularVacanciesSection: React.FC<PopularVacanciesSectionProps> = (
                 {vacancy.roleTitle}
               </h3>
               <span className="mt-1.5 text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400">
-                {vacancy.openPositionsCount.toLocaleString()} Open Positions
+                {vacancy.openPositionsCount.toLocaleString()} {t('vacancies.openPositions')}
               </span>
             </a>
           );

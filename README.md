@@ -23,8 +23,9 @@ The UI uses a master-detail grid maximizing desktop screen real estate (`src/pre
 ## 🛠️ Technical Stack
 - **Framework:** React 18 + Vite (configured as a single-page application).
 - **Language:** Strict TypeScript 5.x.
-- **Styling:** Tailwind CSS (utility-first, dark-mode ready).
+- **Styling:** Tailwind CSS (utility-first, dark-mode ready), styled dynamically via core design tokens.
 - **Backend Integration:** Supabase JS Client wrapper services in the Data layer.
+- **Subsystems:** Dynamic theme configuration (`src/core/theme/themeTokens.ts` feeding into `tailwind.config.js`) and multi-language translation support (`src/core/i18n/TranslationContext.tsx` supporting English and Indonesian).
 
 ---
 
@@ -40,11 +41,12 @@ This repository adheres strictly to **Feature-Based Modular Clean Architecture**
 ```
 mayaagentjob-web/
 ├── src/
-│   ├── core/           # Shared API clients, base Supabase client, HTTP wrappers
-│   ├── shared/         # Common UI components, icons, theme tokens, and hooks
+├── src/
+│   ├── core/           # Shared API clients, base Supabase client, HTTP wrappers, design theme tokens (theme/themeTokens.ts), and localization (i18n/TranslationContext.tsx, translations/en.ts, translations/id.ts)
+│   ├── shared/         # Common UI components, icons, and hooks
 │   ├── data/           # Layer: Repositories implementation, mock feeds, and mapping
 │   ├── domain/         # Layer: Pure Entities (HomePortalContract.ts), Use cases, Interfaces
-│   └── presentation/   # Layer: React Components (HomeLandingPage.tsx), layouts, hooks
+│   └── presentation/   # Layer: React Components (HomeLandingPage.tsx), layouts, hooks (e.g. Navbar, JobCard, PopularVacancies)
 ├── graphify-out/       # Graphify code knowledge graph and navigation tree
 ├── .ai-context.md      # Active platform context blueprint (local rules/contracts)
 └── README.md
