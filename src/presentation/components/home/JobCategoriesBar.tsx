@@ -13,6 +13,8 @@ import { JobCategoryCardContract } from '../../../domain/entities/HomePortalCont
 
 interface JobCategoriesBarProps {
   categories: readonly JobCategoryCardContract[];
+  activeCategoryId?: string;
+  onCategorySelect?: (id: string) => void;
 }
 
 const iconMap: Record<string, LucideIcon> = {
@@ -24,7 +26,11 @@ const iconMap: Record<string, LucideIcon> = {
   'file-text': FileText,
 };
 
-export const JobCategoriesBar: React.FC<JobCategoriesBarProps> = ({ categories }) => {
+export const JobCategoriesBar: React.FC<JobCategoriesBarProps> = ({
+  categories,
+  activeCategoryId,
+  onCategorySelect,
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -33,12 +39,13 @@ export const JobCategoriesBar: React.FC<JobCategoriesBarProps> = ({ categories }
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4">
           {categories.map((cat) => {
             const IconComponent = iconMap[cat.iconName] || Code2;
-            const isActive = Boolean(cat.isActive);
+            const isActive = activeCategoryId === cat.id;
 
             return (
               <button
                 key={cat.id}
                 type="button"
+                onClick={() => onCategorySelect?.(cat.id)}
                 className={`group relative flex flex-col items-start justify-between p-4 sm:p-5 rounded-2xl transition-all duration-300 text-left cursor-pointer shadow-sm ${
                   isActive
                     ? 'bg-gradient-to-br from-emerald-500 to-green-500 text-white shadow-emerald-500/25 shadow-lg scale-[1.02]'

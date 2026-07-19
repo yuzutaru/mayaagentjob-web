@@ -1,16 +1,16 @@
-# Graph Report - mayaagentjob-web  (2026-07-12)
+# Graph Report - mayaagentjob-web  (2026-07-20)
 
 ## Corpus Check
-- 30 files · ~5,768 words
+- 50 files · ~11,588 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 156 nodes · 197 edges · 14 communities
+- 230 nodes · 363 edges · 18 communities (16 shown, 2 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `0d7a3c74`
+- Built from commit: `406ac4e9`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -26,47 +26,52 @@
 - [[_COMMUNITY_MayaAgentJob Web Portal AI Rules & Protocol|MayaAgentJob Web Portal AI Rules & Protocol]]
 - [[_COMMUNITY_Claude Code AI Rules & Workspace Protocol (mayaagentjob-web)|Claude Code AI Rules & Workspace Protocol (mayaagentjob-web)]]
 - [[_COMMUNITY_Gemini CLI & AI Rules (mayaagentjob-web)|Gemini CLI & AI Rules (mayaagentjob-web)]]
+- [[_COMMUNITY_tailwind.config.js|tailwind.config.js]]
+- [[_COMMUNITY_UserLocation|UserLocation]]
+- [[_COMMUNITY_TranslationContext.tsx|TranslationContext.tsx]]
+- [[_COMMUNITY_CandidateOnboardingModal.tsx|CandidateOnboardingModal.tsx]]
+- [[_COMMUNITY_setup.ts|setup.ts]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `compilerOptions` - 18 edges
-2. `User` - 10 edges
-3. `Local Platform Blueprint: React Web Portal (Maya)` - 7 edges
-4. `UserRepository` - 6 edges
-5. `compilerOptions` - 6 edges
-6. `MayaAgentJob Web Portal AI Rules & Protocol` - 6 edges
-7. `Maya Web Portal (React Admin Dashboard)` - 6 edges
-8. `Claude Code AI Rules & Workspace Protocol (mayaagentjob-web)` - 5 edges
-9. `scripts` - 4 edges
-10. `UserRepositoryImpl` - 4 edges
+2. `useTranslation()` - 17 edges
+3. `UserLocation` - 12 edges
+4. `User` - 10 edges
+5. `IUserLocationRepository` - 9 edges
+6. `ParsedResumeProfile` - 8 edges
+7. `Local Platform Blueprint: React Web Portal (Maya)` - 7 edges
+8. `scripts` - 6 edges
+9. `ICandidateOnboardingRepository` - 6 edges
+10. `UserRepository` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
+- `CandidateOnboardingModal()` --calls--> `useTranslation()`  [EXTRACTED]
+  src/presentation/components/auth/CandidateOnboardingModal.tsx → src/core/i18n/TranslationContext.tsx
+- `HeroSearchSection()` --calls--> `useTranslation()`  [EXTRACTED]
+  src/presentation/components/home/HeroSearchSection.tsx → src/core/i18n/TranslationContext.tsx
+- `HomeNavbar()` --calls--> `useTranslation()`  [EXTRACTED]
+  src/presentation/components/home/HomeNavbar.tsx → src/core/i18n/TranslationContext.tsx
+- `CandidateOnboardingModalProps` --references--> `ParsedResumeProfile`  [EXTRACTED]
+  src/presentation/components/auth/CandidateOnboardingModal.tsx → src/domain/entities/CandidateOnboardingContract.ts
 - `UseUserProfileReturn` --references--> `User`  [EXTRACTED]
   src/presentation/hooks/useUserProfile.ts → src/domain/entities/User.ts
-- `UserRepositoryImpl` --implements--> `UserRepository`  [EXTRACTED]
-  src/data/repositories/UserRepositoryImpl.ts → src/domain/repositories/UserRepository.ts
-- `JobCategoriesBarProps` --references--> `JobCategoryCardContract`  [EXTRACTED]
-  src/presentation/components/home/JobCategoriesBar.tsx → src/domain/entities/HomePortalContract.ts
-- `PopularVacanciesSectionProps` --references--> `PopularVacancyContract`  [EXTRACTED]
-  src/presentation/components/home/PopularVacanciesSection.tsx → src/domain/entities/HomePortalContract.ts
-- `HowWeWorkSectionProps` --references--> `HowWeWorkStepContract`  [EXTRACTED]
-  src/presentation/components/home/HowWeWorkSection.tsx → src/domain/entities/HomePortalContract.ts
 
 ## Import Cycles
 - None detected.
 
-## Communities (14 total, 0 thin omitted)
+## Communities (18 total, 2 thin omitted)
 
 ### Community 0 - "UserRepositoryImpl.ts"
 Cohesion: 0.24
 Nodes (8): mapUserDtoToDomain(), UserDto, UserRepositoryImpl, User, UserRepository, GetUserProfileUseCase, useUserProfile(), UseUserProfileReturn
 
 ### Community 1 - "User"
-Cohesion: 0.12
-Nodes (22): homePortalMockData, CtaBannerContract, FooterColumnContract, HomePortalContract, HowWeWorkStepContract, JobCategoryCardContract, PopularVacancyContract, QuickLinkItemContract (+14 more)
+Cohesion: 0.15
+Nodes (21): useTranslation(), homePortalMockData, CtaBannerContract, FooterColumnContract, HomePortalContract, HowWeWorkStepContract, JobCategoryCardContract, PopularVacancyContract (+13 more)
 
 ### Community 2 - "UserRepository"
-Cohesion: 0.09
-Nodes (21): dependencies, lucide-react, react, react-dom, devDependencies, autoprefixer, postcss, tailwindcss (+13 more)
+Cohesion: 0.07
+Nodes (27): dependencies, lucide-react, react, react-dom, devDependencies, autoprefixer, jsdom, postcss (+19 more)
 
 ### Community 3 - "compilerOptions"
 Cohesion: 0.09
@@ -77,8 +82,8 @@ Cohesion: 0.23
 Nodes (8): App(), HomeNavbar(), ThemeContext, ThemeContextType, ThemeMode, ThemeProvider(), useTheme(), HomeLandingPage()
 
 ### Community 5 - "Local Platform Blueprint: React Web Portal (Maya)"
-Cohesion: 0.18
-Nodes (10): Core Architecture & Multi-Repo Ecosystem, 🎨 Design System: Web Desktop Blue & White, Global System Map: MayaAgentJob, Local Platform Blueprint: React Web Portal (Maya), Local Project Directory Architecture, 🔒 Session & Entitlement Handling, 📡 Shared TypeScript Contracts, Strict Local Rules for Code Generation (+2 more)
+Cohesion: 0.13
+Nodes (14): Core Architecture & Multi-Repo Ecosystem, 🎨 Design System: Web Desktop Blue & White, Dynamic Theme Tokens & Tailwind Integration:, Geolocation Feature (Added Jul 2026), Global System Map: MayaAgentJob, Local Platform Blueprint: React Web Portal (Maya), Local Project Directory Architecture, 🌐 Localization & Translation (i18n): (+6 more)
 
 ### Community 6 - "Maya Web Portal (React Admin Dashboard)"
 Cohesion: 0.20
@@ -97,21 +102,40 @@ Cohesion: 0.33
 Nodes (5): 🏗️ Architectural Boundaries & Synchronized Contracts, Claude Code AI Rules & Workspace Protocol (mayaagentjob-web), 🎨 Design System & Split-Pane Layout Rules, ⚡ Development & Build Commands, ⚡ Tooling: RTK & Graphify Usage
 
 ### Community 10 - "Gemini CLI & AI Rules (mayaagentjob-web)"
-Cohesion: 0.40
-Nodes (4): Gemini CLI & AI Rules (mayaagentjob-web), 📋 Mandatory Workflow: Platform Context Loading, 🔒 Strict Local Rules & Constraints, ⚡ Tooling: RTK & Graphify Usage
+Cohesion: 0.29
+Nodes (6): ⚡ Development & Test Commands, Gemini CLI & AI Rules (mayaagentjob-web), 📋 Mandatory Workflow: Platform Context Loading, 🔒 Strict Local Rules & Constraints, 🧪 Test Patterns, ⚡ Tooling: RTK & Graphify Usage
+
+### Community 14 - "UserLocation"
+Cohesion: 0.19
+Nodes (12): mapNominatimDtoToDomain(), NominatimAddressDto, NominatimReverseDto, DEFAULT_LOCATION, DEFAULT_LOCATION, MOCK_COORDS, UserLocationRepositoryImpl, UserLocation (+4 more)
+
+### Community 15 - "TranslationContext.tsx"
+Cohesion: 0.15
+Nodes (12): Locale, TranslationContext, TranslationContextType, TranslationProvider(), translations, en, id, HeroSearchSection() (+4 more)
+
+### Community 16 - "CandidateOnboardingModal.tsx"
+Cohesion: 0.28
+Nodes (8): MockCandidateOnboardingRepository, ICandidateOnboardingRepository, OnboardingStep, ParsedResumeProfile, CandidateOnboardingModal(), CandidateOnboardingModalProps, useCandidateOnboardingViewModel(), UseCandidateOnboardingViewModelReturn
 
 ## Knowledge Gaps
-- **73 isolated node(s):** `name`, `private`, `version`, `type`, `dev` (+68 more)
+- **96 isolated node(s):** `name`, `private`, `version`, `type`, `dev` (+91 more)
   These have ≤1 connection - possible missing edges or undocumented components.
+- **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
+- **Why does `useTranslation()` connect `User` to `CandidateOnboardingModal.tsx`, `useTheme.tsx`, `TranslationContext.tsx`?**
+  _High betweenness centrality (0.038) - this node is a cross-community bridge._
+- **Why does `UserLocationRepositoryImpl` connect `UserLocation` to `TranslationContext.tsx`?**
+  _High betweenness centrality (0.010) - this node is a cross-community bridge._
 - **What connects `name`, `private`, `version` to the rest of the system?**
-  _73 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _96 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `User` be split into smaller, more focused modules?**
-  _Cohesion score 0.11612903225806452 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.1477832512315271 - nodes in this community are weakly interconnected._
 - **Should `UserRepository` be split into smaller, more focused modules?**
-  _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07142857142857142 - nodes in this community are weakly interconnected._
 - **Should `compilerOptions` be split into smaller, more focused modules?**
   _Cohesion score 0.09090909090909091 - nodes in this community are weakly interconnected._
+- **Should `Local Platform Blueprint: React Web Portal (Maya)` be split into smaller, more focused modules?**
+  _Cohesion score 0.13333333333333333 - nodes in this community are weakly interconnected._

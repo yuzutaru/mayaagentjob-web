@@ -15,6 +15,7 @@ export interface PopularVacancyContract {
   readonly id: string;
   readonly roleTitle: string;
   readonly openPositionsCount: number;
+  readonly categoryId: string;
   readonly isHighlighted?: boolean; // Highlighted in emerald green (e.g. Data Scientist)
 }
 

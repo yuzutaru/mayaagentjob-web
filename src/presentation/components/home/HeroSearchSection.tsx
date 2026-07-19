@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Search, MapPin, ArrowRight, ChevronDown, Laptop, Sparkles } from 'lucide-react';
 import { useTranslation } from '../../../core/i18n/TranslationContext';
+import { useUserLocation } from '../../hooks/useUserLocation';
+import { UserLocationRepositoryImpl } from '../../../data/repositories/UserLocationRepositoryImpl';
 
 interface HeroSearchSectionProps {
   headline: string;
@@ -17,7 +19,7 @@ export const HeroSearchSection: React.FC<HeroSearchSectionProps> = ({
 }) => {
   const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
-  const [location, setLocation] = useState('NewTown, Kolkata');
+  const { location } = useUserLocation(new UserLocationRepositoryImpl());
 
   // Split headline to highlight the specific word
   const renderHeadline = () => {
@@ -78,7 +80,7 @@ export const HeroSearchSection: React.FC<HeroSearchSectionProps> = ({
           <div className="flex items-center justify-between gap-3 px-4 py-2 sm:py-3 sm:w-60 text-left border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
             <div className="flex items-center gap-2.5 text-slate-600 dark:text-slate-300">
               <MapPin className="w-4 h-4 text-slate-400 shrink-0" />
-              <span className="text-sm font-medium truncate">{location}</span>
+              <span className="text-sm font-medium truncate">{location?.displayName ?? 'Jakarta, Indonesia'}</span>
             </div>
             <ChevronDown className="w-4 h-4 text-slate-400 shrink-0" />
           </div>

@@ -12,9 +12,5 @@
   "10": "Gemini CLI & AI Rules (mayaagentjob-web)",
   "11": "postcss.config.js",
   "12": "tailwind.config.js",
-  "13": "vite.config.ts",
-  "14": "UserLocation",
-  "15": "TranslationContext.tsx",
-  "16": "CandidateOnboardingModal.tsx",
-  "17": "setup.ts"
+  "13": "vite.config.ts"
 }

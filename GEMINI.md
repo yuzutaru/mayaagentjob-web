@@ -40,6 +40,34 @@ Before writing code or proposing changes:
 
 ---
 
+## ⚡ Development & Test Commands
+
+```bash
+# Run local dev server (default port 5173)
+npm run dev
+
+# Build production bundle (outputs to dist/)
+npm run build
+
+# Preview production build locally
+npm run preview
+
+# Run unit tests (Vitest, CI mode)
+npm run test
+
+# Run unit tests in watch mode
+npm run test:watch
+
+# Run type checks
+npx tsc --noEmit
+```
+
+## 🧪 Test Patterns
+- Tests are co-located next to source files (e.g., `NominatimDto.test.ts` next to `NominatimDto.ts`).
+- Vitest configured in `vite.config.ts` with jsdom environment and globals enabled.
+- Browser API mocks (localStorage, geolocation, fetch) live in `src/test/setup.ts`.
+- 21 tests across 5 files covering DTO mappers, use cases, repository, hooks, and components.
+
 ## ⚡ Tooling: RTK & Graphify Usage
 - Ensure all CLI scripts and git actions utilize RTK (Rust Token Killer): `rtk gain`, `rtk discover`.
 - Refresh code knowledge graph after structural updates: `graphify update .`.

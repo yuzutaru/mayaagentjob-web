@@ -24,6 +24,9 @@ npx tsc --noEmit
 
 # Run unit tests (Vitest)
 npm run test
+
+# Run unit tests in watch mode
+npm run test:watch
 ```
 
 ---
@@ -50,10 +53,18 @@ All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clea
 4. **Centralized Theme Token Adherence**:
    - UI styles extending Tailwind configurations must map to design tokens declared in `src/core/theme/themeTokens.ts`. Avoid hardcoded layout parameters.
 
-5. **Multi-Language Web Localization (i18n)**:
+5. **Testing Pattern**:
+   - Tests are co-located next to source files with `.test.ts(x)` suffix.
+   - Vitest is configured in `vite.config.ts` with jsdom environment and globals enabled.
+   - Browser API mocks (localStorage, geolocation, fetch) go in `src/test/setup.ts`.
+   - Pure domain/data tests (DTO mappers, use cases) need no DOM setup.
+   - Hook/component tests should mock repository dependencies via `vi.mock`.
+   - Run `npm run test` for CI mode or `npm run test:watch` for development.
+
+6. **Multi-Language Web Localization (i18n)**:
    - All text copy exposed in layouts must use `useTranslation()` from `src/core/i18n/TranslationContext.tsx`. Do not write hardcoded labels or placeholders.
 
-6. **Autonomous Planning Protocol**:
+7. **Autonomous Planning Protocol**:
    - Always output an Implementation Plan and Checklist (`task.md`) before writing any UI routes, layouts, or data hooks. Refer to [MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md](file:///Users/yuzutaru/Development/mayaagentjob-workspace/MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md) in the workspace root as a guideline.
 
 ---

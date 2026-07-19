@@ -41,20 +41,25 @@ This repository adheres strictly to **Feature-Based Modular Clean Architecture**
 ```
 mayaagentjob-web/
 ├── src/
-├── src/
-│   ├── core/           # Shared API clients, base Supabase client, HTTP wrappers, design theme tokens (theme/themeTokens.ts), and localization (i18n/TranslationContext.tsx, translations/en.ts, translations/id.ts)
-│   ├── shared/         # Common UI components, icons, and hooks
-│   ├── data/           # Layer: Repositories implementation, mock feeds, and mapping
-│   ├── domain/         # Layer: Pure Entities (HomePortalContract.ts), Use cases, Interfaces
-│   └── presentation/   # Layer: React Components (HomeLandingPage.tsx), layouts, hooks (e.g. Navbar, JobCard, PopularVacancies)
+│   ├── core/           # Shared infrastructure: i18n (TranslationContext.tsx, translations/en.ts, translations/id.ts), theme tokens (theme/themeTokens.ts)
+│   ├── data/           # Data layer: DTOS/mappers (NominatimDto.ts, UserDto.ts), repository implementations (UserLocationRepositoryImpl.ts, UserRepositoryImpl.ts), mock data
+│   ├── domain/         # Domain layer: Pure entities (HomePortalContract.ts, UserLocation.ts, User.ts), repository interfaces, use cases (GetUserLocationUseCase.ts, GetUserProfileUseCase.ts)
+│   ├── presentation/   # Presentation layer: Pages (HomeLandingPage.tsx), components (home/HeroSearchSection.tsx, etc.), hooks (useUserLocation.ts, useUserProfile.ts, etc.)
+│   ├── shared/         # Common UI components, icons, and utilities
+│   └── test/           # Test infrastructure: setup.ts (localStorage mock for jsdom)
 ├── graphify-out/       # Graphify code knowledge graph and navigation tree
 ├── .ai-context.md      # Active platform context blueprint (local rules/contracts)
+├── CLAUDE.md           # AI rules for Claude Code
+├── GEMINI.md           # AI rules for Gemini CLI
 └── README.md
 ```
 
 ### The 2026 Testing Guarantee (100% Pure Domain)
-All code inside `src/domain/` (`HomePortalContract.ts`) must be pure TypeScript with **zero external framework dependencies** (no React imports, UI styling, or web network SDKs). This ensures:
-- Automated tests in Jest/Vitest run instantaneously without native emulators or DOM mocks.
+All code inside `src/domain/` (`HomePortalContract.ts`, `UserLocation.ts`) must be pure TypeScript with **zero external framework dependencies** (no React imports, UI styling, or web network SDKs). This ensures:
+- Automated tests in Vitest run instantaneously without native emulators or DOM mocks.
+- Tests are co-located next to source files with `.test.ts(x)` suffix.
+- `src/test/setup.ts` provides browser API mocks (localStorage) for jsdom environment.
+- **21 tests** across 5 test files covering DTO mapping, use cases, repository (geolocation + fetch mocks), hooks, and components.
 - Clear decoupling of domain logic from network client details and UI presentation frameworks.
 
 ---
