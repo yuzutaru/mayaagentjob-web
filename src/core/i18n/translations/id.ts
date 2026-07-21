@@ -48,6 +48,13 @@ export const id = {
     callNow: 'Hubungi sekarang',
     tagline: 'Membangun koneksi, menjembatani peluang karir dengan bantuan AI.',
   },
+  jobListings: {
+    sectionTitle: 'Lowongan Tersedia',
+    found: 'ditemukan',
+    emptyState: 'Tidak ada lowongan yang cocok dengan filter Anda. Coba sesuaikan pencarian atau kategori.',
+    matchScore: 'Cocok',
+    applyNow: 'Lamar Sekarang',
+  },
   onboarding: {
     joinMaya: 'Bergabung dengan Maya',
     tagline: 'Percepat pencarian kerja Anda dengan AI',

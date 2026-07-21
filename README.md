@@ -2,7 +2,7 @@
 
 Welcome to the desktop and administrative web portal interface for **Maya: Your AI Career Agent** & **Lowker Job Search Automation Platform**.
 
-This repository holds the evaluative and administrative web dashboard. It acts as a desktop companion to the mobile applications, giving users a full-page scrolling interface to search jobs, view AI-scored matches, filter by category, and manage their profile.
+This repository holds the evaluative and administrative web dashboard. It acts as a desktop companion to the mobile applications, giving users a full-page scrolling interface to search jobs, view AI-scored matches, filter by category/keyword, and manage their profile.
 
 ---
 
@@ -15,9 +15,9 @@ Within the unified **MayaAgentJob** ecosystem:
 ### 🎨 Desktop Layout: Full-Page Scrolling Layout
 The UI is a single-page scrollable experience (`src/presentation/pages/HomeLandingPage.tsx`):
 1. **HomeNavbar**: Persistent top navigation bar.
-2. **HeroSearchSection**: Search bar with location-aware greeting (browser geolocation via Nominatim reverse geocode).
-3. **JobCategoriesBar**: Horizontal filter chips for category-based job filtering.
-4. **JobListingSection**: Paginated grid of job cards with AI summary bullets, filtered by category/keyword.
+2. **HeroSearchSection**: Search bar with location-aware greeting (browser geolocation via Nominatim reverse geocode). Search state lifted to page; drives keyword filter via `onSearchSubmit`.
+3. **JobCategoriesBar**: Horizontal filter chips for category-based job filtering. Active category state lifted to page; selection drives `useJobListings` category filter.
+4. **JobListingSection**: Paginated grid of job cards with AI summary bullets, filtered by category/keyword using `FilterJobListingsUseCase` + `MockJobListingRepository`, 9 per page client-side pagination.
 5. **PopularVacanciesSection**: Highlighted vacancies with open position counts.
 6. **HowWeWorkSection**: Three-step workflow illustration.
 7. **DualCtaBannersSection**: Candidate and Employer call-to-action banners.
@@ -48,8 +48,8 @@ mayaagentjob-web/
 ├── src/
 │   ├── core/           # Shared infrastructure: i18n (TranslationContext.tsx, translations/en.ts, translations/id.ts), theme tokens (theme/themeTokens.ts)
 │   ├── data/           # Data layer: DTOs/mappers (NominatimDto.ts, UserDto.ts), repository implementations (UserLocationRepositoryImpl.ts, UserRepositoryImpl.ts, MockJobListingRepository.ts), mock data (homePortalMockData.ts, jobListingsMockData.ts)
-│   ├── domain/         # Domain layer: Pure entities (HomePortalContract.ts, JobListing.ts, CandidateOnboardingContract.ts, UserLocation.ts, User.ts), repository interfaces, use cases (FilterJobListingsUseCase.ts, GetUserLocationUseCase.ts, GetUserProfileUseCase.ts)
-│   ├── presentation/   # Presentation layer: Pages (HomeLandingPage.tsx), components (home/HeroSearchSection.tsx, JobListingSection.tsx, etc.), hooks (useJobListings.ts, useUserLocation.ts, useUserProfile.ts, useTheme.tsx, useCandidateOnboardingViewModel.ts)
+│   ├── domain/         # Domain layer: Pure entities (HomePortalContract.ts, JobListing.ts, CandidateOnboardingContract.ts, UserLocation.ts, User.ts), repository interfaces (IJobListingRepository, IUserLocationRepository, IUserRepository), use cases (FilterJobListingsUseCase.ts, GetUserLocationUseCase.ts, GetUserProfileUseCase.ts)
+│   ├── presentation/   # Presentation layer: Pages (HomeLandingPage.tsx), components (home/HeroSearchSection.tsx, JobListingSection.tsx, JobCategoriesBar.tsx, etc.), hooks (useJobListings.ts, useUserLocation.ts, useUserProfile.ts, useTheme.tsx, useCandidateOnboardingViewModel.ts)
 │   ├── shared/         # Common UI components, icons, and utilities
 │   └── test/           # Test infrastructure: setup.ts (localStorage mock for jsdom)
 ├── .ai-context.md      # Active platform context blueprint (local rules/contracts)
@@ -62,7 +62,7 @@ All code inside `src/domain/` (`HomePortalContract.ts`, `JobListing.ts`, `Candid
 - Automated tests in Vitest run instantaneously without native emulators or DOM mocks.
 - Tests are co-located next to source files with `.test.ts(x)` suffix.
 - `src/test/setup.ts` provides browser API mocks (localStorage) for jsdom environment.
-- **55 tests** across 9 test files covering DTO mapping, use cases, repositories (geolocation + job listing), hooks, and components.
+- **89 tests** across 13 test files covering DTO mapping, use cases, repositories (geolocation + job listing), hooks, and components.
 - Clear decoupling of domain logic from network client details and UI presentation frameworks.
 
 ---

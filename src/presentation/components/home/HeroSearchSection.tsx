@@ -9,6 +9,9 @@ interface HeroSearchSectionProps {
   highlightWord: string;
   quote: string;
   quoteHighlightWord: string;
+  searchQuery: string;
+  onSearchQueryChange: (value: string) => void;
+  onSearchSubmit: () => void;
 }
 
 export const HeroSearchSection: React.FC<HeroSearchSectionProps> = ({
@@ -16,9 +19,11 @@ export const HeroSearchSection: React.FC<HeroSearchSectionProps> = ({
   highlightWord,
   quote,
   quoteHighlightWord,
+  searchQuery,
+  onSearchQueryChange,
+  onSearchSubmit,
 }) => {
   const { t } = useTranslation();
-  const [searchQuery, setSearchQuery] = useState('');
   const { location } = useUserLocation(new UserLocationRepositoryImpl());
 
   // Split headline to highlight the specific word
@@ -67,7 +72,7 @@ export const HeroSearchSection: React.FC<HeroSearchSectionProps> = ({
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => onSearchQueryChange(e.target.value)}
               placeholder={t('hero.placeholderKeyword')}
               className="w-full bg-transparent text-sm sm:text-base text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none"
             />
@@ -88,6 +93,7 @@ export const HeroSearchSection: React.FC<HeroSearchSectionProps> = ({
           {/* Action Button */}
           <button
             type="button"
+            onClick={onSearchSubmit}
             className="w-full sm:w-auto px-6 py-3.5 sm:py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white font-semibold flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30 transition-all"
           >
             <ArrowRight className="w-5 h-5" />

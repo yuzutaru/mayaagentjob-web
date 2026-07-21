@@ -35,7 +35,7 @@ npm run test:watch
 
 Before writing code or proposing changes:
 1. **Load Local Blueprint**: Always read `.ai-context.md` at the root of `mayaagentjob-web/` to understand component boundaries, styling configurations, and current data models.
-2. **Review Domain Types**: Inspect files in `src/domain/` (`HomePortalContract.ts`, `JobListing.ts`, `CandidateOnboardingContract.ts`) to verify that any data mapping aligns with synchronized domain types.
+2. **Review Domain Types**: Inspect files in `src/domain/` (`HomePortalContract.ts`, `JobListing.ts`, `CandidateOnboardingContract.ts`, `UserLocation.ts`, `User.ts`, `JobListingRepository.ts`) to verify that any data mapping aligns with synchronized domain types.
 3. **Check Layout Architecture**: Verify that UI modifications adhere to the Full-Page Scrolling Layout in `src/presentation/pages/HomeLandingPage.tsx`.
 4. **Reference Global Rules**: Consult `.agents/AGENTS.md` for multi-repo workspace invariants.
 
@@ -46,7 +46,7 @@ Before writing code or proposing changes:
 All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clean Architecture** and the **2026 Testing Guarantee**:
 
 1. **100% Pure Domain Rule**:
-   - Files in `src/domain/` (`HomePortalContract.ts`, `JobListing.ts`, `CandidateOnboardingContract.ts`, `UserLocation.ts`, `User.ts`) must be 100% pure TypeScript.
+   - Files in `src/domain/` (`HomePortalContract.ts`, `JobListing.ts`, `CandidateOnboardingContract.ts`, `UserLocation.ts`, `User.ts`, `JobListingRepository.ts`, `FilterJobListingsUseCase.ts`) must be 100% pure TypeScript.
    - **Zero imports** of React components, hooks, style libraries, or Supabase network client SDKs.
    - Keep domain entities readonly to avoid accidental mutations.
 
@@ -80,7 +80,7 @@ All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clea
    - Browser API mocks (localStorage, geolocation, fetch) go in `src/test/setup.ts`.
    - Pure domain/data tests (DTO mappers, use cases) need no DOM setup.
    - Hook/component tests should mock repository dependencies via `vi.mock`.
-   - Run `npm run test` for CI mode or `npm run test:watch` for development. **55 tests across 9 test files** currently pass with zero failures.
+   - Run `npm run test` for CI mode or `npm run test:watch` for development. **89 tests across 13 test files** currently pass with zero failures.
 
 9. **Autonomous Planning Protocol**:
    - Always output an Implementation Plan and Checklist (`task.md`) before writing any UI routes, layouts, or data hooks.
@@ -89,7 +89,7 @@ All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clea
 
 ## Design System & Layout Rules
 
-- **Full-Page Scrolling Layout**: The desktop layout (`src/presentation/pages/HomeLandingPage.tsx`) is a single-page scrollable experience: `HomeNavbar` → `HeroSearchSection` → `JobCategoriesBar` → `JobListingSection` → `PopularVacanciesSection` → `HowWeWorkSection` → `DualCtaBannersSection` → `HomeFooter`.
+- **Full-Page Scrolling Layout**: The desktop layout (`src/presentation/pages/HomeLandingPage.tsx`) is a single-page scrollable experience: `HomeNavbar` → `HeroSearchSection` → `JobCategoriesBar` (active category state lifted to page, drives `useJobListings` filter) → `JobListingSection` (paginated grid, 9 per page, filtered by category + keyword search) → `PopularVacanciesSection` → `HowWeWorkSection` → `DualCtaBannersSection` → `HomeFooter`.
 - **Tailwind CSS Utility Classes**: Use standard classes. Canvas background is `bg-slate-50` (light) / `bg-career-dark` (dark).
 - **Vanilla CSS (if needed)**: Declare animations and custom variables inside `src/index.css`.
 

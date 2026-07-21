@@ -48,6 +48,13 @@ export const en = {
     callNow: 'Call now',
     tagline: 'Building connections, bridging career opportunities with AI assistance.',
   },
+  jobListings: {
+    sectionTitle: 'Available Jobs',
+    found: 'found',
+    emptyState: 'No jobs match your filters. Try adjusting your search or category.',
+    matchScore: 'Match',
+    applyNow: 'Apply Now',
+  },
   onboarding: {
     joinMaya: 'Join Maya',
     tagline: 'Accelerate your job matching journey with AI',
