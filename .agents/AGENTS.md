@@ -8,7 +8,7 @@ This file defines the strict repository rules and guidelines for AI agents editi
 
 The workspace is a hybrid multi-repo unified by a local MCP server.
 - Whenever Supabase API responses or models change in the backend, data-transfer objects (DTOs) in the client directories must be updated in sync.
-- The web portal must stay synchronized with database schemas defined in the backend and domain structures defined in the mobile client where overlapping structures occur (e.g. `JobListingCard` and `UserProfile`).
+- The web portal must stay synchronized with database schemas defined in the backend and domain structures defined in the mobile client where overlapping structures occur (e.g. `JobListing`, `HomePortalContract`, `UserProfile`).
 
 ---
 
@@ -16,7 +16,7 @@ The workspace is a hybrid multi-repo unified by a local MCP server.
 
 Before working on any feature:
 1. Always load the `.ai-context.md` file in the web repository root first.
-2. If changing shared contract types, check the mobile client (`mayaagentjob-mobile/src/features/job-matching/domain/entities/`) or the backend model equivalents to ensure structural alignment.
+2. If changing shared contract types, check the mobile client (`mayaagentjob-mobile/src/features/job-matching/domain/`) or the backend model equivalents to ensure structural alignment.
 
 ---
 
@@ -41,6 +41,14 @@ Before working on any feature:
 
 ---
 
-## 5. Autonomous Planning Protocol
+## 5. Domain Contracts & Synchronization
 
-- Always generate an Implementation Plan and a task checklist (`task.md`) before writing code changes to ensure all changes are tracked and consistent. Refer to [MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md](file:///Users/yuzutaru/Development/mayaagentjob-workspace/MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md) in the workspace root as a guideline.
+- **HomePortalContract**: Synchronized between web (`src/domain/entities/HomePortalContract.ts`) and mobile (`src/features/job-matching/domain/HomePortalContract.ts`). Note: mobile `PopularVacancyContract` may lack `categoryId` — ensure forward compatibility.
+- **JobListing**: Pure domain entity with `jobId`, `title`, `company`, `arrangement`, `location`, `categoryId`, `matchScore`, `aiSummaryBullets`.
+- **CandidateOnboardingContract**: Pure domain contract for multi-step wizard (AUTH_SELECTION → RESUME_INGESTION → PROFILE_CALIBRATION → COMPLETED) with `ParsedResumeProfile` entity.
+
+---
+
+## 6. Autonomous Planning Protocol
+
+- Always generate an Implementation Plan and a task checklist (`task.md`) before writing code changes to ensure all changes are tracked and consistent.

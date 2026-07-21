@@ -35,8 +35,8 @@ npm run test:watch
 
 Before writing code or proposing changes:
 1. **Load Local Blueprint**: Always read `.ai-context.md` at the root of `mayaagentjob-web/` to understand component boundaries, styling configurations, and current data models.
-2. **Review Domain Types**: Inspect files in `src/domain/` (`HomePortalContract.ts`) to verify that any data mapping aligns with synchronized domain types.
-3. **Check Layout Architecture**: Verify that UI modifications adhere to the Split-Pane Master-Detail Grid in `src/presentation/pages/HomeLandingPage.tsx`.
+2. **Review Domain Types**: Inspect files in `src/domain/` (`HomePortalContract.ts`, `JobListing.ts`, `CandidateOnboardingContract.ts`) to verify that any data mapping aligns with synchronized domain types.
+3. **Check Layout Architecture**: Verify that UI modifications adhere to the Full-Page Scrolling Layout in `src/presentation/pages/HomeLandingPage.tsx`.
 4. **Reference Global Rules**: Consult `.agents/AGENTS.md` for multi-repo workspace invariants.
 
 ---
@@ -46,7 +46,7 @@ Before writing code or proposing changes:
 All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clean Architecture** and the **2026 Testing Guarantee**:
 
 1. **100% Pure Domain Rule**:
-   - Files in `src/domain/` (`HomePortalContract.ts`) must be 100% pure TypeScript.
+   - Files in `src/domain/` (`HomePortalContract.ts`, `JobListing.ts`, `CandidateOnboardingContract.ts`, `UserLocation.ts`, `User.ts`) must be 100% pure TypeScript.
    - **Zero imports** of React components, hooks, style libraries, or Supabase network client SDKs.
    - Keep domain entities readonly to avoid accidental mutations.
 
@@ -80,22 +80,22 @@ All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clea
    - Browser API mocks (localStorage, geolocation, fetch) go in `src/test/setup.ts`.
    - Pure domain/data tests (DTO mappers, use cases) need no DOM setup.
    - Hook/component tests should mock repository dependencies via `vi.mock`.
-   - Run `npm run test` for CI mode or `npm run test:watch` for development.
+   - Run `npm run test` for CI mode or `npm run test:watch` for development. **55 tests across 9 test files** currently pass with zero failures.
 
 9. **Autonomous Planning Protocol**:
-   - Always output an Implementation Plan and Checklist (`task.md`) before writing any UI routes, layouts, or data hooks. Refer to [MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md](file:///Users/yuzutaru/Development/mayaagentjob-workspace/MOBILE_ONBOARDING_IMPLEMENTATION_PLAN.md) in the workspace root as a guideline.
+   - Always output an Implementation Plan and Checklist (`task.md`) before writing any UI routes, layouts, or data hooks.
 
 ---
 
-## Design System & Split-Pane Layout Rules
+## Design System & Layout Rules
 
-- **Split-Pane Master-Detail Grid**: Implement the three-pane desktop layout (`src/presentation/pages/HomeLandingPage.tsx` with sidebar navigation, center scrollable job feed, and right interactive matrix form).
-- **Tailwind CSS Utility Classes**: Use standard classes. Canvas background is `#FFFFFF` (light) / `#020617` (dark).
+- **Full-Page Scrolling Layout**: The desktop layout (`src/presentation/pages/HomeLandingPage.tsx`) is a single-page scrollable experience: `HomeNavbar` → `HeroSearchSection` → `JobCategoriesBar` → `JobListingSection` → `PopularVacanciesSection` → `HowWeWorkSection` → `DualCtaBannersSection` → `HomeFooter`.
+- **Tailwind CSS Utility Classes**: Use standard classes. Canvas background is `bg-slate-50` (light) / `bg-career-dark` (dark).
 - **Vanilla CSS (if needed)**: Declare animations and custom variables inside `src/index.css`.
 
 ---
 
-## Tooling: RTK & Graphify Usage
+## Tooling: RTK Usage
 
-- All git and build operations run transparently via the **RTK (Rust Token Killer)** hook (`rtk gain`, `rtk discover`).
-- Refresh code knowledge graph after structural updates: `graphify update .`.
+- All git commands run transparently via the **RTK (Rust Token Killer)** hook (`rtk gain`, `rtk discover`).
+- Graphify is not available in this environment — code knowledge graphs are maintained manually.

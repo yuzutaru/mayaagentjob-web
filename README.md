@@ -2,21 +2,26 @@
 
 Welcome to the desktop and administrative web portal interface for **Maya: Your AI Career Agent** & **Lowker Job Search Automation Platform**.
 
-This repository holds the evaluative and administrative web dashboard. It acts as a desktop companion to the mobile applications, giving users a split-pane interface to view job matches, edit profile requirements, and inspect AI-driven application metrics.
+This repository holds the evaluative and administrative web dashboard. It acts as a desktop companion to the mobile applications, giving users a full-page scrolling interface to search jobs, view AI-scored matches, filter by category, and manage their profile.
 
 ---
 
 ## 🏗️ Repository Role & Platform Context
 Within the unified **MayaAgentJob** ecosystem:
-- **Web Portal (`mayaagentjob-web/`)**: Evaluative/administrative desktop layout implementing `HomeLandingPage.tsx` and synchronized `HomePortalContract.ts`.
+- **Web Portal (`mayaagentjob-web/`)**: Evaluative/administrative desktop layout implementing `HomeLandingPage.tsx` and synchronized domain contracts (`HomePortalContract.ts`, `JobListing.ts`, `CandidateOnboardingContract.ts`).
 - **Mobile Client (`mayaagentjob-mobile/`)**: Primary user platform for search, automation, and monetization across native iOS (`ios/`) and Android (`android/`).
 - **Backend Service (`mayaagentjob-backend/`)**: Supabase PostgreSQL database, edge functions, and scoring logic.
 
-### 🎨 Desktop Layout: Split-Pane Master-Detail Grid
-The UI uses a master-detail grid maximizing desktop screen real estate (`src/presentation/pages/HomeLandingPage.tsx`):
-1. **Left Sidebar**: Persistent navigation panel (Feed, Saved/Applied, Subscription Tier Status).
-2. **Middle Feed**: Dynamic, scrollable layout of matching job cards (`src/presentation/components/home/`).
-3. **Right Panel**: Interactive Matrix Form (allows real-time profile editing and automatic search feed updates).
+### 🎨 Desktop Layout: Full-Page Scrolling Layout
+The UI is a single-page scrollable experience (`src/presentation/pages/HomeLandingPage.tsx`):
+1. **HomeNavbar**: Persistent top navigation bar.
+2. **HeroSearchSection**: Search bar with location-aware greeting (browser geolocation via Nominatim reverse geocode).
+3. **JobCategoriesBar**: Horizontal filter chips for category-based job filtering.
+4. **JobListingSection**: Paginated grid of job cards with AI summary bullets, filtered by category/keyword.
+5. **PopularVacanciesSection**: Highlighted vacancies with open position counts.
+6. **HowWeWorkSection**: Three-step workflow illustration.
+7. **DualCtaBannersSection**: Candidate and Employer call-to-action banners.
+8. **HomeFooter**: Multi-column footer with quick links.
 
 ---
 
@@ -42,24 +47,22 @@ This repository adheres strictly to **Feature-Based Modular Clean Architecture**
 mayaagentjob-web/
 ├── src/
 │   ├── core/           # Shared infrastructure: i18n (TranslationContext.tsx, translations/en.ts, translations/id.ts), theme tokens (theme/themeTokens.ts)
-│   ├── data/           # Data layer: DTOS/mappers (NominatimDto.ts, UserDto.ts), repository implementations (UserLocationRepositoryImpl.ts, UserRepositoryImpl.ts), mock data
-│   ├── domain/         # Domain layer: Pure entities (HomePortalContract.ts, UserLocation.ts, User.ts), repository interfaces, use cases (GetUserLocationUseCase.ts, GetUserProfileUseCase.ts)
-│   ├── presentation/   # Presentation layer: Pages (HomeLandingPage.tsx), components (home/HeroSearchSection.tsx, etc.), hooks (useUserLocation.ts, useUserProfile.ts, etc.)
+│   ├── data/           # Data layer: DTOs/mappers (NominatimDto.ts, UserDto.ts), repository implementations (UserLocationRepositoryImpl.ts, UserRepositoryImpl.ts, MockJobListingRepository.ts), mock data (homePortalMockData.ts, jobListingsMockData.ts)
+│   ├── domain/         # Domain layer: Pure entities (HomePortalContract.ts, JobListing.ts, CandidateOnboardingContract.ts, UserLocation.ts, User.ts), repository interfaces, use cases (FilterJobListingsUseCase.ts, GetUserLocationUseCase.ts, GetUserProfileUseCase.ts)
+│   ├── presentation/   # Presentation layer: Pages (HomeLandingPage.tsx), components (home/HeroSearchSection.tsx, JobListingSection.tsx, etc.), hooks (useJobListings.ts, useUserLocation.ts, useUserProfile.ts, useTheme.tsx, useCandidateOnboardingViewModel.ts)
 │   ├── shared/         # Common UI components, icons, and utilities
 │   └── test/           # Test infrastructure: setup.ts (localStorage mock for jsdom)
-├── graphify-out/       # Graphify code knowledge graph and navigation tree
 ├── .ai-context.md      # Active platform context blueprint (local rules/contracts)
-├── CLAUDE.md           # AI rules for Claude Code
-├── GEMINI.md           # AI rules for Gemini CLI
+├── AGENTS.md           # AI rules file (AI-agnostic, consolidated from CLAUDE.md + GEMINI.md)
 └── README.md
 ```
 
 ### The 2026 Testing Guarantee (100% Pure Domain)
-All code inside `src/domain/` (`HomePortalContract.ts`, `UserLocation.ts`) must be pure TypeScript with **zero external framework dependencies** (no React imports, UI styling, or web network SDKs). This ensures:
+All code inside `src/domain/` (`HomePortalContract.ts`, `JobListing.ts`, `CandidateOnboardingContract.ts`, `UserLocation.ts`, `User.ts`) must be pure TypeScript with **zero external framework dependencies** (no React imports, UI styling, or web network SDKs). This ensures:
 - Automated tests in Vitest run instantaneously without native emulators or DOM mocks.
 - Tests are co-located next to source files with `.test.ts(x)` suffix.
 - `src/test/setup.ts` provides browser API mocks (localStorage) for jsdom environment.
-- **21 tests** across 5 test files covering DTO mapping, use cases, repository (geolocation + fetch mocks), hooks, and components.
+- **55 tests** across 9 test files covering DTO mapping, use cases, repositories (geolocation + job listing), hooks, and components.
 - Clear decoupling of domain logic from network client details and UI presentation frameworks.
 
 ---
@@ -73,10 +76,4 @@ rtk gain
 
 # Git and CLI commands automatically run through the token killer proxy hook
 git status
-```
-
-### Graphify Code Knowledge Graph
-Keep code structure relationships indexed using Graphify:
-```bash
-graphify update .
 ```
