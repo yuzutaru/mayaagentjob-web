@@ -3,6 +3,7 @@ import { homePortalMockData } from '../../data/mock/homePortalMockData';
 import { MockJobListingRepository } from '../../data/repositories/MockJobListingRepository';
 import { HomeNavbar } from '../components/home/HomeNavbar';
 import { HeroSearchSection } from '../components/home/HeroSearchSection';
+import { FloatingSearchBar } from '../components/home/FloatingSearchBar';
 import { JobCategoriesBar } from '../components/home/JobCategoriesBar';
 import { JobListingSection } from '../components/home/JobListingSection';
 import { PopularVacanciesSection } from '../components/home/PopularVacanciesSection';
@@ -54,15 +55,18 @@ export const HomeLandingPage: React.FC = () => {
           highlightWord={data.heroHighlightWord}
           quote={data.heroQuote}
           quoteHighlightWord={data.heroQuoteHighlightWord}
-          searchQuery={searchQuery}
-          onSearchQueryChange={handleSearchQueryChange}
-          onSearchSubmit={handleSearchSubmit}
         />
 
         <JobCategoriesBar
           categories={data.categories}
           activeCategoryId={selectedCategoryId}
           onCategorySelect={handleCategorySelect}
+        />
+
+        <FloatingSearchBar
+          searchQuery={searchQuery}
+          onSearchQueryChange={handleSearchQueryChange}
+          onSearchSubmit={handleSearchSubmit}
         />
 
         <JobListingSection
