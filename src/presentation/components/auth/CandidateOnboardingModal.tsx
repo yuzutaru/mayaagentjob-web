@@ -19,6 +19,7 @@ import { useCandidateOnboardingViewModel } from '../../hooks/useCandidateOnboard
 import { MockCandidateOnboardingRepository } from '../../../data/repositories/MockCandidateOnboardingRepository';
 import { ParsedResumeProfile } from '../../../domain/entities/CandidateOnboardingContract';
 import { useTranslation } from '../../../core/i18n/TranslationContext';
+import { useAuth } from '../../../presentation/hooks/useAuth';
 
 interface CandidateOnboardingModalProps {
   isOpen: boolean;
@@ -38,8 +39,12 @@ export const CandidateOnboardingModal: React.FC<CandidateOnboardingModalProps> =
   });
 
   const { t } = useTranslation();
+  const { login } = useAuth();
   const repository = new MockCandidateOnboardingRepository();
-  const viewModel = useCandidateOnboardingViewModel(repository, onSuccess);
+  const viewModel = useCandidateOnboardingViewModel(repository, async (profile) => {
+    await login('email', profile.email, profile.fullName);
+    onSuccess(profile);
+  });
 
   if (!isOpen) return null;
 

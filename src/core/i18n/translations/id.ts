@@ -8,6 +8,8 @@ export const id = {
     salaries: 'Gaji',
     login: 'Masuk',
     signUp: 'Daftar',
+    logout: 'Keluar',
+    profile: 'Profil',
   },
   hero: {
     findYourDreamJob: 'Temukan Pekerjaan Impian',
@@ -94,5 +96,36 @@ export const id = {
     completedTitle: 'Semua Selesai! Onboarding Selesai',
     completedDesc: 'Kami telah berhasil memperbarui preferensi profil kandidat Anda. Mengarahkan Anda ke daftar lowongan kerja pilihan AI Anda...',
     letsFindJobs: 'Ayo Cari Lowongan!',
-  }
+  },
+  tabs: {
+    home: 'Beranda',
+    saved: 'Tersimpan',
+    profile: 'Profil',
+  },
+  saved: {
+    emptyTitle: 'Belum Ada Lowongan Tersimpan',
+    emptySubtitle: 'Lowongan yang Anda simpan akan muncul di sini untuk akses cepat.',
+  },
+  profile: {
+    guest: 'Tamu',
+    notSignedIn: 'Belum masuk',
+    settings: 'Pengaturan',
+    darkMode: 'Mode Gelap',
+    language: 'Bahasa',
+    version: 'Versi',
+    on: 'Aktif',
+    off: 'Nonaktif',
+    logout: 'Keluar',
+    loggingOut: 'Keluar...',
+  },
+  dashboard: {
+    welcome: 'Selamat datang kembali',
+    candidate: 'Kandidat',
+    subtitle: 'Ini adalah feed pencocokan pekerjaan yang dipersonalisasi untuk Anda.',
+    matchCount: 'Cocok AI',
+    profileScore: 'Skor Profil',
+    applications: 'Lamaran',
+    recommendations: 'Rekomendasi',
+    recommendationsDesc: 'Rekomendasi pekerjaan yang dipersonalisasi berdasarkan keahlian dan preferensi Anda akan muncul di sini.',
+  },
 };

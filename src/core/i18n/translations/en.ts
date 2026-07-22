@@ -8,6 +8,8 @@ export const en = {
     salaries: 'Salaries',
     login: 'Login',
     signUp: 'Sign Up',
+    logout: 'Logout',
+    profile: 'Profile',
   },
   hero: {
     findYourDreamJob: 'Find Your Dream',
@@ -94,5 +96,36 @@ export const en = {
     completedTitle: 'All Set! Onboarding Complete',
     completedDesc: 'We\'ve successfully updated your candidate profile preferences. Redirecting you to your curated AI job matching feed...',
     letsFindJobs: 'Let\'s Find Jobs!',
-  }
+  },
+  tabs: {
+    home: 'Home',
+    saved: 'Saved',
+    profile: 'Profile',
+  },
+  saved: {
+    emptyTitle: 'No Saved Jobs Yet',
+    emptySubtitle: 'Jobs you save will appear here for quick access.',
+  },
+  profile: {
+    guest: 'Guest',
+    notSignedIn: 'Not signed in',
+    settings: 'Settings',
+    darkMode: 'Dark Mode',
+    language: 'Language',
+    version: 'Version',
+    on: 'On',
+    off: 'Off',
+    logout: 'Logout',
+    loggingOut: 'Logging out...',
+  },
+  dashboard: {
+    welcome: 'Welcome back',
+    candidate: 'Candidate',
+    subtitle: 'Here\'s your personalized job matching feed.',
+    matchCount: 'AI Matches',
+    profileScore: 'Profile Score',
+    applications: 'Applications',
+    recommendations: 'Recommendations',
+    recommendationsDesc: 'Your personalized job recommendations based on your tech stack and preferences will appear here.',
+  },
 };
