@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Briefcase, Sun, Moon, ChevronDown, User, LogOut } from 'lucide-react';
+import { Sun, Moon, ChevronDown, User, LogOut } from 'lucide-react';
+import logoIcon from '@/assets/logo-icon.jpg';
 import { useTheme } from '../../hooks/useTheme';
 import { useAuth } from '../../hooks/useAuth';
 import { useTranslation } from '../../../core/i18n/TranslationContext';
@@ -34,9 +35,11 @@ export const HomeNavbar: React.FC = () => {
     <header className="sticky top-0 z-50 w-full border-b border-slate-200/40 dark:border-slate-800/60 bg-white/80 dark:bg-career-dark/85 backdrop-blur-md transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-emerald-500 to-green-400 flex items-center justify-center shadow-lg shadow-emerald-500/25">
-            <Briefcase className="w-5 h-5 text-white" />
-          </div>
+          <img
+            src={logoIcon}
+            alt="Maya"
+            className="w-10 h-10 rounded-full object-cover shadow-lg"
+          />
           <div className="flex flex-col">
             <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white flex items-center gap-1.5">
               Maya

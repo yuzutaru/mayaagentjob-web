@@ -1,7 +1,8 @@
 import React from 'react';
-import { Briefcase, Heart, User } from 'lucide-react';
+import { Heart, User } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from '../../../core/i18n/TranslationContext';
+import logoIcon from '@/assets/logo-icon.jpg';
 
 export const BottomTabBar: React.FC = () => {
   const location = useLocation();
@@ -9,7 +10,7 @@ export const BottomTabBar: React.FC = () => {
   const { t } = useTranslation();
 
   const tabs = [
-    { key: 'home', path: '/home', icon: Briefcase, label: t('tabs.home') },
+    { key: 'home', path: '/home', icon: () => <img src={logoIcon} alt="" className="w-5 h-5 rounded-full object-cover" />, label: t('tabs.home') },
     { key: 'saved', path: '/saved', icon: Heart, label: t('tabs.saved') },
     { key: 'profile', path: '/profile', icon: User, label: t('tabs.profile') },
   ];
