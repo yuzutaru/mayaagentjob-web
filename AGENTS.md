@@ -27,6 +27,9 @@ npm run test
 
 # Run unit tests in watch mode
 npm run test:watch
+
+# Sync generated API types from backend OpenAPI spec (requires running backend)
+cd .. && npm run sync-api
 ```
 
 ---
@@ -36,8 +39,9 @@ npm run test:watch
 Before writing code or proposing changes:
 1. **Load Local Blueprint**: Always read `.ai-context.md` at the root of `mayaagentjob-web/` to understand component boundaries, styling configurations, and current data models.
 2. **Review Domain Types**: Inspect files in `src/domain/` (`HomePortalContract.ts`, `JobListing.ts`, `CandidateOnboardingContract.ts`, `UserLocation.ts`, `User.ts`, `JobListingRepository.ts`) to verify that any data mapping aligns with synchronized domain types.
-3. **Check Layout Architecture**: Verify that UI modifications adhere to the Full-Page Scrolling Layout in `src/presentation/pages/HomeLandingPage.tsx`.
-4. **Reference Global Rules**: Consult `.agents/AGENTS.md` for multi-repo workspace invariants.
+3. **Review Generated API Types**: Check `src/data/api/generated/api.d.ts` — this is auto-generated from the backend OpenAPI spec. Import REST API response types via `import type { components } from '@api/generated/api'` when building real API data sources.
+4. **Check Layout Architecture**: Verify that UI modifications adhere to the Full-Page Scrolling Layout in `src/presentation/pages/HomeLandingPage.tsx`.
+5. **Reference Global Rules**: Consult `.agents/AGENTS.md` for multi-repo workspace invariants.
 
 ---
 
