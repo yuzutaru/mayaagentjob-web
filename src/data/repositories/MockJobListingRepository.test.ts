@@ -47,4 +47,19 @@ describe('MockJobListingRepository', () => {
     const results = await repo.getFilteredListings(undefined, '');
     expect(results.length).toBeGreaterThanOrEqual(14);
   });
+
+  it('filters by country in location', async () => {
+    const repo = new MockJobListingRepository();
+    const results = await repo.getFilteredListings(undefined, undefined, 'Jakarta');
+    expect(results.length).toBeGreaterThanOrEqual(1);
+    expect(results.every((j) => /jakarta/i.test(j.location))).toBe(true);
+  });
+
+  it('combines country with category and keyword', async () => {
+    const repo = new MockJobListingRepository();
+    const results = await repo.getFilteredListings('cat-1', 'frontend', 'Jakarta');
+    expect(results.every((j) => j.categoryId === 'cat-1')).toBe(true);
+    expect(results.every((j) => /frontend/i.test(j.title))).toBe(true);
+    expect(results.every((j) => /jakarta/i.test(j.location))).toBe(true);
+  });
 });

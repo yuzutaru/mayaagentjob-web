@@ -8,12 +8,16 @@ interface FloatingSearchBarProps {
   searchQuery: string;
   onSearchQueryChange: (value: string) => void;
   onSearchSubmit: () => void;
+  countryQuery?: string;
+  onCountryQueryChange?: (value: string) => void;
 }
 
 export const FloatingSearchBar: React.FC<FloatingSearchBarProps> = ({
   searchQuery,
   onSearchQueryChange,
   onSearchSubmit,
+  countryQuery,
+  onCountryQueryChange,
 }) => {
   const { t } = useTranslation();
   const { location } = useUserLocation(new UserLocationRepositoryImpl());
@@ -29,6 +33,19 @@ export const FloatingSearchBar: React.FC<FloatingSearchBarProps> = ({
               value={searchQuery}
               onChange={(e) => onSearchQueryChange(e.target.value)}
               placeholder={t('hero.placeholderKeyword')}
+              className="w-full bg-transparent text-sm sm:text-base text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none"
+            />
+          </div>
+
+          <div className="hidden sm:block w-px h-8 bg-slate-200 dark:bg-slate-800" />
+
+          <div className="flex items-center gap-3 flex-1 px-4 py-2 sm:py-3">
+            <MapPin className="w-5 h-5 text-slate-400 shrink-0" />
+            <input
+              type="text"
+              value={countryQuery ?? ''}
+              onChange={(e) => onCountryQueryChange?.(e.target.value)}
+              placeholder={t('hero.placeholderCountry')}
               className="w-full bg-transparent text-sm sm:text-base text-slate-800 dark:text-white placeholder:text-slate-400 focus:outline-none"
             />
           </div>

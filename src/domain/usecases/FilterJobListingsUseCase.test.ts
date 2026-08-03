@@ -27,7 +27,7 @@ describe('FilterJobListingsUseCase', () => {
     const useCase = new FilterJobListingsUseCase(mockRepo);
     const result = await useCase.execute();
     expect(result).toHaveLength(3);
-    expect(mockRepo.getFilteredListings).toHaveBeenCalledWith(undefined, undefined);
+    expect(mockRepo.getFilteredListings).toHaveBeenCalledWith(undefined, undefined, undefined);
   });
 
   it('filters by categoryId', async () => {
@@ -37,7 +37,7 @@ describe('FilterJobListingsUseCase', () => {
     const useCase = new FilterJobListingsUseCase(mockRepo);
     const result = await useCase.execute('cat-1');
     expect(result).toHaveLength(2);
-    expect(mockRepo.getFilteredListings).toHaveBeenCalledWith('cat-1', undefined);
+    expect(mockRepo.getFilteredListings).toHaveBeenCalledWith('cat-1', undefined, undefined);
   });
 
   it('filters by keyword', async () => {
@@ -47,7 +47,7 @@ describe('FilterJobListingsUseCase', () => {
     const useCase = new FilterJobListingsUseCase(mockRepo);
     const result = await useCase.execute(undefined, 'designer');
     expect(result).toHaveLength(1);
-    expect(mockRepo.getFilteredListings).toHaveBeenCalledWith(undefined, 'designer');
+    expect(mockRepo.getFilteredListings).toHaveBeenCalledWith(undefined, 'designer', undefined);
   });
 
   it('combines category and keyword filters', async () => {
@@ -57,7 +57,27 @@ describe('FilterJobListingsUseCase', () => {
     const useCase = new FilterJobListingsUseCase(mockRepo);
     const result = await useCase.execute('cat-1', 'frontend');
     expect(result).toHaveLength(1);
-    expect(mockRepo.getFilteredListings).toHaveBeenCalledWith('cat-1', 'frontend');
+    expect(mockRepo.getFilteredListings).toHaveBeenCalledWith('cat-1', 'frontend', undefined);
+  });
+
+  it('filters by country', async () => {
+    const mockRepo: IJobListingRepository = {
+      getFilteredListings: vi.fn().mockResolvedValue([mockJob1]),
+    };
+    const useCase = new FilterJobListingsUseCase(mockRepo);
+    const result = await useCase.execute(undefined, undefined, 'Jakarta');
+    expect(result).toHaveLength(1);
+    expect(mockRepo.getFilteredListings).toHaveBeenCalledWith(undefined, undefined, 'Jakarta');
+  });
+
+  it('combines country with other filters', async () => {
+    const mockRepo: IJobListingRepository = {
+      getFilteredListings: vi.fn().mockResolvedValue([mockJob1]),
+    };
+    const useCase = new FilterJobListingsUseCase(mockRepo);
+    const result = await useCase.execute('cat-1', 'frontend', 'Jakarta');
+    expect(result).toHaveLength(1);
+    expect(mockRepo.getFilteredListings).toHaveBeenCalledWith('cat-1', 'frontend', 'Jakarta');
   });
 
   it('propagates repository errors', async () => {

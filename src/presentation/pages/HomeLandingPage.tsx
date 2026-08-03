@@ -16,6 +16,7 @@ export const HomeLandingPage: React.FC = () => {
   const data = homePortalMockData;
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | undefined>(undefined);
   const [searchQuery, setSearchQuery] = useState('');
+  const [countryQuery, setCountryQuery] = useState('');
   const repoRef = useRef(new MockJobListingRepository());
 
   const {
@@ -23,6 +24,7 @@ export const HomeLandingPage: React.FC = () => {
     isLoading,
     setCategoryId,
     setKeyword,
+    setCountry,
     page,
     totalPages,
     totalCount,
@@ -39,9 +41,14 @@ export const HomeLandingPage: React.FC = () => {
     setSearchQuery(value);
   }, []);
 
+  const handleCountryQueryChange = useCallback((value: string) => {
+    setCountryQuery(value);
+  }, []);
+
   const handleSearchSubmit = useCallback(() => {
     setKeyword(searchQuery.trim() || undefined);
-  }, [searchQuery, setKeyword]);
+    setCountry(countryQuery.trim() || undefined);
+  }, [searchQuery, countryQuery, setKeyword, setCountry]);
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-career-dark text-slate-900 dark:text-white transition-colors duration-300">
@@ -67,6 +74,8 @@ export const HomeLandingPage: React.FC = () => {
           searchQuery={searchQuery}
           onSearchQueryChange={handleSearchQueryChange}
           onSearchSubmit={handleSearchSubmit}
+          countryQuery={countryQuery}
+          onCountryQueryChange={handleCountryQueryChange}
         />
 
         <JobListingSection

@@ -102,6 +102,20 @@ describe('useJobListings', () => {
     expect(result.current.page).toBe(1);
   });
 
+  it('resets page to 1 when country changes', async () => {
+    const { result } = renderHook(() => useJobListings(mockRepo));
+
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+
+    act(() => { result.current.setPage(2); });
+
+    expect(result.current.page).toBe(2);
+
+    act(() => { result.current.setCountry('Jakarta'); });
+
+    expect(result.current.page).toBe(1);
+  });
+
   it('refetches when categoryId changes', async () => {
     const repo: IJobListingRepository = {
       getFilteredListings: vi.fn().mockResolvedValue(mockJobs),
@@ -114,7 +128,7 @@ describe('useJobListings', () => {
     act(() => { result.current.setCategoryId('cat-2'); });
 
     await waitFor(() => {
-      expect(repo.getFilteredListings).toHaveBeenCalledWith('cat-2', undefined);
+      expect(repo.getFilteredListings).toHaveBeenCalledWith('cat-2', undefined, undefined);
     });
   });
 
@@ -130,7 +144,7 @@ describe('useJobListings', () => {
     act(() => { result.current.setKeyword('designer'); });
 
     await waitFor(() => {
-      expect(repo.getFilteredListings).toHaveBeenCalledWith(undefined, 'designer');
+      expect(repo.getFilteredListings).toHaveBeenCalledWith(undefined, 'designer', undefined);
     });
   });
 

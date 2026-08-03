@@ -3,7 +3,7 @@ import { JobListing } from '../../domain/entities/JobListing';
 import { jobListingsMockData } from '../mock/jobListingsMockData';
 
 export class MockJobListingRepository implements IJobListingRepository {
-  async getFilteredListings(categoryId?: string, keyword?: string): Promise<JobListing[]> {
+  async getFilteredListings(categoryId?: string, keyword?: string, country?: string): Promise<JobListing[]> {
     await new Promise((resolve) => setTimeout(resolve, 200));
 
     let results = [...jobListingsMockData];
@@ -19,6 +19,11 @@ export class MockJobListingRepository implements IJobListingRepository {
           job.title.toLowerCase().includes(lower) ||
           job.company.toLowerCase().includes(lower)
       );
+    }
+
+    if (country && country.trim()) {
+      const lower = country.toLowerCase();
+      results = results.filter((job) => job.location.toLowerCase().includes(lower));
     }
 
     return results;

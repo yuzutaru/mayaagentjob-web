@@ -17,6 +17,7 @@ export const en = {
     quote: '"Building Connections, Bridging Opportunities – Your Future Starts Here."',
     here: 'Here."',
     placeholderKeyword: 'Job title or keyword',
+    placeholderCountry: 'Country or location',
   },
   categories: {
     title: 'Popular Categories',

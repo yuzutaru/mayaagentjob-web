@@ -1,5 +1,5 @@
 import { JobListing } from '../entities/JobListing';
 
 export interface IJobListingRepository {
-  getFilteredListings(categoryId?: string, keyword?: string): Promise<JobListing[]>;
+  getFilteredListings(categoryId?: string, keyword?: string, country?: string): Promise<JobListing[]>;
 }
