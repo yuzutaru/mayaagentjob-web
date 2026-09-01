@@ -1,7 +1,7 @@
 export const id = {
   nav: {
     brandName: 'Maya',
-    subtitle: 'Asisten cari kerja Kamu',
+    subtitle: 'Asisten Portofolio & Karir',
     community: 'Komunitas',
     findJobs: 'Cari Lowongan',
     companies: 'Perusahaan',
@@ -18,6 +18,7 @@ export const id = {
     quote: '"Membangun Koneksi, Menjembatani Peluang – Masa Depan Anda Dimulai di Sini."',
     here: 'Sini."',
     placeholderKeyword: 'Judul pekerjaan atau kata kunci',
+    placeholderCountry: 'Negara atau lokasi',
   },
   categories: {
     title: 'Kategori Populer',
@@ -29,6 +30,26 @@ export const id = {
     'cat-5': 'Bisnis',
     'cat-6': 'Penulisan & Terjemahan',
   },
+  features: {
+    title: 'Satu Platform, Semua yang Anda Butuhkan',
+    subtitle: 'Bangun website portofolio Anda, ekspor sebagai PDF, dan biarkan AI mencocokkan Anda dengan peran berikutnya.',
+    'feature-portfolio': {
+      title: 'Pembuat Website Portofolio',
+      desc: 'Desain website portofolio yang indah dan responsif dari profil GitHub, GitLab, atau LinkedIn Anda yang sebenarnya.',
+    },
+    'feature-pdf': {
+      title: 'Ekspor PDF & CV',
+      desc: 'Ekspor CV PDF yang rapi dan situs HTML yang dapat dibagikan dalam satu klik — siap rekruter dalam hitungan menit.',
+    },
+    'feature-jobs': {
+      title: 'Pencocokan Pekerjaan AI',
+      desc: 'Salah satu fitur Maya: dapatkan peran yang cocok dengan keahlian dan preferensi Anda.',
+    },
+  },
+  jobs: {
+    title: 'Temukan Pekerjaan Impian',
+    subtitle: 'Jelajahi peran yang cocok dengan portofolio dan preferensi Anda.',
+  },
   vacancies: {
     title: 'Lowongan Populer',
     subtitle: 'Peluang kerja yang sedang mencari talenta',
@@ -39,17 +60,22 @@ export const id = {
     subtitle: 'Empat langkah mudah menuju jenjang karir Anda berikutnya',
   },
   cta: {
-    becomeCandidate: 'Menjadi Kandidat',
-    becomeCandidateDesc: 'Jelajahi pekerjaan yang cocok dengan keahlian teknis Anda dan bangun karir Anda.',
+    becomeCandidate: 'Bangun Portofolio Anda',
+    becomeCandidateDesc: 'Impor profil GitHub, GitLab, atau Bitbucket Anda dan buat portofolio & CV yang memukau dalam satu klik.',
+    jobs: {
+      title: 'Temukan Pekerjaan Impian',
+      desc: 'Jelajahi pekerjaan yang cocok dengan keahlian teknis Anda dan lamar dalam hitungan detik dengan pencarian kerja Maya.',
+      btn: 'Cari Lowongan',
+    },
     becomeEmployer: 'Menjadi Perusahaan',
     becomeEmployerDesc: 'Pasang lowongan kerja dan biarkan Maya mencocokkan Anda dengan kandidat terbaik.',
     registerNow: 'Daftar Sekarang',
   },
   footer: {
-    subtitle: 'Asisten Karir AI Anda',
+    subtitle: 'Asisten Portofolio & Karir',
     copyright: '© 2026 Maya. Hak Cipta Dilindungi Undang-Undang.',
     callNow: 'Hubungi sekarang',
-    tagline: 'Membangun koneksi, menjembatani peluang karir dengan bantuan AI.',
+    tagline: 'Bangun website portofolio Anda, ekspor sebagai PDF, dan biarkan AI mencocokkan Anda dengan peran berikutnya.',
   },
   jobListings: {
     sectionTitle: 'Lowongan Tersedia',

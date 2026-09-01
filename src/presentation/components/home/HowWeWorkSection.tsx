@@ -1,5 +1,15 @@
 import React from 'react';
-import { UserPlus, Upload, Search, CheckCircle2, LucideIcon } from 'lucide-react';
+import {
+  UserPlus,
+  Upload,
+  Search,
+  CheckCircle2,
+  Import,
+  LayoutTemplate,
+  FileDown,
+  Sparkles,
+  LucideIcon,
+} from 'lucide-react';
 import { useTranslation } from '../../../core/i18n/TranslationContext';
 import { HowWeWorkStepContract } from '../../../domain/entities/HomePortalContract';
 
@@ -12,6 +22,10 @@ const iconMap: Record<string, LucideIcon> = {
   upload: Upload,
   search: Search,
   'check-circle': CheckCircle2,
+  import: Import,
+  layout: LayoutTemplate,
+  'file-down': FileDown,
+  sparkles: Sparkles,
 };
 
 export const HowWeWorkSection: React.FC<HowWeWorkSectionProps> = ({ steps }) => {

@@ -4,6 +4,7 @@ import { ThemeProvider } from './presentation/hooks/useTheme';
 import { TranslationProvider } from './core/i18n/TranslationContext';
 import { AuthProvider } from './presentation/hooks/useAuth';
 import { HomeLandingPage } from './presentation/pages/HomeLandingPage';
+import { FindJobsPage } from './presentation/pages/FindJobsPage';
 import { HomePage } from './presentation/pages/HomePage';
 import { SavedJobsPage } from './presentation/pages/SavedJobsPage';
 import { ProfilePage } from './presentation/pages/ProfilePage';
@@ -18,6 +19,7 @@ export function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<HomeLandingPage />} />
+              <Route path="/jobs" element={<FindJobsPage />} />
               <Route path="/portfolio" element={<PortfolioBuilderPage />} />
               <Route
                 path="/home"

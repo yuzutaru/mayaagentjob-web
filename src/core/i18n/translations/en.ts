@@ -1,7 +1,7 @@
 export const en = {
   nav: {
     brandName: 'Maya',
-    subtitle: 'Your AI Career Assistant',
+    subtitle: 'Portfolio & Career Assistant',
     community: 'Community',
     findJobs: 'Find Jobs',
     companies: 'Companies',
@@ -30,6 +30,26 @@ export const en = {
     'cat-5': 'Business',
     'cat-6': 'Writing And Translation',
   },
+  features: {
+    title: 'One Platform, Everything You Need',
+    subtitle: 'Build your portfolio website, export it as a PDF, and let AI match you to your next role.',
+    'feature-portfolio': {
+      title: 'Portfolio Web Builder',
+      desc: 'Design a beautiful, responsive portfolio website from your real GitHub, GitLab or LinkedIn profiles.',
+    },
+    'feature-pdf': {
+      title: 'PDF & CV Export',
+      desc: 'Export a polished PDF CV and a shareable HTML site in one click — recruiter-ready in minutes.',
+    },
+    'feature-jobs': {
+      title: 'AI Job Matching',
+      desc: 'One of Maya\'s features: get roles matched to your technical stack and preferences.',
+    },
+  },
+  jobs: {
+    title: 'Find Your Dream Job',
+    subtitle: 'Browse roles matched to your portfolio and preferences.',
+  },
   vacancies: {
     title: 'Popular Vacancies',
     subtitle: 'Opportunities currently looking for talent',
@@ -40,17 +60,22 @@ export const en = {
     subtitle: 'Four simple steps to your next career milestone',
   },
   cta: {
-    becomeCandidate: 'Become a Candidate',
-    becomeCandidateDesc: 'Explore jobs matched to your technical stack and build your career.',
+    becomeCandidate: 'Build Your Portfolio',
+    becomeCandidateDesc: 'Import your GitHub, GitLab or Bitbucket profile and generate a stunning portfolio & CV in one click.',
+    jobs: {
+      title: 'Find Your Dream Job',
+      desc: 'Explore jobs matched to your technical stack and apply in seconds with Maya job search.',
+      btn: 'Find Jobs',
+    },
     becomeEmployer: 'Become an Employer',
     becomeEmployerDesc: 'Post jobs and let Maya match you with top-tier candidates.',
     registerNow: 'Register Now',
   },
   footer: {
-    subtitle: 'Your AI Career Agent',
+    subtitle: 'Portfolio & Career Assistant',
     copyright: '© 2026 Maya. All rights reserved.',
     callNow: 'Call now',
-    tagline: 'Building connections, bridging career opportunities with AI assistance.',
+    tagline: 'Build your portfolio website, export it as a PDF, and let AI match you to your next role.',
   },
   jobListings: {
     sectionTitle: 'Available Jobs',

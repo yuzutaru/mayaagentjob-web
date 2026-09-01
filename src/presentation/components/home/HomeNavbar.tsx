@@ -58,7 +58,11 @@ export const HomeNavbar: React.FC = () => {
             {t('nav.community')}
           </a>
           <a
-            href="#find-jobs"
+            href="/jobs"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/jobs');
+            }}
             className="flex items-center gap-1 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
           >
             {t('nav.findJobs')}

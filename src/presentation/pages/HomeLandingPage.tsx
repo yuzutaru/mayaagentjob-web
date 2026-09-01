@@ -1,54 +1,14 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React from 'react';
 import { homePortalMockData } from '../../data/mock/homePortalMockData';
-import { MockJobListingRepository } from '../../data/repositories/MockJobListingRepository';
 import { HomeNavbar } from '../components/home/HomeNavbar';
 import { HeroSearchSection } from '../components/home/HeroSearchSection';
-import { FloatingSearchBar } from '../components/home/FloatingSearchBar';
-import { JobCategoriesBar } from '../components/home/JobCategoriesBar';
-import { JobListingSection } from '../components/home/JobListingSection';
-import { PopularVacanciesSection } from '../components/home/PopularVacanciesSection';
+import { FeaturesSection } from '../components/home/FeaturesSection';
 import { HowWeWorkSection } from '../components/home/HowWeWorkSection';
 import { DualCtaBannersSection } from '../components/home/DualCtaBannersSection';
 import { HomeFooter } from '../components/home/HomeFooter';
-import { useJobListings } from '../hooks/useJobListings';
 
 export const HomeLandingPage: React.FC = () => {
   const data = homePortalMockData;
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string | undefined>(undefined);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [countryQuery, setCountryQuery] = useState('');
-  const repoRef = useRef(new MockJobListingRepository());
-
-  const {
-    jobs,
-    isLoading,
-    setCategoryId,
-    setKeyword,
-    setCountry,
-    page,
-    totalPages,
-    totalCount,
-    setPage,
-  } = useJobListings(repoRef.current);
-
-  const handleCategorySelect = useCallback((id: string) => {
-    const next = id === selectedCategoryId ? undefined : id;
-    setSelectedCategoryId(next);
-    setCategoryId(next);
-  }, [selectedCategoryId, setCategoryId]);
-
-  const handleSearchQueryChange = useCallback((value: string) => {
-    setSearchQuery(value);
-  }, []);
-
-  const handleCountryQueryChange = useCallback((value: string) => {
-    setCountryQuery(value);
-  }, []);
-
-  const handleSearchSubmit = useCallback(() => {
-    setKeyword(searchQuery.trim() || undefined);
-    setCountry(countryQuery.trim() || undefined);
-  }, [searchQuery, countryQuery, setKeyword, setCountry]);
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-career-dark text-slate-900 dark:text-white transition-colors duration-300">
@@ -64,30 +24,7 @@ export const HomeLandingPage: React.FC = () => {
           quoteHighlightWord={data.heroQuoteHighlightWord}
         />
 
-        <JobCategoriesBar
-          categories={data.categories}
-          activeCategoryId={selectedCategoryId}
-          onCategorySelect={handleCategorySelect}
-        />
-
-        <FloatingSearchBar
-          searchQuery={searchQuery}
-          onSearchQueryChange={handleSearchQueryChange}
-          onSearchSubmit={handleSearchSubmit}
-          countryQuery={countryQuery}
-          onCountryQueryChange={handleCountryQueryChange}
-        />
-
-        <JobListingSection
-          jobs={jobs}
-          isLoading={isLoading}
-          page={page}
-          totalPages={totalPages}
-          totalCount={totalCount}
-          onPageChange={setPage}
-        />
-
-        <PopularVacanciesSection vacancies={data.popularVacancies} />
+        <FeaturesSection features={data.features} />
 
         <HowWeWorkSection steps={data.workSteps} />
 

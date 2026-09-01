@@ -2,11 +2,34 @@ import { HomePortalContract } from '../../domain/entities/HomePortalContract';
 
 export const homePortalMockData: HomePortalContract = {
   brandName: 'Maya',
-  brandSubtitle: 'Portfolio & Career Assistant',
-  heroHeadline: 'Build Your Portfolio, Find Your Dream Job',
-  heroHighlightWord: 'Dream Job',
-  heroQuote: '"Your portfolio opens doors. Maya builds it for you, and finds the job to match."',
-  heroQuoteHighlightWord: 'portfolio',
+  brandSubtitle: 'Portfolio Builder & Career Assistant',
+  heroHeadline: 'Build a Portfolio Website & PDF CV',
+  heroHighlightWord: 'PDF CV',
+  heroQuote: '"Maya turns your skills into a stunning portfolio website and a shareable PDF CV — then finds the job that matches."',
+  heroQuoteHighlightWord: 'portfolio website',
+  features: [
+    {
+      id: 'feature-portfolio',
+      title: 'Portfolio Web Builder',
+      description:
+        'Design a beautiful, responsive portfolio website from your real GitHub, GitLab or LinkedIn profiles.',
+      iconName: 'layout',
+    },
+    {
+      id: 'feature-pdf',
+      title: 'PDF & CV Export',
+      description:
+        'Export a polished PDF CV and a shareable HTML site in one click — recruiter-ready in minutes.',
+      iconName: 'file-down',
+    },
+    {
+      id: 'feature-jobs',
+      title: 'AI Job Matching',
+      description:
+        'One of Maya\'s features: get roles matched to your technical stack and preferences.',
+      iconName: 'sparkles',
+    },
+  ],
   categories: [
     {
       id: 'cat-1',
@@ -124,28 +147,28 @@ export const homePortalMockData: HomePortalContract = {
   workSteps: [
     {
       stepNumber: 1,
-      title: 'Create account',
-      description: 'Whatever whatever whatever whatever whatever whatever',
-      iconName: 'user-plus',
+      title: 'Import your profiles',
+      description: 'Connect GitHub, GitLab, Bitbucket or a LinkedIn PDF export to pull your work history.',
+      iconName: 'import',
     },
     {
       stepNumber: 2,
-      title: 'Upload CV/Resume',
-      description: 'Whatever whatever whatever whatever whatever whatever',
-      iconName: 'upload',
+      title: 'Build & customize',
+      description: 'Design your portfolio website with a live preview as you edit.',
+      iconName: 'layout',
       isActive: true,
     },
     {
       stepNumber: 3,
-      title: 'Find suitable job',
-      description: 'Whatever whatever whatever whatever whatever whatever',
-      iconName: 'search',
+      title: 'Export PDF & site',
+      description: 'Download a polished PDF CV and your portfolio website in one click.',
+      iconName: 'file-down',
     },
     {
       stepNumber: 4,
-      title: 'Apply job',
-      description: 'Whatever whatever whatever whatever whatever whatever',
-      iconName: 'check-circle',
+      title: 'Get AI matches',
+      description: 'Receive jobs matched to your portfolio and preferences.',
+      iconName: 'sparkles',
     },
   ],
   ctaBanners: [
@@ -159,13 +182,13 @@ export const homePortalMockData: HomePortalContract = {
       buttonActionUrl: '/portfolio',
     },
     {
-      id: 'cta-employer',
-      type: 'employer',
+      id: 'cta-jobs',
+      type: 'jobs',
       title: 'Find Your Dream Job',
       description:
         'Explore jobs matched to your technical stack and apply in seconds with Maya job search.',
       buttonText: 'Find Jobs',
-      buttonActionUrl: '/home',
+      buttonActionUrl: '/jobs',
     },
   ],
   footerColumns: [

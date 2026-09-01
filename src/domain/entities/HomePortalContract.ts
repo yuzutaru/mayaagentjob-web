@@ -27,9 +27,16 @@ export interface HowWeWorkStepContract {
   readonly isActive?: boolean;
 }
 
+export interface FeatureContract {
+  readonly id: string;
+  readonly title: string;
+  readonly description: string;
+  readonly iconName: string; // e.g., 'layout', 'file-down', 'sparkles'
+}
+
 export interface CtaBannerContract {
   readonly id: string;
-  readonly type: 'candidate' | 'employer';
+  readonly type: 'candidate' | 'employer' | 'jobs';
   readonly title: string;
   readonly description: string;
   readonly buttonText: string;
@@ -54,6 +61,7 @@ export interface HomePortalContract {
   readonly heroHighlightWord: string;
   readonly heroQuote: string;
   readonly heroQuoteHighlightWord: string;
+  readonly features: readonly FeatureContract[];
   readonly categories: readonly JobCategoryCardContract[];
   readonly popularVacancies: readonly PopularVacancyContract[];
   readonly workSteps: readonly HowWeWorkStepContract[];

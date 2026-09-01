@@ -93,7 +93,7 @@ All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clea
 
 ## Design System & Layout Rules
 
-- **Full-Page Scrolling Layout**: The desktop layout (`src/presentation/pages/HomeLandingPage.tsx`) is a single-page scrollable experience: `HomeNavbar` → `HeroSearchSection` → `JobCategoriesBar` (active category state lifted to page, drives `useJobListings` filter) → `JobListingSection` (paginated grid, 9 per page, filtered by category + keyword search) → `PopularVacanciesSection` → `HowWeWorkSection` → `DualCtaBannersSection` → `HomeFooter`.
+- **Full-Page Scrolling Layout**: The landing page (`src/presentation/pages/HomeLandingPage.tsx`) is a single-page scrollable experience: `HomeNavbar` → `HeroSearchSection` (portfolio/PDF positioning) → `FeaturesSection` (Portfolio Web Builder, PDF & CV Export, AI Job Matching) → `HowWeWorkSection` → `DualCtaBannersSection` (→ `/portfolio`, `/jobs`) → `HomeFooter`. The job-matching experience lives on a separate route: `FindJobsPage` (`/jobs`) hosts `JobCategoriesBar` (active category state lifted to page, drives `useJobListings` filter), `FloatingSearchBar`, `JobListingSection` (paginated grid, 9 per page, filtered by category + keyword search), and `PopularVacanciesSection`.
 - **Tailwind CSS Utility Classes**: Use standard classes. Canvas background is `bg-slate-50` (light) / `bg-career-dark` (dark).
 - **Vanilla CSS (if needed)**: Declare animations and custom variables inside `src/index.css`.
 
