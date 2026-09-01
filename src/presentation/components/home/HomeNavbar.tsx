@@ -52,10 +52,14 @@ export const HomeNavbar: React.FC = () => {
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
           <a
-            href="#community"
+            href="/portfolio"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/portfolio');
+            }}
             className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
           >
-            {t('nav.community')}
+            {t('nav.portfolio')}
           </a>
           <a
             href="/jobs"
@@ -69,6 +73,12 @@ export const HomeNavbar: React.FC = () => {
             <ChevronDown className="w-4 h-4 opacity-70" />
           </a>
           <a
+            href="#community"
+            className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+          >
+            {t('nav.community')}
+          </a>
+          <a
             href="#companies"
             className="flex items-center gap-1 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
           >
@@ -80,16 +90,6 @@ export const HomeNavbar: React.FC = () => {
             className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
           >
             {t('nav.salaries')}
-          </a>
-          <a
-            href="/portfolio"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate('/portfolio');
-            }}
-            className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
-          >
-            {t('nav.portfolio')}
           </a>
         </nav>
 

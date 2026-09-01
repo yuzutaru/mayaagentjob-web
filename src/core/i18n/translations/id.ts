@@ -59,6 +59,24 @@ export const id = {
     title: 'Cara Kerja Maya',
     subtitle: 'Empat langkah mudah menuju jenjang karir Anda berikutnya',
   },
+  workSteps: {
+    step1: {
+      title: 'Impor profil Anda',
+      desc: 'Hubungkan GitHub, GitLab, Bitbucket atau ekspor PDF LinkedIn untuk menarik riwayat pekerjaan Anda.',
+    },
+    step2: {
+      title: 'Bangun & sesuaikan',
+      desc: 'Desain website portofolio Anda dengan pratinjau langsung saat mengedit.',
+    },
+    step3: {
+      title: 'Ekspor PDF & situs',
+      desc: 'Unduh CV PDF yang rapi dan website portofolio Anda dalam satu klik.',
+    },
+    step4: {
+      title: 'Dapatkan kecocokan AI',
+      desc: 'Terima pekerjaan yang cocok dengan portofolio dan preferensi Anda.',
+    },
+  },
   cta: {
     becomeCandidate: 'Bangun Portofolio Anda',
     becomeCandidateDesc: 'Impor profil GitHub, GitLab, atau Bitbucket Anda dan buat portofolio & CV yang memukau dalam satu klik.',

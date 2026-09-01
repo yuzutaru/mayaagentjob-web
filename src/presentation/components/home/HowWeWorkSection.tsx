@@ -39,6 +39,9 @@ export const HowWeWorkSection: React.FC<HowWeWorkSectionProps> = ({ steps }) => 
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             {t('howItWorks.title')}
           </h2>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            {t('howItWorks.subtitle')}
+          </p>
         </div>
 
         {/* Workflow Steps Grid */}

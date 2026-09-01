@@ -59,6 +59,24 @@ export const en = {
     title: 'How Maya Works',
     subtitle: 'Four simple steps to your next career milestone',
   },
+  workSteps: {
+    step1: {
+      title: 'Import your profiles',
+      desc: 'Connect GitHub, GitLab, Bitbucket or a LinkedIn PDF export to pull your work history.',
+    },
+    step2: {
+      title: 'Build & customize',
+      desc: 'Design your portfolio website with a live preview as you edit.',
+    },
+    step3: {
+      title: 'Export PDF & site',
+      desc: 'Download a polished PDF CV and your portfolio website in one click.',
+    },
+    step4: {
+      title: 'Get AI matches',
+      desc: 'Receive jobs matched to your portfolio and preferences.',
+    },
+  },
   cta: {
     becomeCandidate: 'Build Your Portfolio',
     becomeCandidateDesc: 'Import your GitHub, GitLab or Bitbucket profile and generate a stunning portfolio & CV in one click.',
