@@ -30,7 +30,7 @@ export interface paths {
         };
         /**
          * Get Jobs
-         * @description Get paginated job listings with optional category and keyword filters.
+         * @description Get paginated job listings with optional category, keyword, and country filters.
          *     Matches the exact contract from mayaagentjob-web's FilterJobListingsUseCase.
          */
         get: operations["get_jobs_api_v1_jobs_get"];
@@ -136,10 +136,168 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/portfolio/import/linkedin-pdf": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Import Linkedin Pdf
+         * @description Import a portfolio from a LinkedIn 'Save to PDF' export (or txt/pdf resume).
+         */
+        post: operations["import_linkedin_pdf_api_v1_portfolio_import_linkedin_pdf_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/portfolio/import/{provider}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Import Profile
+         * @description Import a partial portfolio from a public source provider.
+         */
+        post: operations["import_profile_api_v1_portfolio_import__provider__post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/portfolio/profiles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List Profiles
+         * @description List saved portfolio profiles for a user.
+         */
+        get: operations["list_profiles_api_v1_portfolio_profiles_get"];
+        put?: never;
+        /**
+         * Save Profile
+         * @description Save a portfolio profile (insert or update by id).
+         */
+        post: operations["save_profile_api_v1_portfolio_profiles_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/portfolio/profiles/{profile_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get Profile
+         * @description Get a saved portfolio profile by id.
+         */
+        get: operations["get_profile_api_v1_portfolio_profiles__profile_id__get"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete Profile
+         * @description Delete a saved portfolio profile by id.
+         */
+        delete: operations["delete_profile_api_v1_portfolio_profiles__profile_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/portfolio/export/pdf": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Export Pdf
+         * @description Render a portfolio profile to a PDF CV.
+         */
+        post: operations["export_pdf_api_v1_portfolio_export_pdf_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/portfolio/export/html": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Export Html
+         * @description Render a portfolio profile to a fully self-contained HTML page.
+         */
+        post: operations["export_html_api_v1_portfolio_export_html_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** Article */
+        Article: {
+            /** Title */
+            title: string;
+            /**
+             * Url
+             * @default
+             */
+            url: string;
+            /**
+             * Description
+             * @default
+             */
+            description: string;
+            /**
+             * Published At
+             * @default
+             */
+            published_at: string;
+            /**
+             * Tags
+             * @default []
+             */
+            tags: string[];
+        };
+        /** Body_import_linkedin_pdf_api_v1_portfolio_import_linkedin_pdf_post */
+        Body_import_linkedin_pdf_api_v1_portfolio_import_linkedin_pdf_post: {
+            /** File */
+            file: string;
+        };
         /** Body_submit_profile_api_v1_candidate_profile_post */
         Body_submit_profile_api_v1_candidate_profile_post: {
             profile: components["schemas"]["ParsedResumeProfile"];
@@ -180,10 +338,56 @@ export interface components {
             /** Embedding */
             embedding?: number[] | null;
         };
+        /** Certification */
+        Certification: {
+            /** Name */
+            name: string;
+            /**
+             * Issuer
+             * @default
+             */
+            issuer: string;
+            /**
+             * Year
+             * @default
+             */
+            year: string;
+            /**
+             * Url
+             * @default
+             */
+            url: string;
+        };
+        /** Education */
+        Education: {
+            /** Institution */
+            institution: string;
+            /** Degree */
+            degree: string;
+            /**
+             * Start Date
+             * @default
+             */
+            start_date: string;
+            /** End Date */
+            end_date?: string | null;
+            /**
+             * Description
+             * @default
+             */
+            description: string;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
+        };
+        /** ImportRequest */
+        ImportRequest: {
+            /** Username */
+            username: string;
+            /** Api Key */
+            api_key?: string | null;
         };
         /** JobListing */
         JobListing: {
@@ -223,6 +427,262 @@ export interface components {
             /** Embedding */
             embedding?: number[] | null;
         };
+        /** PortfolioProfile */
+        PortfolioProfile: {
+            /** Full Name */
+            full_name: string;
+            /**
+             * Headline
+             * @default
+             */
+            headline: string;
+            /**
+             * Bio
+             * @default
+             */
+            bio: string;
+            /**
+             * Email
+             * @default
+             */
+            email: string;
+            /**
+             * Phone
+             * @default
+             */
+            phone: string;
+            /**
+             * Location
+             * @default
+             */
+            location: string;
+            /**
+             * Website
+             * @default
+             */
+            website: string;
+            /**
+             * Avatar Url
+             * @default
+             */
+            avatar_url: string;
+            /**
+             * Socials
+             * @default []
+             */
+            socials: components["schemas"]["SocialLink"][];
+            /**
+             * Summary
+             * @default
+             */
+            summary: string;
+            /**
+             * Skills
+             * @default []
+             */
+            skills: components["schemas"]["Skill"][];
+            /**
+             * Experience
+             * @default []
+             */
+            experience: components["schemas"]["WorkExperience"][];
+            /**
+             * Education
+             * @default []
+             */
+            education: components["schemas"]["Education"][];
+            /**
+             * Projects
+             * @default []
+             */
+            projects: components["schemas"]["Project"][];
+            /**
+             * Certifications
+             * @default []
+             */
+            certifications: components["schemas"]["Certification"][];
+            /**
+             * Articles
+             * @default []
+             */
+            articles: components["schemas"]["Article"][];
+            stats?: components["schemas"]["PortfolioStats"];
+            /**
+             * Sections
+             * @default []
+             */
+            sections: components["schemas"]["PortfolioSection"][];
+            /**
+             * Theme
+             * @default aurora
+             */
+            theme: string;
+            /**
+             * Accent Color
+             * @default #6366F1
+             */
+            accent_color: string;
+            /**
+             * Id
+             * @default
+             */
+            id: string;
+            /**
+             * User Id
+             * @default
+             */
+            user_id: string;
+            /**
+             * Created At
+             * @default
+             */
+            created_at: string;
+            /**
+             * Updated At
+             * @default
+             */
+            updated_at: string;
+        };
+        /** PortfolioSection */
+        PortfolioSection: {
+            /** Key */
+            key: string;
+            /**
+             * Title
+             * @default
+             */
+            title: string;
+            /**
+             * Visible
+             * @default true
+             */
+            visible: boolean;
+            /**
+             * Order
+             * @default 0
+             */
+            order: number;
+        };
+        /** PortfolioStats */
+        PortfolioStats: {
+            /**
+             * Total Repos
+             * @default 0
+             */
+            total_repos: number;
+            /**
+             * Total Stars
+             * @default 0
+             */
+            total_stars: number;
+            /**
+             * Total Forks
+             * @default 0
+             */
+            total_forks: number;
+            /**
+             * Followers
+             * @default 0
+             */
+            followers: number;
+            /**
+             * Following
+             * @default 0
+             */
+            following: number;
+            /**
+             * Contributions Last Year
+             * @default 0
+             */
+            contributions_last_year: number;
+            /**
+             * Coding Hours
+             * @default 0
+             */
+            coding_hours: number;
+            /**
+             * Reputation
+             * @default 0
+             */
+            reputation: number;
+            /**
+             * Articles Published
+             * @default 0
+             */
+            articles_published: number;
+        };
+        /** Project */
+        Project: {
+            /** Name */
+            name: string;
+            /**
+             * Description
+             * @default
+             */
+            description: string;
+            /**
+             * Url
+             * @default
+             */
+            url: string;
+            /**
+             * Source Url
+             * @default
+             */
+            source_url: string;
+            /**
+             * Tech Stack
+             * @default []
+             */
+            tech_stack: string[];
+            /**
+             * Stars
+             * @default 0
+             */
+            stars: number;
+            /**
+             * Forks
+             * @default 0
+             */
+            forks: number;
+            /**
+             * Language
+             * @default
+             */
+            language: string;
+            /**
+             * Is Featured
+             * @default false
+             */
+            is_featured: boolean;
+        };
+        /** Skill */
+        Skill: {
+            /** Name */
+            name: string;
+            /**
+             * Category
+             * @default
+             */
+            category: string;
+            /**
+             * Level
+             * @default
+             */
+            level: string;
+        };
+        /** SocialLink */
+        SocialLink: {
+            /** Platform */
+            platform: string;
+            /** Url */
+            url: string;
+            /**
+             * Handle
+             * @default
+             */
+            handle: string;
+        };
         /** ValidationError */
         ValidationError: {
             /** Location */
@@ -235,6 +695,35 @@ export interface components {
             input?: unknown;
             /** Context */
             ctx?: Record<string, never>;
+        };
+        /** WorkExperience */
+        WorkExperience: {
+            /** Company */
+            company: string;
+            /** Role */
+            role: string;
+            /**
+             * Start Date
+             * @default
+             */
+            start_date: string;
+            /** End Date */
+            end_date?: string | null;
+            /**
+             * Location
+             * @default
+             */
+            location: string;
+            /**
+             * Description
+             * @default
+             */
+            description: string;
+            /**
+             * Highlights
+             * @default []
+             */
+            highlights: string[];
         };
     };
     responses: never;
@@ -272,6 +761,8 @@ export interface operations {
                 category?: string | null;
                 /** @description Search in title & company */
                 keyword?: string | null;
+                /** @description Filter by country (matches location) */
+                country?: string | null;
                 /** @description Page number */
                 page?: number;
                 /** @description Items per page */
@@ -422,6 +913,268 @@ export interface operations {
                     "application/json": {
                         [key: string]: unknown;
                     }[];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    import_linkedin_pdf_api_v1_portfolio_import_linkedin_pdf_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": components["schemas"]["Body_import_linkedin_pdf_api_v1_portfolio_import_linkedin_pdf_post"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PortfolioProfile"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    import_profile_api_v1_portfolio_import__provider__post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                provider: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ImportRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PortfolioProfile"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_profiles_api_v1_portfolio_profiles_get: {
+        parameters: {
+            query?: {
+                user_id?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PortfolioProfile"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    save_profile_api_v1_portfolio_profiles_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PortfolioProfile"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PortfolioProfile"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_profile_api_v1_portfolio_profiles__profile_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                profile_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PortfolioProfile"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_profile_api_v1_portfolio_profiles__profile_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                profile_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    export_pdf_api_v1_portfolio_export_pdf_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PortfolioProfile"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    export_html_api_v1_portfolio_export_html_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PortfolioProfile"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
                 };
             };
             /** @description Validation Error */

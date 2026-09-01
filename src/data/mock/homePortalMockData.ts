@@ -2,11 +2,11 @@ import { HomePortalContract } from '../../domain/entities/HomePortalContract';
 
 export const homePortalMockData: HomePortalContract = {
   brandName: 'Maya',
-  brandSubtitle: 'Asisten cari kerja Kamu',
-  heroHeadline: 'Find Your Dream Job',
-  heroHighlightWord: 'Job',
-  heroQuote: '"Building Connections, Bridging Opportunities – Your Future Starts Here."',
-  heroQuoteHighlightWord: 'Here."',
+  brandSubtitle: 'Portfolio & Career Assistant',
+  heroHeadline: 'Build Your Portfolio, Find Your Dream Job',
+  heroHighlightWord: 'Dream Job',
+  heroQuote: '"Your portfolio opens doors. Maya builds it for you, and finds the job to match."',
+  heroQuoteHighlightWord: 'portfolio',
   categories: [
     {
       id: 'cat-1',
@@ -152,20 +152,20 @@ export const homePortalMockData: HomePortalContract = {
     {
       id: 'cta-candidate',
       type: 'candidate',
-      title: 'Become a Candidate',
+      title: 'Build Your Portfolio',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras cursus a dolor convallis efficitur.',
-      buttonText: 'Register Now',
-      buttonActionUrl: '/register/candidate',
+        'Import your GitHub, GitLab or Bitbucket profile and generate a stunning portfolio & CV in one click.',
+      buttonText: 'Open Builder',
+      buttonActionUrl: '/portfolio',
     },
     {
       id: 'cta-employer',
       type: 'employer',
-      title: 'Become a Employers',
+      title: 'Find Your Dream Job',
       description:
-        'Cras in massa pellentesque, mollis ligula non, luctus dui. Morbi sed efficitur dolor. Pellentesque augue risus, aligu.',
-      buttonText: 'Register Now',
-      buttonActionUrl: '/register/employer',
+        'Explore jobs matched to your technical stack and apply in seconds with Maya job search.',
+      buttonText: 'Find Jobs',
+      buttonActionUrl: '/home',
     },
   ],
   footerColumns: [

@@ -1,6 +1,6 @@
 /**
  * Pure TypeScript Domain Contract for Home Portal Landing Screen.
- * Synchronized across `mayaagentjob-web` and `mayaagentjob-mobile` for 100% contract alignment.
+ * Kept consistent with the native clients' contracts for 100% alignment.
  * Zero framework dependencies to ensure instantaneous <5ms unit testing.
  */
 

@@ -55,7 +55,7 @@ All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clea
    - Keep domain entities readonly to avoid accidental mutations.
 
 2. **Synchronized Domain Contracts**:
-   - Ensure `src/domain/entities/HomePortalContract.ts` matches the domain contract in `mayaagentjob-mobile` (`src/features/job-matching/domain/HomePortalContract.ts`).
+   - Ensure `src/domain/entities/HomePortalContract.ts` stays consistent with the native clients' contracts (`mayaagentjob-android`, `mayaagentjob-ios`).
    - Network payloads and API responses must be typed as Data Transfer Objects (DTOs) in `src/data/`.
    - Implement mapper functions in the Data layer to map DTOs into pure Domain entities.
    - The Presentation layer (`HomeLandingPage.tsx`) must only consume Domain entities, never raw DTOs.

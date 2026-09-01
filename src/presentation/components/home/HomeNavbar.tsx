@@ -77,6 +77,16 @@ export const HomeNavbar: React.FC = () => {
           >
             {t('nav.salaries')}
           </a>
+          <a
+            href="/portfolio"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate('/portfolio');
+            }}
+            className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+          >
+            {t('nav.portfolio')}
+          </a>
         </nav>
 
         <div className="flex items-center gap-4">
