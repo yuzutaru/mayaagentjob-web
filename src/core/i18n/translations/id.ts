@@ -78,16 +78,16 @@ export const id = {
     },
   },
   cta: {
-    becomeCandidate: 'Bangun Portofolio Anda',
-    becomeCandidateDesc: 'Impor profil GitHub, GitLab, atau Bitbucket Anda dan buat portofolio & CV yang memukau dalam satu klik.',
+    candidate: {
+      title: 'Bangun Portofolio Anda',
+      desc: 'Impor profil GitHub, GitLab, atau Bitbucket Anda dan buat portofolio & CV yang memukau dalam satu klik.',
+      btn: 'Buka Pembuat',
+    },
     jobs: {
       title: 'Temukan Pekerjaan Impian',
       desc: 'Jelajahi pekerjaan yang cocok dengan keahlian teknis Anda dan lamar dalam hitungan detik dengan pencarian kerja Maya.',
       btn: 'Cari Lowongan',
     },
-    becomeEmployer: 'Menjadi Perusahaan',
-    becomeEmployerDesc: 'Pasang lowongan kerja dan biarkan Maya mencocokkan Anda dengan kandidat terbaik.',
-    registerNow: 'Daftar Sekarang',
   },
   footer: {
     subtitle: 'Asisten Portofolio & Karir',

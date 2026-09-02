@@ -78,16 +78,16 @@ export const en = {
     },
   },
   cta: {
-    becomeCandidate: 'Build Your Portfolio',
-    becomeCandidateDesc: 'Import your GitHub, GitLab or Bitbucket profile and generate a stunning portfolio & CV in one click.',
+    candidate: {
+      title: 'Build Your Portfolio',
+      desc: 'Import your GitHub, GitLab or Bitbucket profile and generate a stunning portfolio & CV in one click.',
+      btn: 'Open Builder',
+    },
     jobs: {
       title: 'Find Your Dream Job',
       desc: 'Explore jobs matched to your technical stack and apply in seconds with Maya job search.',
       btn: 'Find Jobs',
     },
-    becomeEmployer: 'Become an Employer',
-    becomeEmployerDesc: 'Post jobs and let Maya match you with top-tier candidates.',
-    registerNow: 'Register Now',
   },
   footer: {
     subtitle: 'Portfolio & Career Assistant',
