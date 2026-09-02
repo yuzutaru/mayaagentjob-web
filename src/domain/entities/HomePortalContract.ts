@@ -32,6 +32,7 @@ export interface FeatureContract {
   readonly title: string;
   readonly description: string;
   readonly iconName: string; // e.g., 'layout', 'file-down', 'sparkles'
+  readonly actionUrl: string; // client route this feature card navigates to
 }
 
 export interface CtaBannerContract {

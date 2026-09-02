@@ -33,6 +33,7 @@ export const id = {
   features: {
     title: 'Satu Platform, Semua yang Anda Butuhkan',
     subtitle: 'Bangun website portofolio Anda, ekspor sebagai PDF, dan biarkan AI mencocokkan Anda dengan peran berikutnya.',
+    learnMore: 'Pelajari Lebih Lanjut',
     'feature-portfolio': {
       title: 'Pembuat Website Portofolio',
       desc: 'Desain website portofolio yang indah dan responsif dari profil GitHub, GitLab, atau LinkedIn Anda yang sebenarnya.',

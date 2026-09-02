@@ -33,6 +33,7 @@ export const en = {
   features: {
     title: 'One Platform, Everything You Need',
     subtitle: 'Build your portfolio website, export it as a PDF, and let AI match you to your next role.',
+    learnMore: 'Learn More',
     'feature-portfolio': {
       title: 'Portfolio Web Builder',
       desc: 'Design a beautiful, responsive portfolio website from your real GitHub, GitLab or LinkedIn profiles.',

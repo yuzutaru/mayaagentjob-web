@@ -14,6 +14,7 @@ export const homePortalMockData: HomePortalContract = {
       description:
         'Design a beautiful, responsive portfolio website from your real GitHub, GitLab or LinkedIn profiles.',
       iconName: 'layout',
+      actionUrl: '/portfolio',
     },
     {
       id: 'feature-pdf',
@@ -21,6 +22,7 @@ export const homePortalMockData: HomePortalContract = {
       description:
         'Export a polished PDF CV and a shareable HTML site in one click — recruiter-ready in minutes.',
       iconName: 'file-down',
+      actionUrl: '/portfolio',
     },
     {
       id: 'feature-jobs',
@@ -28,6 +30,7 @@ export const homePortalMockData: HomePortalContract = {
       description:
         'One of Maya\'s features: get roles matched to your technical stack and preferences.',
       iconName: 'sparkles',
+      actionUrl: '/jobs',
     },
   ],
   categories: [
