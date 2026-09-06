@@ -18,7 +18,7 @@ const features: readonly FeatureContract[] = [
     title: 'PDF & CV Export',
     description: 'Export a polished PDF CV.',
     iconName: 'file-down',
-    actionUrl: '/portfolio',
+    actionUrl: '/cv-export',
   },
   {
     id: 'feature-jobs',
@@ -56,7 +56,7 @@ describe('FeaturesSection', () => {
     const cards = screen.getAllByRole('link');
     expect(cards).toHaveLength(3);
     expect(cards[0].getAttribute('href')).toBe('/portfolio');
-    expect(cards[1].getAttribute('href')).toBe('/portfolio');
+    expect(cards[1].getAttribute('href')).toBe('/cv-export');
     expect(cards[2].getAttribute('href')).toBe('/jobs');
   });
 

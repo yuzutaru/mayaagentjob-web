@@ -9,19 +9,19 @@ export const homePortalMockData: HomePortalContract = {
   heroQuoteHighlightWord: 'portfolio website',
   features: [
     {
-      id: 'feature-portfolio',
-      title: 'Portfolio Web Builder',
-      description:
-        'Design a beautiful, responsive portfolio website from your real GitHub, GitLab or LinkedIn profiles.',
-      iconName: 'layout',
-      actionUrl: '/portfolio',
-    },
-    {
       id: 'feature-pdf',
       title: 'PDF & CV Export',
       description:
         'Export a polished PDF CV and a shareable HTML site in one click — recruiter-ready in minutes.',
       iconName: 'file-down',
+      actionUrl: '/cv-export',
+    },
+    {
+      id: 'feature-portfolio',
+      title: 'Portfolio Web Builder',
+      description:
+        'Design a beautiful, responsive portfolio website from your real GitHub, GitLab or LinkedIn profiles.',
+      iconName: 'layout',
       actionUrl: '/portfolio',
     },
     {

@@ -80,8 +80,9 @@ export class ApiPortfolioRepository implements IPortfolioRepository {
     await this.request<void>(`/portfolio/profiles/${encodeURIComponent(id)}`, { method: 'DELETE' });
   }
 
-  async exportPdf(profile: PortfolioProfile): Promise<Blob> {
-    const res = await fetch(`${this.base}/portfolio/export/pdf`, {
+  async exportPdf(profile: PortfolioProfile, templateId?: string): Promise<Blob> {
+    const query = templateId ? `?template=${encodeURIComponent(templateId)}` : '';
+    const res = await fetch(`${this.base}/portfolio/export/pdf${query}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(mapPortfolioToDto(profile)),

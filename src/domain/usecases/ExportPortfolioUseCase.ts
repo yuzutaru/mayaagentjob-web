@@ -4,8 +4,8 @@ import { IPortfolioRepository } from '../repositories/IPortfolioRepository';
 export class ExportPortfolioUseCase {
   constructor(private readonly repository: IPortfolioRepository) {}
 
-  exportPdf(profile: PortfolioProfile): Promise<Blob> {
-    return this.repository.exportPdf(profile);
+  exportPdf(profile: PortfolioProfile, templateId?: string): Promise<Blob> {
+    return this.repository.exportPdf(profile, templateId);
   }
 
   exportHtml(profile: PortfolioProfile): Promise<string> {

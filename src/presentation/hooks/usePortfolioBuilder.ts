@@ -17,7 +17,7 @@ export interface UsePortfolioBuilderReturn {
   importFromProvider: (provider: string, username: string, apiKey?: string) => Promise<void>;
   importLinkedInPdf: (file: File) => Promise<void>;
   saveProfile: () => Promise<PortfolioProfile>;
-  exportPdf: () => Promise<void>;
+  exportPdf: (templateId?: string) => Promise<void>;
   exportHtml: () => Promise<void>;
 }
 
@@ -98,26 +98,29 @@ export const usePortfolioBuilder = (
     }
   }, [profile]);
 
-  const exportPdf = useCallback(async () => {
-    setIsExporting(true);
-    setError(null);
-    try {
-      const blob = await exportUseCaseRef.current.exportPdf(profile);
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${profile.fullName.replace(/\s+/g, '_') || 'portfolio'}_CV.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-      setNotice('PDF downloaded.');
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'PDF export failed');
-    } finally {
-      setIsExporting(false);
-    }
-  }, [profile]);
+  const exportPdf = useCallback(
+    async (templateId?: string) => {
+      setIsExporting(true);
+      setError(null);
+      try {
+        const blob = await exportUseCaseRef.current.exportPdf(profile, templateId);
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `${profile.fullName.replace(/\s+/g, '_') || 'portfolio'}_CV.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        setNotice('PDF downloaded.');
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : 'PDF export failed');
+      } finally {
+        setIsExporting(false);
+      }
+    },
+    [profile],
+  );
 
   const exportHtml = useCallback(async () => {
     setIsExporting(true);

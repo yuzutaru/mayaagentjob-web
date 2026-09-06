@@ -120,9 +120,9 @@ export class MockPortfolioRepository implements IPortfolioRepository {
     this.saved.delete(id);
   }
 
-  async exportPdf(profile: PortfolioProfile): Promise<Blob> {
+  async exportPdf(profile: PortfolioProfile, templateId?: string): Promise<Blob> {
     await wait(300);
-    return new Blob(['%PDF-1.4 mock portfolio export'], { type: 'application/pdf' });
+    return new Blob([`%PDF-1.4 mock ${templateId || 'modern'} portfolio export`], { type: 'application/pdf' });
   }
 
   async exportHtml(profile: PortfolioProfile): Promise<string> {

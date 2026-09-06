@@ -9,6 +9,7 @@ import { HomePage } from './presentation/pages/HomePage';
 import { SavedJobsPage } from './presentation/pages/SavedJobsPage';
 import { ProfilePage } from './presentation/pages/ProfilePage';
 import { PortfolioBuilderPage } from './presentation/pages/PortfolioBuilderPage';
+import { CvExportPage } from './presentation/pages/CvExportPage';
 import { AuthLayout } from './presentation/components/layout/AuthLayout';
 
 export function App() {
@@ -21,6 +22,7 @@ export function App() {
               <Route path="/" element={<HomeLandingPage />} />
               <Route path="/jobs" element={<FindJobsPage />} />
               <Route path="/portfolio" element={<PortfolioBuilderPage />} />
+              <Route path="/cv-export" element={<CvExportPage />} />
               <Route
                 path="/home"
                 element={

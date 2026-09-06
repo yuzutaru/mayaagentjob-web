@@ -13,7 +13,7 @@ export interface IPortfolioRepository {
 
   delete(id: string): Promise<void>;
 
-  exportPdf(profile: PortfolioProfile): Promise<Blob>;
+  exportPdf(profile: PortfolioProfile, templateId?: string): Promise<Blob>;
 
   exportHtml(profile: PortfolioProfile): Promise<string>;
 }
