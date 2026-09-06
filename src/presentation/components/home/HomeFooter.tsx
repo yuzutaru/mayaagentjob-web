@@ -38,7 +38,7 @@ export const HomeFooter: React.FC<HomeFooterProps> = ({ columns }) => {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 text-sm text-slate-300 mb-2">
+            {/* <div className="flex items-center gap-2 text-sm text-slate-300 mb-2">
               <PhoneCall className="w-4 h-4 text-emerald-400 shrink-0" />
               <span>{t('footer.callNow')}:</span>
               <a
@@ -47,7 +47,7 @@ export const HomeFooter: React.FC<HomeFooterProps> = ({ columns }) => {
               >
                 (319) 555-0115
               </a>
-            </div>
+            </div> */}
             <p className="text-xs text-slate-500 max-w-xs mt-2">
               {t('footer.tagline')}
             </p>
