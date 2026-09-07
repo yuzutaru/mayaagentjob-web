@@ -4,6 +4,7 @@ import logoIcon from '@/assets/logo-icon.jpg';
 import { useTheme } from '../../hooks/useTheme';
 import { useAuth } from '../../hooks/useAuth';
 import { localizePath, parsePathname, useTranslation, type Locale } from '../../../core/i18n/TranslationContext';
+import { FEATURE_FLAGS } from '../../../core/featureFlags';
 import { CandidateOnboardingModal } from '../auth/CandidateOnboardingModal';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -15,6 +16,8 @@ export const HomeNavbar: React.FC = () => {
   const location = useLocation();
   const [isOnboardingOpen, setIsOnboardingOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+
+  const showMainNav = FEATURE_FLAGS.landing || FEATURE_FLAGS.portfolio || FEATURE_FLAGS.jobs;
 
   const switchLocale = (next: Locale) => {
     if (next === locale) return;
@@ -58,46 +61,50 @@ export const HomeNavbar: React.FC = () => {
         </div>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
-          <a
-            href={localizePath(locale, '/portfolio')}
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(localizePath(locale, '/portfolio'));
-            }}
-            className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
-          >
-            {t('nav.portfolio')}
-          </a>
-          <a
-            href={localizePath(locale, '/jobs')}
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(localizePath(locale, '/jobs'));
-            }}
-            className="flex items-center gap-1 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
-          >
-            {t('nav.findJobs')}
-            <ChevronDown className="w-4 h-4 opacity-70" />
-          </a>
-          <a
-            href="#community"
-            className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
-          >
-            {t('nav.community')}
-          </a>
-          <a
-            href="#companies"
-            className="flex items-center gap-1 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
-          >
-            {t('nav.companies')}
-            <ChevronDown className="w-4 h-4 opacity-70" />
-          </a>
-          <a
-            href="#salaries"
-            className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
-          >
-            {t('nav.salaries')}
-          </a>
+          {showMainNav && (
+            <>
+              <a
+                href={localizePath(locale, '/portfolio')}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(localizePath(locale, '/portfolio'));
+                }}
+                className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+              >
+                {t('nav.portfolio')}
+              </a>
+              <a
+                href={localizePath(locale, '/jobs')}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(localizePath(locale, '/jobs'));
+                }}
+                className="flex items-center gap-1 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+              >
+                {t('nav.findJobs')}
+                <ChevronDown className="w-4 h-4 opacity-70" />
+              </a>
+              <a
+                href="#community"
+                className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+              >
+                {t('nav.community')}
+              </a>
+              <a
+                href="#companies"
+                className="flex items-center gap-1 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+              >
+                {t('nav.companies')}
+                <ChevronDown className="w-4 h-4 opacity-70" />
+              </a>
+              <a
+                href="#salaries"
+                className="hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+              >
+                {t('nav.salaries')}
+              </a>
+            </>
+          )}
         </nav>
 
         <div className="flex items-center gap-4">
@@ -133,7 +140,7 @@ export const HomeNavbar: React.FC = () => {
             )}
           </button>
 
-          {isLoggedIn && user ? (
+          {FEATURE_FLAGS.auth && isLoggedIn && user ? (
             <div className="relative">
               <button
                 onClick={() => setShowDropdown(!showDropdown)}
@@ -163,7 +170,7 @@ export const HomeNavbar: React.FC = () => {
                 </div>
               )}
             </div>
-          ) : (
+          ) : FEATURE_FLAGS.auth ? (
             <>
               <a
                 href="#login"
@@ -180,7 +187,7 @@ export const HomeNavbar: React.FC = () => {
                 {t('nav.signUp')}
               </a>
             </>
-          )}
+          ) : null}
         </div>
       </div>
 

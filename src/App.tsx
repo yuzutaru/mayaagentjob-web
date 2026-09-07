@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './presentation/hooks/useTheme';
-import { TranslationProvider } from './core/i18n/TranslationContext';
+import { TranslationProvider, useTranslation } from './core/i18n/TranslationContext';
 import { AuthProvider } from './presentation/hooks/useAuth';
 import { HomeLandingPage } from './presentation/pages/HomeLandingPage';
 import { FindJobsPage } from './presentation/pages/FindJobsPage';
@@ -12,6 +12,12 @@ import { PortfolioBuilderPage } from './presentation/pages/PortfolioBuilderPage'
 import { CvExportPage } from './presentation/pages/CvExportPage';
 import { AuthLayout } from './presentation/components/layout/AuthLayout';
 import { LocaleLayout, LangFallback, RootRedirect } from './core/i18n/LocaleLayout';
+import { FEATURE_FLAGS } from './core/featureFlags';
+
+const RedirectToCv: React.FC = () => {
+  const { locale } = useTranslation();
+  return <Navigate to={`/${locale}/cv-export`} replace />;
+};
 
 export function App() {
   return (
@@ -22,32 +28,53 @@ export function App() {
             <Routes>
               <Route path="/" element={<RootRedirect />} />
               <Route path="/:lang" element={<LocaleLayout />}>
-                <Route index element={<HomeLandingPage />} />
-                <Route path="jobs" element={<FindJobsPage />} />
-                <Route path="portfolio" element={<PortfolioBuilderPage />} />
-                <Route path="cv-export" element={<CvExportPage />} />
+                <Route
+                  index
+                  element={FEATURE_FLAGS.landing ? <HomeLandingPage /> : <RedirectToCv />}
+                />
+                <Route path="jobs" element={FEATURE_FLAGS.jobs ? <FindJobsPage /> : <RedirectToCv />} />
+                <Route
+                  path="portfolio"
+                  element={FEATURE_FLAGS.portfolio ? <PortfolioBuilderPage /> : <RedirectToCv />}
+                />
+                <Route
+                  path="cv-export"
+                  element={FEATURE_FLAGS.cvExport ? <CvExportPage /> : <RedirectToCv />}
+                />
                 <Route
                   path="home"
                   element={
-                    <AuthLayout>
-                      <HomePage />
-                    </AuthLayout>
+                    FEATURE_FLAGS.dashboard ? (
+                      <AuthLayout>
+                        <HomePage />
+                      </AuthLayout>
+                    ) : (
+                      <RedirectToCv />
+                    )
                   }
                 />
                 <Route
                   path="saved"
                   element={
-                    <AuthLayout>
-                      <SavedJobsPage />
-                    </AuthLayout>
+                    FEATURE_FLAGS.dashboard ? (
+                      <AuthLayout>
+                        <SavedJobsPage />
+                      </AuthLayout>
+                    ) : (
+                      <RedirectToCv />
+                    )
                   }
                 />
                 <Route
                   path="profile"
                   element={
-                    <AuthLayout>
-                      <ProfilePage />
-                    </AuthLayout>
+                    FEATURE_FLAGS.dashboard ? (
+                      <AuthLayout>
+                        <ProfilePage />
+                      </AuthLayout>
+                    ) : (
+                      <RedirectToCv />
+                    )
                   }
                 />
                 <Route path="*" element={<LangFallback />} />
