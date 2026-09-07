@@ -30,7 +30,7 @@ function summary(profile: PortfolioProfile): string {
   if (!text) return EMPTY_FRAGMENT;
   return (
     '<section class="summary">' +
-    '<h2 class="block-title">Profile</h2>' +
+    '<h2 class="block-title">Summary</h2>' +
     `<p>${esc(text)}</p>` +
     '</section>'
   );
