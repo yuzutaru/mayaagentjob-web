@@ -1,9 +1,48 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { PortfolioProfile, createEmptyPortfolio } from '../../domain/entities/PortfolioContract';
 import { IPortfolioRepository } from '../../domain/repositories/IPortfolioRepository';
 import { ImportPortfolioUseCase } from '../../domain/usecases/ImportPortfolioUseCase';
 import { SavePortfolioUseCase } from '../../domain/usecases/SavePortfolioUseCase';
 import { ExportPortfolioUseCase } from '../../domain/usecases/ExportPortfolioUseCase';
+
+export const DEFAULT_DRAFT_KEY = 'cv-portfolio-draft';
+
+const hasProfileContent = (profile: PortfolioProfile): boolean => {
+  const textFields = ['fullName', 'headline', 'bio', 'summary', 'email', 'phone', 'location', 'website', 'avatarUrl'] as const;
+  for (const field of textFields) {
+    if (profile[field]) return true;
+  }
+  const listFields = ['socials', 'skills', 'experience', 'education', 'projects', 'certifications', 'articles'] as const;
+  for (const field of listFields) {
+    if (profile[field].length > 0) return true;
+  }
+  const empty = createEmptyPortfolio();
+  if (profile.theme !== empty.theme || profile.accentColor !== empty.accentColor) return true;
+  return false;
+};
+
+const loadDraft = (storageKey: string): PortfolioProfile | null => {
+  if (typeof localStorage === 'undefined') return null;
+  try {
+    const raw = localStorage.getItem(storageKey);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as PortfolioProfile;
+    return typeof parsed === 'object' && parsed !== null && hasProfileContent(parsed)
+      ? parsed
+      : null;
+  } catch {
+    return null;
+  }
+};
+
+const clearDraft = (storageKey: string) => {
+  if (typeof localStorage === 'undefined') return;
+  try {
+    localStorage.removeItem(storageKey);
+  } catch {
+    // ignore storage failures
+  }
+};
 
 export interface UsePortfolioBuilderReturn {
   profile: PortfolioProfile;
@@ -11,6 +50,8 @@ export interface UsePortfolioBuilderReturn {
   isExporting: boolean;
   error: string | null;
   notice: string | null;
+  draftRestored: boolean;
+  hasUnsavedChanges: boolean;
   setProfile: (profile: PortfolioProfile) => void;
   updateProfile: (patch: Partial<PortfolioProfile>) => void;
   resetProfile: () => void;
@@ -24,26 +65,59 @@ export interface UsePortfolioBuilderReturn {
 export const usePortfolioBuilder = (
   repository: IPortfolioRepository,
   initialProfile?: PortfolioProfile,
+  storageKey: string = DEFAULT_DRAFT_KEY,
 ): UsePortfolioBuilderReturn => {
   const importUseCaseRef = useRef(new ImportPortfolioUseCase(repository));
   const saveUseCaseRef = useRef(new SavePortfolioUseCase(repository));
   const exportUseCaseRef = useRef(new ExportPortfolioUseCase(repository));
 
-  const [profile, setProfile] = useState<PortfolioProfile>(initialProfile ?? createEmptyPortfolio());
+  const [draftRestored] = useState<boolean>(() =>
+    initialProfile ? false : loadDraft(storageKey) !== null,
+  );
+  const [profile, setProfile] = useState<PortfolioProfile>(() => {
+    if (initialProfile) return initialProfile;
+    return loadDraft(storageKey) ?? createEmptyPortfolio();
+  });
+  const [dirty, setDirty] = useState<boolean>(() =>
+    initialProfile ? false : draftRestored,
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (initialProfile || typeof localStorage === 'undefined') return;
+    if (!hasProfileContent(profile)) return;
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(profile));
+    } catch {
+      // ignore quota / storage failures
+    }
+  }, [profile, storageKey, initialProfile]);
+
+  useEffect(() => {
+    if (!dirty) return;
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = '';
+    };
+    window.addEventListener('beforeunload', onBeforeUnload);
+    return () => window.removeEventListener('beforeunload', onBeforeUnload);
+  }, [dirty]);
+
   const updateProfile = useCallback((patch: Partial<PortfolioProfile>) => {
+    setDirty(true);
     setProfile((prev) => ({ ...prev, ...patch }));
   }, []);
 
   const resetProfile = useCallback(() => {
+    clearDraft(storageKey);
+    setDirty(false);
     setProfile(createEmptyPortfolio());
     setError(null);
     setNotice(null);
-  }, []);
+  }, [storageKey]);
 
   const runImport = useCallback(
     async (task: () => Promise<PortfolioProfile>, successMessage?: string) => {
@@ -52,6 +126,7 @@ export const usePortfolioBuilder = (
       setNotice(null);
       try {
         const result = await task();
+        setDirty(true);
         setProfile(result);
         if (successMessage) setNotice(successMessage);
       } catch (err: unknown) {
@@ -87,6 +162,7 @@ export const usePortfolioBuilder = (
     setNotice(null);
     try {
       const saved = await saveUseCaseRef.current.execute(profile);
+      setDirty(false);
       setProfile(saved);
       setNotice('Portfolio saved.');
       return saved;
@@ -150,6 +226,8 @@ export const usePortfolioBuilder = (
     isExporting,
     error,
     notice,
+    draftRestored,
+    hasUnsavedChanges: dirty,
     setProfile,
     updateProfile,
     resetProfile,

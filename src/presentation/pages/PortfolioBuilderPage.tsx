@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Loader2, Download, FileCode2, Save, RotateCcw, X } from 'lucide-react';
 import { useTranslation } from '../../core/i18n/TranslationContext';
 import { HomeNavbar } from '../components/home/HomeNavbar';
@@ -12,8 +12,15 @@ export const PortfolioBuilderPage: React.FC = () => {
   const { t } = useTranslation();
   const repoRef = useRef(new ApiPortfolioRepository());
   const builder = usePortfolioBuilder(repoRef.current);
+  const [showRestored, setShowRestored] = useState(builder.draftRestored);
+
+  const handleUpdateProfile = (patch: Parameters<typeof builder.updateProfile>[0]) => {
+    setShowRestored(false);
+    builder.updateProfile(patch);
+  };
 
   const handleStartEmpty = () => {
+    setShowRestored(false);
     builder.resetProfile();
   };
 
@@ -44,6 +51,15 @@ export const PortfolioBuilderPage: React.FC = () => {
             </div>
           )}
 
+          {showRestored && (
+            <div className="mb-6 flex items-start justify-between gap-3 rounded-xl border border-sky-200 dark:border-sky-900/60 bg-sky-50 dark:bg-sky-950/40 px-4 py-3 text-sm text-sky-700 dark:text-sky-300">
+              <span>{t('portfolio.draftRestored')}</span>
+              <button onClick={() => setShowRestored(false)} className="text-sky-500 hover:text-sky-700" aria-label="dismiss">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          )}
+
           {/* Import loading overlay state */}
           {builder.isLoading && (
             <div className="mb-6 flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400">
@@ -60,7 +76,7 @@ export const PortfolioBuilderPage: React.FC = () => {
                 <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 lg:sticky lg:top-24 max-h-[calc(100vh-8rem)] overflow-y-auto">
                   <h2 className="text-xl font-bold mb-1">{t('portfolio.editorHeading')}</h2>
                   <p className="text-sm text-slate-500 dark:text-slate-400 mb-6">{t('portfolio.editorSub')}</p>
-                  <PortfolioEditor profile={builder.profile} updateProfile={builder.updateProfile} />
+                  <PortfolioEditor profile={builder.profile} updateProfile={handleUpdateProfile} />
                 </div>
               </div>
 

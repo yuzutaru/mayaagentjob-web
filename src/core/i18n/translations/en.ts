@@ -283,6 +283,8 @@ export const en = {
     back: 'Back',
     letsConnect: "Let's connect",
     builtWith: 'Built with Maya',
+    draftRestored: 'Restored your unsaved draft. Your edits are auto-saved as you type.',
+    unsavedChanges: 'You have unsaved changes. Leave this page?',
   },
   cvExport: {
     title: 'Export Your CV',

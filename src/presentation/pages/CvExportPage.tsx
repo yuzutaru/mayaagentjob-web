@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Download, FileDown, Loader2, X } from 'lucide-react';
 import { useTranslation } from '../../core/i18n/TranslationContext';
 import { HomeNavbar } from '../components/home/HomeNavbar';
@@ -15,6 +15,12 @@ export const CvExportPage: React.FC = () => {
   const { t } = useTranslation();
   const repoRef = useRef(new ApiPortfolioRepository());
   const builder = usePortfolioBuilder(repoRef.current);
+  const [showRestored, setShowRestored] = useState(builder.draftRestored);
+
+  const handleUpdateProfile = (patch: Parameters<typeof builder.updateProfile>[0]) => {
+    setShowRestored(false);
+    builder.updateProfile(patch);
+  };
 
   const selectedTemplate = cvTemplatesMockData.find((tmpl) => tmpl.id === DEFAULT_TEMPLATE_ID) ?? null;
 
@@ -53,6 +59,14 @@ export const CvExportPage: React.FC = () => {
               {builder.notice}
             </div>
           )}
+          {showRestored && (
+            <div className="mb-6 flex items-start justify-between gap-3 rounded-xl border border-sky-200 dark:border-sky-900/60 bg-sky-50 dark:bg-sky-950/40 px-4 py-3 text-sm text-sky-700 dark:text-sky-300">
+              <span>{t('portfolio.draftRestored')}</span>
+              <button onClick={() => setShowRestored(false)} className="text-sky-500 hover:text-sky-700" aria-label="dismiss">
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          )}
           {builder.isLoading && (
             <div className="mb-6 flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400">
               <Loader2 className="w-4 h-4 animate-spin" />
@@ -69,7 +83,7 @@ export const CvExportPage: React.FC = () => {
                   {t('portfolio.editorSub')}
                 </p>
                 <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6">
-                  <PortfolioEditor profile={builder.profile} updateProfile={builder.updateProfile} />
+                  <PortfolioEditor profile={builder.profile} updateProfile={handleUpdateProfile} />
                 </div>
               </div>
 

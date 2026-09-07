@@ -283,6 +283,8 @@ export const id = {
     back: 'Kembali',
     letsConnect: 'Mari terhubung',
     builtWith: 'Dibangun dengan Maya',
+    draftRestored: 'Draf yang belum disimpan telah dipulihkan. Setiap edit Anda tersimpan otomatis saat mengetik.',
+    unsavedChanges: 'Ada perubahan yang belum disimpan. Tinggalkan halaman ini?',
   },
   cvExport: {
     title: 'Ekspor CV Anda',
