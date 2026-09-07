@@ -133,11 +133,6 @@ export const PortfolioEditor: React.FC<PortfolioEditorProps> = ({ profile, updat
             <input className={inputCls} value={profile.website} onChange={(e) => set('website', e.target.value)} />
           </Field>
           <div className="sm:col-span-2">
-            <Field label={t('portfolio.bio')}>
-              <textarea className={`${inputCls} min-h-[80px]`} value={profile.bio} onChange={(e) => set('bio', e.target.value)} />
-            </Field>
-          </div>
-          <div className="sm:col-span-2">
             <Field label={t('portfolio.summary')}>
               <textarea className={`${inputCls} min-h-[120px]`} value={profile.summary} onChange={(e) => set('summary', e.target.value)} />
             </Field>

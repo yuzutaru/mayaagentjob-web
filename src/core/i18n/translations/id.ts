@@ -231,7 +231,6 @@ export const id = {
     basicInfo: 'Informasi Dasar',
     fullName: 'Nama Lengkap',
     headline: 'Jabatan',
-    bio: 'Bio',
     email: 'Email',
     phone: 'Telepon',
     location: 'Lokasi',
@@ -282,6 +281,8 @@ export const id = {
     error: 'Terjadi kesalahan.',
     emptyHint: 'Belum ada item — tambahkan yang pertama di atas.',
     back: 'Kembali',
+    letsConnect: 'Mari terhubung',
+    builtWith: 'Dibangun dengan Maya',
   },
   cvExport: {
     title: 'Ekspor CV Anda',

@@ -231,7 +231,6 @@ export const en = {
     basicInfo: 'Basic Info',
     fullName: 'Full Name',
     headline: 'Headline',
-    bio: 'Bio',
     email: 'Email',
     phone: 'Phone',
     location: 'Location',
@@ -282,6 +281,8 @@ export const en = {
     error: 'Something went wrong.',
     emptyHint: 'No items yet — add your first one above.',
     back: 'Back',
+    letsConnect: "Let's connect",
+    builtWith: 'Built with Maya',
   },
   cvExport: {
     title: 'Export Your CV',

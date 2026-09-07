@@ -59,7 +59,6 @@ export const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ profile }) =
               {profile.fullName || 'Your Name'}
             </h1>
             <p className="mt-1 text-slate-300 font-medium">{profile.headline || 'Software Developer'}</p>
-            {profile.bio && <p className="mt-3 text-sm text-slate-400 max-w-md">{profile.bio}</p>}
           </div>
           <div
             className="w-28 h-28 sm:w-32 sm:h-32 rounded-full flex items-center justify-center text-4xl font-extrabold text-white shrink-0"
@@ -85,9 +84,9 @@ export const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ profile }) =
       )}
 
       {/* Summary */}
-      {(profile.summary || profile.bio) && (
+      {profile.summary && (
         <Section label="About">
-          <p className="text-sm text-slate-300 leading-relaxed max-w-2xl">{profile.summary || profile.bio}</p>
+          <p className="text-sm text-slate-300 leading-relaxed max-w-2xl">{profile.summary}</p>
         </Section>
       )}
 
@@ -184,19 +183,13 @@ export const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ profile }) =
 
       {/* Footer */}
       <div className="px-6 py-8 text-center border-t border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
-        <h3 className="text-white font-bold text-base mb-1">Let's connect</h3>
+        <h3 className="text-white font-bold text-base mb-1">{t('portfolio.letsConnect')}</h3>
         <div className="flex flex-wrap gap-2 justify-center mt-3">
-          {profile.socials.length > 0 ? (
-            profile.socials.map((s, i) => (
-              <span key={i} className="text-xs font-semibold px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-slate-300">
-                {s.platform}
-              </span>
-            ))
-          ) : profile.email ? (
-            <span className="text-xs font-semibold px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-slate-300">{profile.email}</span>
-          ) : null}
+          {footerLinks(profile).map((link, i) => (
+            <FooterLink key={i} {...link} />
+          ))}
         </div>
-        <div className="text-[11px] text-slate-500 mt-4">© {profile.fullName || 'Your Name'} · Built with Maya</div>
+        <div className="text-[11px] text-slate-500 mt-4">© {profile.fullName || 'Your Name'} · {t('portfolio.builtWith')}</div>
       </div>
     </div>
   );
@@ -209,6 +202,45 @@ function Section({ label, children }: { label: string; children: React.ReactNode
       {children}
     </div>
   );
+}
+
+function FooterLink({ label, url }: { label: string; url: string }) {
+  const pillCls =
+    'text-xs font-semibold px-3 py-1.5 rounded-full border border-white/10 bg-white/5 text-slate-300';
+  if (!url) {
+    return <span className={pillCls}>{label}</span>;
+  }
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${pillCls} hover:text-white hover:border-white/30 transition-colors`}
+    >
+      {label}
+    </a>
+  );
+}
+
+function footerLinks(profile: PortfolioProfile): { label: string; url: string }[] {
+  const links: { label: string; url: string }[] = [];
+  if (profile.website) {
+    links.push({ label: profile.website, url: withScheme(profile.website) });
+  }
+  for (const s of profile.socials) {
+    const label = s.platform || s.handle || s.url;
+    if (!label) continue;
+    links.push({ label, url: s.url ? withScheme(s.url) : '' });
+  }
+  if (links.length === 0 && profile.email) {
+    links.push({ label: profile.email, url: `mailto:${profile.email}` });
+  }
+  return links;
+}
+
+function withScheme(url: string): string {
+  if (/^(https?:\/\/|mailto:)/i.test(url)) return url;
+  return `https://${url}`;
 }
 
 function themeBackground(theme: string): string {
