@@ -53,7 +53,7 @@ const SAMPLE_RESUME: PortfolioProfile = {
 export const TemplateThumb: React.FC<TemplateThumbProps> = ({ template, className = '' }) => {
   return (
     <div
-      className={`relative overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm bg-white ${className}`}
+      className={`pointer-events-none relative overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm bg-white ${className}`}
       aria-hidden
     >
       <ResumePreview templateId={template.id} profile={SAMPLE_RESUME} iframeTitle="" />

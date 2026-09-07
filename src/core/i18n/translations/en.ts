@@ -226,7 +226,7 @@ export const en = {
     importing: 'Importing...',
     dropTitle: 'Drop a LinkedIn PDF export here',
     dropSub: 'or click to browse · PDF, TXT up to 10MB',
-    editorHeading: '2. Customize your portfolio',
+    editorHeading: '1. Customize your portfolio',
     editorSub: 'Everything you edit appears live in the preview.',
     basicInfo: 'Basic Info',
     fullName: 'Full Name',

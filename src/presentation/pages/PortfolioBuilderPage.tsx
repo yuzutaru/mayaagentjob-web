@@ -1,34 +1,20 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { Loader2, Download, FileCode2, Save, RotateCcw, X } from 'lucide-react';
 import { useTranslation } from '../../core/i18n/TranslationContext';
 import { HomeNavbar } from '../components/home/HomeNavbar';
 import { HomeFooter } from '../components/home/HomeFooter';
-import { SourcePicker } from '../components/portfolio/SourcePicker';
-import { ProviderImportForm } from '../components/portfolio/ProviderImportForm';
 import { PortfolioEditor } from '../components/portfolio/PortfolioEditor';
 import { PortfolioPreview } from '../components/portfolio/PortfolioPreview';
 import { usePortfolioBuilder } from '../hooks/usePortfolioBuilder';
 import { ApiPortfolioRepository } from '../../data/repositories/ApiPortfolioRepository';
-import { samplePortfolio } from '../../data/mock/portfolioMockData';
-import { PortfolioProvider } from '../../domain/entities/PortfolioContract';
 
 export const PortfolioBuilderPage: React.FC = () => {
   const { t } = useTranslation();
   const repoRef = useRef(new ApiPortfolioRepository());
   const builder = usePortfolioBuilder(repoRef.current);
 
-  const [activeSource, setActiveSource] = useState<PortfolioProvider | null>(null);
-
-  const handleSelectProvider = (provider: PortfolioProvider) => setActiveSource(provider);
-
   const handleStartEmpty = () => {
     builder.resetProfile();
-    setActiveSource(null);
-  };
-
-  const handleLoadSample = () => {
-    builder.setProfile(samplePortfolio);
-    setActiveSource(null);
   };
 
   return (
@@ -66,48 +52,7 @@ export const PortfolioBuilderPage: React.FC = () => {
             </div>
           )}
 
-          {/* Step 1: Source picker */}
-          <section className="mb-10">
-            <h2 className="text-xl font-bold mb-1">{t('portfolio.sourceHeading')}</h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mb-4">{t('portfolio.sourceSub')}</p>
-
-            {activeSource ? (
-              <div className="max-w-md">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-semibold text-slate-600 dark:text-slate-300">
-                    {t(`portfolio.providers.${activeSource}`)}
-                  </span>
-                  <button
-                    onClick={() => setActiveSource(null)}
-                    className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
-                  >
-                    <X className="w-4 h-4" />
-                    {t('portfolio.back')}
-                  </button>
-                </div>
-                <ProviderImportForm
-                  provider={activeSource}
-                  isLoading={builder.isLoading}
-                  onImport={async (provider, username, apiKey) => {
-                    await builder.importFromProvider(provider, username, apiKey);
-                    if (!builder.error) setActiveSource(null);
-                  }}
-                  onImportPdf={async (file) => {
-                    await builder.importLinkedInPdf(file);
-                    if (!builder.error) setActiveSource(null);
-                  }}
-                />
-              </div>
-            ) : (
-              <SourcePicker
-                onSelectProvider={handleSelectProvider}
-                onStartEmpty={handleStartEmpty}
-                onLoadSample={handleLoadSample}
-              />
-            )}
-          </section>
-
-          {/* Step 2: Edit + Preview */}
+          {/* Edit + Preview */}
           <section>
             <div className="flex flex-col lg:flex-row gap-8">
               {/* Editor */}

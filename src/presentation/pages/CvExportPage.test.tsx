@@ -26,43 +26,29 @@ describe('CvExportPage', () => {
     expect(screen.getByText(/Pick an ATS-friendly or modern template/)).toBeTruthy();
   });
 
-  it('groups templates into ATS-friendly and modern sections', () => {
+  it('does not show the template gallery or any import source', () => {
     renderPage();
-    expect(screen.getByText('ATS-Friendly CV')).toBeTruthy();
-    expect(screen.getByText('Modern / Creative')).toBeTruthy();
-    expect(screen.getByText('ATS Minimal')).toBeTruthy();
-    expect(screen.getByText('ATS Classic')).toBeTruthy();
-    expect(screen.getByText('Apollo')).toBeTruthy();
-    expect(screen.getByText('Terra')).toBeTruthy();
-    expect(screen.getByText('Tempe')).toBeTruthy();
-  });
-
-  it('flags ATS templates with a badge', () => {
-    renderPage();
-    expect(screen.getAllByText('ATS')).toHaveLength(2);
-  });
-
-  it('moves to the build step after selecting a template', () => {
-    renderPage();
-    fireEvent.click(screen.getByText('ATS Classic'));
-    expect(screen.getByText(/2\. Build your CV/)).toBeTruthy();
-    expect(screen.getAllByText('Selected template').length).toBeGreaterThan(0);
+    expect(screen.queryByText('1. Choose a template')).toBeNull();
+    expect(screen.queryByText('ATS-Friendly CV')).toBeNull();
     expect(screen.queryByText('Modern / Creative')).toBeNull();
-    expect(screen.getByText(/Change template/)).toBeTruthy();
+    expect(screen.queryByText('GitHub')).toBeNull();
+    expect(screen.queryByText('Start Empty')).toBeNull();
   });
 
-  it('returns to the gallery when changing template', () => {
+  it('renders the editor and live preview with the default template', () => {
     renderPage();
-    fireEvent.click(screen.getByText('Tempe'));
-    expect(screen.getByText(/Change template/)).toBeTruthy();
-    fireEvent.click(screen.getByText(/Change template/));
-    expect(screen.getByText('ATS-Friendly CV')).toBeTruthy();
-    expect(screen.getByText('Modern / Creative')).toBeTruthy();
+    expect(screen.getByText(/Customize your portfolio/)).toBeTruthy();
+    expect(screen.getByText('Selected template')).toBeTruthy();
+    expect(screen.getByText('ATS Minimal')).toBeTruthy();
+    expect(screen.getAllByTestId('resume-preview-ats-minimal').length).toBeGreaterThan(0);
   });
 
-  it('renders a live paper preview after selecting a template', () => {
+  it('renders the download button and disables it until a full name is entered', () => {
     renderPage();
-    fireEvent.click(screen.getByText('Apollo'));
-    expect(screen.getAllByTestId('resume-preview-apollo').length).toBeGreaterThan(0);
+    const download = screen.getByRole('button', { name: /Download CV \(PDF\)/ });
+    expect((download as HTMLButtonElement).disabled).toBe(true);
+
+    fireEvent.change(screen.getByLabelText('Full Name'), { target: { value: 'Ada Lovelace' } });
+    expect((screen.getByRole('button', { name: /Download CV \(PDF\)/ }) as HTMLButtonElement).disabled).toBe(false);
   });
 });

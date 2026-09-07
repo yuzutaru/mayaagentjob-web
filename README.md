@@ -24,9 +24,11 @@ The UI is a single-page scrollable experience (`src/presentation/pages/HomeLandi
 8. **HomeFooter**: Multi-column footer with quick links.
 
 ### Dedicated feature routes
-- **`/cv-export` (CV Export)** — `CvExportPage.tsx`, reached from the "PDF & CV Export" feature card. A Resume.com-style **template gallery** grouped into **ATS-Friendly** (`ats-minimal`, `ats-classic`) and **Modern / Creative** (`apollo`, `terra`, `tempe`). Selecting a template opens a build step (import source + full editor) with a **live WYSIWYG A4 paper preview** and a **Download CV (PDF)** button that calls `builder.exportPdf(templateId)`.
-- **`/portfolio` (Portfolio Builder)** — `PortfolioBuilderPage.tsx`: import → customize → live site preview → export self-contained HTML or PDF CV.
+- **`/cv-export` (CV Export)** — `CvExportPage.tsx`, reached from the "PDF & CV Export" feature card. A **blank-start CV builder** that goes straight to a manual editor (`PortfolioEditor`) beside a **live WYSIWYG A4 paper preview** (`ResumePreview`) on a fixed default template (`ats-minimal`, resolved from `cvTemplatesMockData`). The **Download CV (PDF)** button calls `builder.exportPdf()` and is disabled until a full name is entered.
+- **`/portfolio` (Portfolio Builder)** — `PortfolioBuilderPage.tsx`: blank-start manual editor → customize → live site preview → export self-contained HTML or PDF CV.
 - **`/jobs` (Job Search)** — `FindJobsPage.tsx`: paginated job grid with category/keyword/country filtering.
+
+> **Manual input only (for now):** platform import UI (`SourcePicker`/`ProviderImportForm` — GitHub/GitLab/Bitbucket/Dev.to/Stack Overflow/WakaTime/LinkedIn PDF) and "Load Sample" are hidden. Users start from a blank profile and enter their own data. Import components are kept in place for later re-enable; the backend import endpoints and `usePortfolioBuilder.import*` code remain intact.
 
 ### Shared CV templates (preview = PDF)
 CV resume templates are authored as HTML/CSS in the **backend** (`mayaagentjob-backend-python/src/data/export/templates/`) and copied here by `npm run sync-api` into `src/data/cvTemplates/`. The web renders the **exact same HTML** the backend feeds to WeasyPrint:
@@ -73,7 +75,7 @@ All code inside `src/domain/` (`HomePortalContract.ts`, `JobListing.ts`, `Candid
 - Automated tests in Vitest run instantaneously without native emulators or DOM mocks.
 - Tests are co-located next to source files with `.test.ts(x)` suffix.
 - `src/test/setup.ts` provides browser API mocks (localStorage) for jsdom environment.
-- **95 tests** across 17 test files covering DTO mapping, use cases, repositories (geolocation + job listing + portfolio), hooks, components, and CV-template golden-parity rendering.
+- **93 tests** across 17 test files covering DTO mapping, use cases, repositories (geolocation + job listing + portfolio), hooks, components, and CV-template golden-parity rendering.
 - Clear decoupling of domain logic from network client details and UI presentation frameworks.
 
 ---

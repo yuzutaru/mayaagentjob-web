@@ -226,7 +226,7 @@ export const id = {
     importing: 'Mengimpor...',
     dropTitle: 'Letakkan ekspor PDF LinkedIn di sini',
     dropSub: 'atau klik untuk menjelajah · PDF, TXT hingga 10MB',
-    editorHeading: '2. Sesuaikan portofolio Anda',
+    editorHeading: '1. Sesuaikan portofolio Anda',
     editorSub: 'Semua yang Anda ubah tampil langsung di pratinjau.',
     basicInfo: 'Informasi Dasar',
     fullName: 'Nama Lengkap',
