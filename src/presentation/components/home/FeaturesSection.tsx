@@ -1,7 +1,7 @@
 import React from 'react';
 import { LayoutTemplate, FileDown, Sparkles, ArrowRight, LucideIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from '../../../core/i18n/TranslationContext';
+import { localizePath, useTranslation } from '../../../core/i18n/TranslationContext';
 import { FeatureContract } from '../../../domain/entities/HomePortalContract';
 
 interface FeaturesSectionProps {
@@ -15,7 +15,7 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ features }) => {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -36,10 +36,10 @@ export const FeaturesSection: React.FC<FeaturesSectionProps> = ({ features }) =>
           return (
             <a
               key={feature.id}
-              href={feature.actionUrl}
+              href={localizePath(locale, feature.actionUrl)}
               onClick={(e) => {
                 e.preventDefault();
-                navigate(feature.actionUrl);
+                navigate(localizePath(locale, feature.actionUrl));
               }}
               aria-label={t(`features.${feature.id}.title`) || feature.title}
               className="group relative flex flex-col bg-white dark:bg-career-cardDark rounded-3xl p-8 border border-slate-200/70 dark:border-slate-800 hover:border-emerald-500/40 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-career-dark active:scale-[0.99]"

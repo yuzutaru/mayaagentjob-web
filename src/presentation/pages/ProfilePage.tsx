@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { User, Moon, Sun, Globe, LogOut } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { useTheme } from '../hooks/useTheme';
-import { useTranslation } from '../../core/i18n/TranslationContext';
+import { useTranslation, localizePath } from '../../core/i18n/TranslationContext';
 import { useNavigate } from 'react-router-dom';
 
 export const ProfilePage: React.FC = () => {
   const { user, isLoggedIn, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
-  const { t, locale, setLocale } = useTranslation();
+  const { t, locale } = useTranslation();
   const navigate = useNavigate();
   const [loggingOut, setLoggingOut] = useState(false);
 
@@ -16,11 +16,12 @@ export const ProfilePage: React.FC = () => {
     setLoggingOut(true);
     await logout();
     setLoggingOut(false);
-    navigate('/');
+    navigate(localizePath(locale, '/'));
   };
 
   const toggleLanguage = () => {
-    setLocale(locale === 'en' ? 'id' : 'en');
+    const next = locale === 'en' ? 'id' : 'en';
+    navigate(localizePath(next, '/profile'), { replace: true });
   };
 
   return (

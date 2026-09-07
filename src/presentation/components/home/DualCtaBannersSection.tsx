@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { useTranslation } from '../../../core/i18n/TranslationContext';
+import { localizePath, useTranslation } from '../../../core/i18n/TranslationContext';
 import { CtaBannerContract } from '../../../domain/entities/HomePortalContract';
 
 interface DualCtaBannersSectionProps {
@@ -10,7 +10,7 @@ interface DualCtaBannersSectionProps {
 export const DualCtaBannersSection: React.FC<DualCtaBannersSectionProps> = ({
   banners,
 }) => {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -49,7 +49,7 @@ export const DualCtaBannersSection: React.FC<DualCtaBannersSectionProps> = ({
 
               <div>
                 <a
-                  href={banner.buttonActionUrl}
+                  href={localizePath(locale, banner.buttonActionUrl)}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-emerald-600 font-bold text-sm shadow-md hover:shadow-lg active:scale-95 transition-all group"
                 >
                   <span>{t(`cta.${banner.type}.btn`) || banner.buttonText}</span>

@@ -55,9 +55,9 @@ describe('FeaturesSection', () => {
     renderComponent();
     const cards = screen.getAllByRole('link');
     expect(cards).toHaveLength(3);
-    expect(cards[0].getAttribute('href')).toBe('/portfolio');
-    expect(cards[1].getAttribute('href')).toBe('/cv-export');
-    expect(cards[2].getAttribute('href')).toBe('/jobs');
+    expect(cards[0].getAttribute('href')).toBe('/en/portfolio');
+    expect(cards[1].getAttribute('href')).toBe('/en/cv-export');
+    expect(cards[2].getAttribute('href')).toBe('/en/jobs');
   });
 
   it('renders nothing broken when given an empty feature list', () => {

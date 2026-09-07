@@ -1,5 +1,6 @@
 import React from 'react';
 import { homePortalMockData } from '../../data/mock/homePortalMockData';
+import { useTranslation } from '../../core/i18n/TranslationContext';
 import { HomeNavbar } from '../components/home/HomeNavbar';
 import { HeroSearchSection } from '../components/home/HeroSearchSection';
 import { FeaturesSection } from '../components/home/FeaturesSection';
@@ -9,6 +10,7 @@ import { HomeFooter } from '../components/home/HomeFooter';
 
 export const HomeLandingPage: React.FC = () => {
   const data = homePortalMockData;
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-career-dark text-slate-900 dark:text-white transition-colors duration-300">
@@ -18,10 +20,10 @@ export const HomeLandingPage: React.FC = () => {
       {/* Main Content */}
       <main className="flex-1">
         <HeroSearchSection
-          headline={data.heroHeadline}
-          highlightWord={data.heroHighlightWord}
-          quote={data.heroQuote}
-          quoteHighlightWord={data.heroQuoteHighlightWord}
+          headline={t('hero.headline')}
+          highlightWord={t('hero.highlightWord')}
+          quote={t('hero.quote')}
+          quoteHighlightWord={t('hero.quoteHighlightWord')}
         />
 
         <FeaturesSection features={data.features} />

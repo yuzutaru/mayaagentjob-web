@@ -7,7 +7,7 @@ import {
   Instagram,
   Twitter,
 } from 'lucide-react';
-import { useTranslation } from '../../../core/i18n/TranslationContext';
+import { localizePath, useTranslation } from '../../../core/i18n/TranslationContext';
 import { FooterColumnContract, QuickLinkItemContract } from '../../../domain/entities/HomePortalContract';
 
 interface HomeFooterProps {
@@ -15,7 +15,7 @@ interface HomeFooterProps {
 }
 
 export const HomeFooter: React.FC<HomeFooterProps> = ({ columns }) => {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   return (
     <footer className="bg-slate-900 dark:bg-career-footerDark text-slate-300 pt-16 pb-12 border-t border-slate-800">
@@ -58,7 +58,7 @@ export const HomeFooter: React.FC<HomeFooterProps> = ({ columns }) => {
             {columns.map((col) => (
               <div key={col.title}>
                 <h4 className="text-sm font-bold text-white tracking-wide uppercase mb-5">
-                  {col.title}
+                  {t(`footer.columns.${col.title}`)}
                 </h4>
                 <ul className="space-y-3 text-sm">
                   {col.links.map((link: QuickLinkItemContract) => {
@@ -67,14 +67,14 @@ export const HomeFooter: React.FC<HomeFooterProps> = ({ columns }) => {
                     return (
                       <li key={link.label}>
                         <a
-                          href={link.href}
+                          href={localizePath(locale, link.href)}
                           className={`transition-colors ${
                             isHighlighted
                               ? 'text-emerald-400 font-semibold flex items-center gap-1'
                               : 'text-slate-400 hover:text-white'
                           }`}
                         >
-                          {link.label}
+                          {t(`footer.links.${link.label}`)}
                         </a>
                       </li>
                     );

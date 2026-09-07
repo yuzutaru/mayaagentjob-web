@@ -2,9 +2,32 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { en } from './translations/en';
 import { id } from './translations/id';
 
-type Locale = 'en' | 'id';
+export type Locale = 'en' | 'id';
 
 const translations = { en, id };
+
+export const isLocale = (value: unknown): value is Locale =>
+  value === 'en' || value === 'id';
+
+export const localizePath = (locale: Locale, path: string): string => {
+  if (!path || /^(https?:|tel:|mailto:|#)/.test(path)) return path;
+  return path.startsWith('/') ? `/${locale}${path}` : `/${locale}/${path}`;
+};
+
+export interface ParsedPath {
+  readonly locale: Locale | null;
+  readonly rest: string;
+}
+
+export const parsePathname = (pathname: string): ParsedPath => {
+  const segments = pathname.split('/').filter(Boolean);
+  if (segments.length === 0) return { locale: null, rest: '' };
+  const [first, ...tail] = segments;
+  if (isLocale(first)) {
+    return { locale: first, rest: tail.length ? `/${tail.join('/')}` : '' };
+  }
+  return { locale: null, rest: `/${segments.join('/')}` };
+};
 
 interface TranslationContextType {
   locale: Locale;

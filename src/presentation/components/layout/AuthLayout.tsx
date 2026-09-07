@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
+import { useTranslation, localizePath } from '../../../core/i18n/TranslationContext';
 import { BottomTabBar } from './BottomTabBar';
 
 interface AuthLayoutProps {
@@ -9,9 +10,10 @@ interface AuthLayoutProps {
 
 export const AuthLayout: React.FC<AuthLayoutProps> = ({ children }) => {
   const { isLoggedIn } = useAuth();
+  const { locale } = useTranslation();
 
   if (!isLoggedIn) {
-    return <Navigate to="/" replace />;
+    return <Navigate to={localizePath(locale, '/')} replace />;
   }
 
   return (

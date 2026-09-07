@@ -1,13 +1,18 @@
 import React from 'react';
 import { Heart, User } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useTranslation } from '../../../core/i18n/TranslationContext';
+import { localizePath, useTranslation } from '../../../core/i18n/TranslationContext';
 import logoIcon from '@/assets/logo-icon.jpg';
+
+const localePrefixPattern = /^\/(en|id)(?=\/|$)/;
+
+const stripLocalePrefix = (pathname: string): string =>
+  pathname.replace(localePrefixPattern, '') || '/';
 
 export const BottomTabBar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
 
   const tabs = [
     { key: 'home', path: '/home', icon: () => <img src={logoIcon} alt="" className="w-5 h-5 rounded-full object-cover" />, label: t('tabs.home') },
@@ -15,7 +20,7 @@ export const BottomTabBar: React.FC = () => {
     { key: 'profile', path: '/profile', icon: User, label: t('tabs.profile') },
   ];
 
-  const activeTab = tabs.find((t) => location.pathname.startsWith(t.path))?.key || 'home';
+  const activeTab = tabs.find((t) => stripLocalePrefix(location.pathname).startsWith(t.path))?.key || 'home';
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-career-dark border-t border-slate-200 dark:border-slate-800">
@@ -26,7 +31,7 @@ export const BottomTabBar: React.FC = () => {
           return (
             <button
               key={tab.key}
-              onClick={() => navigate(tab.path)}
+              onClick={() => navigate(localizePath(locale, tab.path))}
               className={`flex flex-col items-center gap-0.5 px-4 py-1 rounded-xl transition-colors ${
                 isActive
                   ? 'text-blue-600 dark:text-blue-400'
