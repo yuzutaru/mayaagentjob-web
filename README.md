@@ -23,6 +23,17 @@ The UI is a single-page scrollable experience (`src/presentation/pages/HomeLandi
 7. **DualCtaBannersSection**: Candidate and Employer call-to-action banners.
 8. **HomeFooter**: Multi-column footer with quick links.
 
+### Dedicated feature routes
+- **`/cv-export` (CV Export)** — `CvExportPage.tsx`, reached from the "PDF & CV Export" feature card. A Resume.com-style **template gallery** grouped into **ATS-Friendly** (`ats-minimal`, `ats-classic`) and **Modern / Creative** (`apollo`, `terra`, `tempe`). Selecting a template opens a build step (import source + full editor) with a **live WYSIWYG A4 paper preview** and a **Download CV (PDF)** button that calls `builder.exportPdf(templateId)`.
+- **`/portfolio` (Portfolio Builder)** — `PortfolioBuilderPage.tsx`: import → customize → live site preview → export self-contained HTML or PDF CV.
+- **`/jobs` (Job Search)** — `FindJobsPage.tsx`: paginated job grid with category/keyword/country filtering.
+
+### Shared CV templates (preview = PDF)
+CV resume templates are authored as HTML/CSS in the **backend** (`mayaagentjob-backend-python/src/data/export/templates/`) and copied here by `npm run sync-api` into `src/data/cvTemplates/`. The web renders the **exact same HTML** the backend feeds to WeasyPrint:
+- `src/presentation/components/cv/resumeTemplateRenderer.ts` — TS twin of the backend renderer (must stay byte-identical; golden fixtures in `src/presentation/components/cv/__fixtures__/`).
+- `src/presentation/components/cv/ResumePreview.tsx` — isolated iframe of the shared HTML scaled to an A4 sheet.
+- `src/presentation/components/portfolio/TemplateThumb.tsx` — realistic miniature resumes from the same templates.
+
 ---
 
 ## 🛠️ Technical Stack
@@ -47,9 +58,9 @@ This repository adheres strictly to **Feature-Based Modular Clean Architecture**
 mayaagentjob-web/
 ├── src/
 │   ├── core/           # Shared infrastructure: i18n (TranslationContext.tsx, translations/en.ts, translations/id.ts), theme tokens (theme/themeTokens.ts)
-│   ├── data/           # Data layer: DTOs/mappers (NominatimDto.ts, UserDto.ts), repository implementations (UserLocationRepositoryImpl.ts, UserRepositoryImpl.ts, MockJobListingRepository.ts), mock data (homePortalMockData.ts, jobListingsMockData.ts)
-│   ├── domain/         # Domain layer: Pure entities (HomePortalContract.ts, JobListing.ts, CandidateOnboardingContract.ts, UserLocation.ts, User.ts), repository interfaces (IJobListingRepository, IUserLocationRepository, IUserRepository), use cases (FilterJobListingsUseCase.ts, GetUserLocationUseCase.ts, GetUserProfileUseCase.ts)
-│   ├── presentation/   # Presentation layer: Pages (HomeLandingPage.tsx), components (home/HeroSearchSection.tsx, JobListingSection.tsx, JobCategoriesBar.tsx, etc.), hooks (useJobListings.ts, useUserLocation.ts, useUserProfile.ts, useTheme.tsx, useCandidateOnboardingViewModel.ts)
+│   ├── data/           # Data layer: DTOs/mappers (NominatimDto.ts, UserDto.ts), repository implementations (UserLocationRepositoryImpl.ts, UserRepositoryImpl.ts, MockJobListingRepository.ts, ApiPortfolioRepository.ts), mock data (homePortalMockData.ts, cvTemplatesMockData.ts), synced CV templates (cvTemplates/*.html from backend)
+│   ├── domain/         # Domain layer: Pure entities (HomePortalContract.ts, JobListing.ts, CandidateOnboardingContract.ts, PortfolioContract.ts, CvTemplateContract.ts, ...), repository interfaces, use cases
+│   ├── presentation/   # Presentation layer: Pages (HomeLandingPage.tsx, CvExportPage.tsx, PortfolioBuilderPage.tsx, FindJobsPage.tsx), components (home/, portfolio/, cv/ incl. ResumePreview.tsx + resumeTemplateRenderer.ts, layout/, auth/), hooks (useJobListings.ts, usePortfolioBuilder.ts, ...)
 │   ├── shared/         # Common UI components, icons, and utilities
 │   └── test/           # Test infrastructure: setup.ts (localStorage mock for jsdom)
 ├── .ai-context.md      # Active platform context blueprint (local rules/contracts)
@@ -62,7 +73,7 @@ All code inside `src/domain/` (`HomePortalContract.ts`, `JobListing.ts`, `Candid
 - Automated tests in Vitest run instantaneously without native emulators or DOM mocks.
 - Tests are co-located next to source files with `.test.ts(x)` suffix.
 - `src/test/setup.ts` provides browser API mocks (localStorage) for jsdom environment.
-- **89 tests** across 13 test files covering DTO mapping, use cases, repositories (geolocation + job listing), hooks, and components.
+- **95 tests** across 17 test files covering DTO mapping, use cases, repositories (geolocation + job listing + portfolio), hooks, components, and CV-template golden-parity rendering.
 - Clear decoupling of domain logic from network client details and UI presentation frameworks.
 
 ---

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Resume</title>
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { margin: 0; background: #fff; }
+.page {
+  width: 210mm; min-height: 297mm;
+  padding: 14mm 16mm;
+  font-family: 'Liberation Sans', Arial, Helvetica, sans-serif;
+  font-size: 10.5pt; line-height: 1.45; color: #000;
+}
+.name { font-size: 22pt; font-weight: 700; letter-spacing: 0.01em; }
+.headline { font-size: 11.5pt; margin-top: 2px; color: #111; }
+.contact { font-size: 9.5pt; margin-top: 5px; color: #111; }
+.header-rule { border: 0; border-top: 1.2px solid #000; margin: 8px 0 2px; }
+.block-title {
+  font-size: 10.5pt; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; margin: 13px 0 4px;
+  border-bottom: 0.8px solid #999; padding-bottom: 2px;
+}
+.summary p { margin-top: 3px; text-align: justify; }
+.skill-group { margin-bottom: 4px; }
+.skill-cat { font-size: 10pt; font-weight: 700; text-transform: uppercase; }
+.skill-list { margin-top: 1px; }
+.exp-item { margin-bottom: 8px; }
+.exp-head { display: flex; justify-content: space-between; align-items: baseline; }
+.exp-role { font-size: 11pt; font-weight: 700; }
+.exp-date { font-size: 9pt; color: #111; white-space: nowrap; }
+.exp-company { font-size: 9.5pt; margin-top: 1px; }
+.exp-desc { margin-top: 2px; text-align: justify; }
+.exp-bullets { margin: 2px 0 0 16px; }
+.edu-item { margin-bottom: 6px; }
+.edu-degree { font-size: 10.5pt; font-weight: 700; }
+.edu-meta { font-size: 9.5pt; }
+.edu-desc { margin-top: 1px; }
+.cert-list { margin: 3px 0 0 16px; }
+</style>
+</head>
+<body>
+<article class="page">
+  <header>
+    <h1 class="name">{{name}}</h1>
+    <p class="headline">{{headline}}</p>
+    {{contact}}
+    <hr class="header-rule"/>
+  </header>
+  {{summary}}
+  {{skills}}
+  {{experience}}
+  {{education}}
+  {{certifications}}
+</article>
+</body>
+</html>

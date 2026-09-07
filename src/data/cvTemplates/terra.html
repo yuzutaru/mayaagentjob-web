@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Resume</title>
+<style>
+@page { size: A4; margin: 0; }
+:root { --accent: #0F766E; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { margin: 0; background: #fff; }
+.page {
+  width: 210mm; min-height: 297mm;
+  font-family: 'Liberation Sans', Arial, Helvetica, sans-serif;
+  font-size: 10pt; line-height: 1.5; color: #1F2937;
+  display: flex; flex-direction: column;
+}
+.name { font-size: 24pt; font-weight: 700; letter-spacing: -0.01em; color: #fff; }
+.headline { font-size: 11.5pt; font-weight: 400; margin-top: 2px; color: #D1FAE5; }
+.contact { font-size: 9pt; margin-top: 6px; color: #A7F3D0; }
+.cols { display: flex; flex: 1 1 auto; }
+.side {
+  flex: 0 0 64mm; padding: 12mm 10mm;
+  background: var(--accent); color: #fff;
+}
+.side .block-title { color: #fff; }
+.side .skill-cat { color: #D1FAE5; }
+.side .skill-list { color: #F0FDFA; }
+.content { flex: 1 1 auto; padding: 12mm 12mm 14mm 10mm; }
+.block-title {
+  font-size: 11pt; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.07em; color: var(--accent); margin: 14px 0 6px;
+}
+.side .block-title { margin-top: 18px; }
+.summary p { margin-top: 3px; text-align: justify; }
+.skill-group { margin-bottom: 8px; }
+.skill-cat { font-size: 9.5pt; font-weight: 700; text-transform: uppercase; }
+.skill-list { margin-top: 1px; font-size: 9.5pt; }
+.exp-item { margin-bottom: 11px; }
+.exp-head { display: flex; justify-content: space-between; align-items: baseline; }
+.exp-role { font-size: 11pt; font-weight: 700; color: #111827; }
+.exp-date { font-size: 9pt; color: #6B7280; white-space: nowrap; }
+.exp-company { font-size: 10pt; margin-top: 1px; color: var(--accent); font-weight: 700; }
+.exp-desc { margin-top: 3px; }
+.exp-bullets { margin: 3px 0 0 16px; }
+.edu-item { margin-bottom: 8px; }
+.edu-degree { font-size: 10.5pt; font-weight: 700; color: #111827; }
+.edu-meta { font-size: 9.5pt; color: #4B5563; }
+.edu-desc { margin-top: 1px; }
+.cert-list { margin: 3px 0 0 16px; }
+</style>
+</head>
+<body>
+<article class="page">
+  <div class="cols">
+    <aside class="side">
+      {{contact}}
+      {{skills}}
+    </aside>
+    <main class="content">
+      <h1 class="name">{{name}}</h1>
+      <p class="headline">{{headline}}</p>
+      {{summary}}
+      {{experience}}
+      {{education}}
+      {{certifications}}
+    </main>
+  </div>
+</article>
+</body>
+</html>

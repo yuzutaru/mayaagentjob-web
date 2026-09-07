@@ -1,0 +1,44 @@
+{
+  "templates": [
+    {
+      "id": "ats-minimal",
+      "name": "ATS Minimal",
+      "category": "ats",
+      "accentColor": "#1F2937",
+      "layout": "single",
+      "file": "ats-minimal.html"
+    },
+    {
+      "id": "ats-classic",
+      "name": "ATS Classic",
+      "category": "ats",
+      "accentColor": "#111827",
+      "layout": "single",
+      "file": "ats-classic.html"
+    },
+    {
+      "id": "apollo",
+      "name": "Apollo",
+      "category": "modern",
+      "accentColor": "#4F46E5",
+      "layout": "single",
+      "file": "apollo.html"
+    },
+    {
+      "id": "terra",
+      "name": "Terra",
+      "category": "modern",
+      "accentColor": "#0F766E",
+      "layout": "sidebar",
+      "file": "terra.html"
+    },
+    {
+      "id": "tempe",
+      "name": "Tempe",
+      "category": "modern",
+      "accentColor": "#B45309",
+      "layout": "centered",
+      "file": "tempe.html"
+    }
+  ]
+}

@@ -32,9 +32,9 @@ describe('CvExportPage', () => {
     expect(screen.getByText('Modern / Creative')).toBeTruthy();
     expect(screen.getByText('ATS Minimal')).toBeTruthy();
     expect(screen.getByText('ATS Classic')).toBeTruthy();
-    expect(screen.getByText('Modern Indigo')).toBeTruthy();
-    expect(screen.getByText('Modern Emerald')).toBeTruthy();
-    expect(screen.getByText('Banner Bold')).toBeTruthy();
+    expect(screen.getByText('Apollo')).toBeTruthy();
+    expect(screen.getByText('Terra')).toBeTruthy();
+    expect(screen.getByText('Tempe')).toBeTruthy();
   });
 
   it('flags ATS templates with a badge', () => {
@@ -53,10 +53,16 @@ describe('CvExportPage', () => {
 
   it('returns to the gallery when changing template', () => {
     renderPage();
-    fireEvent.click(screen.getByText('Banner Bold'));
+    fireEvent.click(screen.getByText('Tempe'));
     expect(screen.getByText(/Change template/)).toBeTruthy();
     fireEvent.click(screen.getByText(/Change template/));
     expect(screen.getByText('ATS-Friendly CV')).toBeTruthy();
     expect(screen.getByText('Modern / Creative')).toBeTruthy();
+  });
+
+  it('renders a live paper preview after selecting a template', () => {
+    renderPage();
+    fireEvent.click(screen.getByText('Apollo'));
+    expect(screen.getAllByTestId('resume-preview-apollo').length).toBeGreaterThan(0);
   });
 });

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Resume</title>
+<style>
+@page { size: A4; margin: 0; }
+:root { --accent: #B45309; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { margin: 0; background: #fff; }
+.page {
+  width: 210mm; min-height: 297mm;
+  padding: 15mm 18mm;
+  font-family: 'Liberation Sans', Arial, Helvetica, sans-serif;
+  font-size: 10.5pt; line-height: 1.5; color: #1F2937;
+}
+.header-block { text-align: center; padding-bottom: 6mm; }
+.name { font-size: 28pt; font-weight: 700; letter-spacing: 0.02em; color: var(--accent); }
+.headline { font-size: 12.5pt; margin-top: 3px; color: #374151; }
+.contact { font-size: 9.5pt; margin-top: 7px; color: #4B5563; }
+.header-rule {
+  border: 0; border-top: 1px solid var(--accent); margin: 4mm auto 0;
+  width: 90%; opacity: 0.5;
+}
+.block-title {
+  font-size: 11pt; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.09em; color: var(--accent); margin: 16px 0 6px;
+  text-align: center;
+}
+.section-title-rule { border: 0; border-top: 1px solid #E5E7EB; margin: 0 auto 4px; width: 30%; }
+.summary p { margin-top: 4px; text-align: justify; }
+.skills { text-align: center; }
+.skill-group { display: inline-block; vertical-align: top; margin: 0 8px 8px; text-align: left; }
+.skill-cat { font-size: 10pt; font-weight: 700; text-transform: uppercase; color: #111827; }
+.skill-list { margin-top: 1px; }
+.exp-item { margin-bottom: 11px; }
+.exp-head { display: flex; justify-content: space-between; align-items: baseline; }
+.exp-role { font-size: 11.5pt; font-weight: 700; color: #111827; }
+.exp-date { font-size: 9pt; color: #6B7280; white-space: nowrap; }
+.exp-company { font-size: 10pt; margin-top: 1px; color: var(--accent); font-weight: 700; }
+.exp-desc { margin-top: 3px; }
+.exp-bullets { margin: 3px 0 0 16px; }
+.edu-item { margin-bottom: 8px; text-align: center; }
+.edu-degree { font-size: 11pt; font-weight: 700; color: #111827; }
+.edu-meta { font-size: 9.5pt; color: #4B5563; }
+.edu-desc { margin-top: 1px; }
+.cert-list { list-style: none; text-align: center; margin-top: 4px; }
+.cert-list li { margin-bottom: 3px; }
+</style>
+</head>
+<body>
+<article class="page">
+  <header class="header-block">
+    <h1 class="name">{{name}}</h1>
+    <p class="headline">{{headline}}</p>
+    {{contact}}
+    <hr class="header-rule"/>
+  </header>
+  {{summary}}
+  {{skills}}
+  {{experience}}
+  {{education}}
+  {{certifications}}
+</article>
+</body>
+</html>

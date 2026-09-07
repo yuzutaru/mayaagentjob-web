@@ -21,6 +21,8 @@ import { samplePortfolio } from '../../data/mock/portfolioMockData';
 import { cvTemplatesMockData } from '../../data/mock/cvTemplatesMockData';
 import { PortfolioProvider } from '../../domain/entities/PortfolioContract';
 import { CvTemplateContract } from '../../domain/entities/CvTemplateContract';
+import { TemplateThumb } from '../components/portfolio/TemplateThumb';
+import { ResumePreview } from '../components/cv/ResumePreview';
 
 export const CvExportPage: React.FC = () => {
   const { t } = useTranslation();
@@ -208,19 +210,34 @@ export const CvExportPage: React.FC = () => {
                   </div>
 
                   <div className="lg:w-1/2 xl:w-2/5">
-                    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 lg:sticky lg:top-24">
-                      <p className="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">
-                        {t('cvExport.selectedTemplate')}
-                      </p>
-                      <TemplateThumb template={selectedTemplate} className="w-full max-w-[180px] mx-auto" />
-                      <h3 className="text-center font-bold mt-4">{selectedTemplate.name}</h3>
-                      <p className="text-center text-sm text-slate-500 dark:text-slate-400 mt-1">
+                    <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 lg:sticky lg:top-24">
+                      <div className="flex items-center justify-between gap-3 mb-4">
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-widest text-slate-400">
+                            {t('cvExport.selectedTemplate')}
+                          </p>
+                          <h3 className="font-bold">{selectedTemplate.name}</h3>
+                        </div>
+                        {selectedTemplate.category === 'ats' && (
+                          <span className="inline-flex items-center rounded-full bg-slate-900 dark:bg-emerald-500/15 text-white dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5">
+                            {t('cvExport.atsBadge')}
+                          </span>
+                        )}
+                      </div>
+                      <div className="max-h-[62vh] overflow-y-auto rounded-xl border border-slate-200 dark:border-slate-700">
+                        <ResumePreview
+                          templateId={selectedTemplate.id}
+                          profile={builder.profile}
+                          className="bg-white"
+                        />
+                      </div>
+                      <p className="text-sm text-slate-500 dark:text-slate-400 mt-3 text-center">
                         {selectedTemplate.description}
                       </p>
                       <button
                         onClick={handleDownloadCv}
                         disabled={builder.isExporting || !builder.profile.fullName}
-                        className="mt-6 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-semibold text-sm shadow-md shadow-emerald-500/25 transition-colors"
+                        className="mt-4 w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-semibold text-sm shadow-md shadow-emerald-500/25 transition-colors"
                       >
                         {builder.isExporting ? (
                           <Loader2 className="w-4 h-4 animate-spin" />
@@ -300,71 +317,3 @@ const TemplateGroup: React.FC<TemplateGroupProps> = ({
     </div>
   </div>
 );
-
-/* ── Mini template thumbnail (skeleton CV sheet) ── */
-
-interface TemplateThumbProps {
-  template: CvTemplateContract;
-  className?: string;
-}
-
-const TemplateThumb: React.FC<TemplateThumbProps> = ({ template, className = '' }) => {
-  const accent = template.accentColor || '#334155';
-  const isAts = template.isAts;
-  const isBanner = template.id === 'modern-banner';
-
-  return (
-    <div
-      className={`aspect-[210/297] overflow-hidden rounded-lg border border-slate-200 dark:border-slate-700 bg-white shadow-sm ${className}`}
-      aria-hidden
-    >
-      {isBanner ? (
-        <div className="h-full w-full flex flex-col" style={{ background: accent }}>
-          <div className="flex items-center gap-1.5 px-2 pt-2">
-            <div className="h-4 w-4 rounded-full bg-white/90" />
-            <div className="flex-1 space-y-1">
-              <div className="h-1.5 w-2/3 rounded bg-white/90" />
-              <div className="h-1 w-1/2 rounded bg-white/60" />
-            </div>
-          </div>
-          <div className="mt-auto space-y-1 p-2 bg-white">
-            <div className="h-1 w-3/4 rounded bg-slate-300" />
-            <div className="h-1 w-5/6 rounded bg-slate-200" />
-            <div className="h-1 w-2/3 rounded bg-slate-200" />
-          </div>
-        </div>
-      ) : (
-        <div className="flex h-full flex-col p-2">
-          <div
-            className="h-1 w-full rounded-full mb-2"
-            style={{ background: isAts ? '#94A3B8' : accent }}
-          />
-          <div className="flex items-center gap-1.5">
-            <div
-              className="h-4 w-4 shrink-0 rounded-full"
-              style={{ background: isAts ? '#CBD5E1' : `${accent}33`, border: isAts ? 'none' : `1px solid ${accent}` }}
-            />
-            <div className="space-y-1 flex-1">
-              <div className="h-1.5 w-2/3 rounded" style={{ background: isAts ? '#334155' : accent }} />
-              <div className="h-1 w-1/2 rounded bg-slate-200" />
-            </div>
-          </div>
-          <div className="mt-2 space-y-1">
-            {[0, 1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="h-1 rounded bg-slate-200 dark:bg-slate-200"
-                style={{ width: `${[90, 100, 80, 70][i]}%` }}
-              />
-            ))}
-          </div>
-          <div className="mt-2 space-y-1 border-t border-slate-100 pt-1.5">
-            {[0, 1].map((i) => (
-              <div key={i} className="h-1 w-full rounded bg-slate-100 dark:bg-slate-100" />
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};

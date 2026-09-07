@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Resume</title>
+<style>
+@page { size: A4; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { margin: 0; background: #fff; }
+.page {
+  width: 210mm; min-height: 297mm;
+  padding: 16mm 18mm;
+  font-family: 'Liberation Serif', 'Times New Roman', Times, serif;
+  font-size: 11pt; line-height: 1.5; color: #111;
+}
+.name { font-size: 26pt; font-weight: 700; letter-spacing: 0.02em; }
+.headline { font-size: 12.5pt; font-style: italic; margin-top: 2px; color: #333; }
+.contact { font-size: 9.5pt; margin-top: 6px; }
+.header-rule { border: 0; border-top: 1.4px solid #000; margin: 10px 0 4px; }
+.block-title {
+  font-size: 11.5pt; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.08em; margin: 15px 0 5px;
+}
+.block-title::after { display: block; content: ""; border-bottom: 0.8px solid #444; margin-top: 2px; }
+.summary p { margin-top: 4px; text-align: justify; }
+.skill-group { margin-bottom: 5px; }
+.skill-cat { font-size: 10.5pt; font-weight: 700; }
+.skill-list { margin-top: 1px; }
+.exp-item { margin-bottom: 10px; }
+.exp-head { display: flex; justify-content: space-between; align-items: baseline; }
+.exp-role { font-size: 12pt; font-weight: 700; }
+.exp-date { font-size: 9.5pt; font-style: italic; color: #333; white-space: nowrap; }
+.exp-company { font-size: 10pt; margin-top: 1px; font-weight: 700; }
+.exp-desc { margin-top: 3px; text-align: justify; }
+.exp-bullets { margin: 3px 0 0 18px; }
+.edu-item { margin-bottom: 7px; }
+.edu-degree { font-size: 11pt; font-weight: 700; }
+.edu-meta { font-size: 9.5pt; font-style: italic; }
+.edu-desc { margin-top: 1px; }
+.cert-list { margin: 4px 0 0 18px; }
+</style>
+</head>
+<body>
+<article class="page">
+  <header>
+    <h1 class="name">{{name}}</h1>
+    <p class="headline">{{headline}}</p>
+    {{contact}}
+    <hr class="header-rule"/>
+  </header>
+  {{summary}}
+  {{skills}}
+  {{experience}}
+  {{education}}
+  {{certifications}}
+</article>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Resume</title>
+<style>
+@page { size: A4; margin: 0; }
+:root { --accent: #0F766E; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { margin: 0; background: #fff; }
+.page {
+  width: 210mm; min-height: 297mm;
+  font-family: 'Liberation Sans', Arial, Helvetica, sans-serif;
+  font-size: 10pt; line-height: 1.5; color: #1F2937;
+  display: flex; flex-direction: column;
+}
+.name { font-size: 24pt; font-weight: 700; letter-spacing: -0.01em; color: #fff; }
+.headline { font-size: 11.5pt; font-weight: 400; margin-top: 2px; color: #D1FAE5; }
+.contact { font-size: 9pt; margin-top: 6px; color: #A7F3D0; }
+.cols { display: flex; flex: 1 1 auto; }
+.side {
+  flex: 0 0 64mm; padding: 12mm 10mm;
+  background: var(--accent); color: #fff;
+}
+.side .block-title { color: #fff; }
+.side .skill-cat { color: #D1FAE5; }
+.side .skill-list { color: #F0FDFA; }
+.content { flex: 1 1 auto; padding: 12mm 12mm 14mm 10mm; }
+.block-title {
+  font-size: 11pt; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.07em; color: var(--accent); margin: 14px 0 6px;
+}
+.side .block-title { margin-top: 18px; }
+.summary p { margin-top: 3px; text-align: justify; }
+.skill-group { margin-bottom: 8px; }
+.skill-cat { font-size: 9.5pt; font-weight: 700; text-transform: uppercase; }
+.skill-list { margin-top: 1px; font-size: 9.5pt; }
+.exp-item { margin-bottom: 11px; }
+.exp-head { display: flex; justify-content: space-between; align-items: baseline; }
+.exp-role { font-size: 11pt; font-weight: 700; color: #111827; }
+.exp-date { font-size: 9pt; color: #6B7280; white-space: nowrap; }
+.exp-company { font-size: 10pt; margin-top: 1px; color: var(--accent); font-weight: 700; }
+.exp-desc { margin-top: 3px; }
+.exp-bullets { margin: 3px 0 0 16px; }
+.edu-item { margin-bottom: 8px; }
+.edu-degree { font-size: 10.5pt; font-weight: 700; color: #111827; }
+.edu-meta { font-size: 9.5pt; color: #4B5563; }
+.edu-desc { margin-top: 1px; }
+.cert-list { margin: 3px 0 0 16px; }
+</style>
+</head>
+<body>
+<article class="page">
+  <div class="cols">
+    <aside class="side">
+      <p class="contact">james@example.com | (555) 555-5555 | Jakarta, ID | james.dev</p>
+      <section class="skills"><h2 class="block-title">Skills</h2><div class="skill-group"><h3 class="skill-cat">Language</h3><p class="skill-list">TypeScript, Python</p></div><div class="skill-group"><h3 class="skill-cat">Framework</h3><p class="skill-list">React</p></div></section>
+    </aside>
+    <main class="content">
+      <h1 class="name">James Appleseed</h1>
+      <p class="headline">Senior Software Engineer</p>
+      <section class="summary"><h2 class="block-title">Profile</h2><p>Experienced engineer passionate about clean architecture and developer tooling.</p></section>
+      <section class="experience"><h2 class="block-title">Experience</h2><article class="exp-item"><div class="exp-head"><h3 class="exp-role">Senior Engineer</h3><span class="exp-date">04/2016 - Present</span></div><p class="exp-company">Barnes &amp; Noble | New York</p><p class="exp-desc">Led checkout systems.</p><ul class="exp-bullets"><li>Open and close the registers</li><li>Mentored juniors</li></ul></article></section>
+      <section class="education"><h2 class="block-title">Education</h2><article class="edu-item"><h3 class="edu-degree">BSc</h3><p class="edu-meta">MIT | 2012 - 2016</p></article></section>
+      <section class="certifications"><h2 class="block-title">Certifications</h2><ul class="cert-list"><li>AWS SA (Amazon, 2021)</li></ul></section>
+    </main>
+  </div>
+</article>
+</body>
+</html>

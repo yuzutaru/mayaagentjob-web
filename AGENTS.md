@@ -16,9 +16,6 @@ npm run build
 # Preview production build locally
 npm run preview
 
-# Run lint checks
-npm run lint
-
 # Run type checks
 npx tsc --noEmit
 
@@ -28,9 +25,11 @@ npm run test
 # Run unit tests in watch mode
 npm run test:watch
 
-# Sync generated API types from backend OpenAPI spec (requires running backend)
+# Sync generated API types + shared CV templates from backend (requires running backend)
 cd .. && npm run sync-api
 ```
+
+> Note: there is **no `lint` npm script** in this repo — use `npx tsc --noEmit` (types) and `npm run test` + `npm run build` (correctness).
 
 ---
 
@@ -59,6 +58,7 @@ All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clea
    - Network payloads and API responses must be typed as Data Transfer Objects (DTOs) in `src/data/`.
    - Implement mapper functions in the Data layer to map DTOs into pure Domain entities.
    - The Presentation layer (`HomeLandingPage.tsx`) must only consume Domain entities, never raw DTOs.
+   - **Shared CV templates**: `src/data/cvTemplates/*.html` are copied from `mayaagentjob-backend-python/src/data/export/templates/` by `npm run sync-api`. Keep the web twin renderer `src/presentation/components/cv/resumeTemplateRenderer.ts` **byte-identical** to the backend `resume_template_renderer.py` — golden fixtures under `src/presentation/components/cv/__fixtures__/` are asserted in tests. Re-run `npm run sync-api` after backend template changes.
 
 3. **No Checkout Forms (Stripe Isolation)**:
    - Do **NOT** write Stripe form elements, checkout buttons, or invoice gateways in the web dashboard.
@@ -84,7 +84,7 @@ All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clea
    - Browser API mocks (localStorage, geolocation, fetch) go in `src/test/setup.ts`.
    - Pure domain/data tests (DTO mappers, use cases) need no DOM setup.
    - Hook/component tests should mock repository dependencies via `vi.mock`.
-   - Run `npm run test` for CI mode or `npm run test:watch` for development. **89 tests across 13 test files** currently pass with zero failures.
+   - Run `npm run test` for CI mode or `npm run test:watch` for development. **95 tests across 17 test files** currently pass with zero failures.
 
 9. **Autonomous Planning Protocol**:
    - Always output an Implementation Plan and Checklist (`task.md`) before writing any UI routes, layouts, or data hooks.
@@ -93,7 +93,7 @@ All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clea
 
 ## Design System & Layout Rules
 
-- **Full-Page Scrolling Layout**: The landing page (`src/presentation/pages/HomeLandingPage.tsx`) is a single-page scrollable experience: `HomeNavbar` → `HeroSearchSection` (portfolio/PDF positioning) → `FeaturesSection` (Portfolio Web Builder, PDF & CV Export, AI Job Matching) → `HowWeWorkSection` → `DualCtaBannersSection` (→ `/portfolio`, `/jobs`) → `HomeFooter`. The job-matching experience lives on a separate route: `FindJobsPage` (`/jobs`) hosts `JobCategoriesBar` (active category state lifted to page, drives `useJobListings` filter), `FloatingSearchBar`, `JobListingSection` (paginated grid, 9 per page, filtered by category + keyword search), and `PopularVacanciesSection`.
+- **Full-Page Scrolling Layout**: The landing page (`src/presentation/pages/HomeLandingPage.tsx`) is a single-page scrollable experience: `HomeNavbar` → `HeroSearchSection` (portfolio/PDF positioning) → `FeaturesSection` (Portfolio Web Builder, PDF & CV Export, AI Job Matching) → `HowWeWorkSection` → `DualCtaBannersSection` (→ `/portfolio`, `/jobs`) → `HomeFooter`. The "PDF & CV Export" card opens **`CvExportPage` at `/cv-export`** (template gallery → build step → live A4 paper preview → PDF download via `builder.exportPdf(templateId)`); the portfolio website builder lives at `/portfolio` (`PortfolioBuilderPage`). The job-matching experience lives on a separate route: `FindJobsPage` (`/jobs`) hosts `JobCategoriesBar` (active category state lifted to page, drives `useJobListings` filter), `FloatingSearchBar`, `JobListingSection` (paginated grid, 9 per page, filtered by category + keyword search), and `PopularVacanciesSection`.
 - **Tailwind CSS Utility Classes**: Use standard classes. Canvas background is `bg-slate-50` (light) / `bg-career-dark` (dark).
 - **Vanilla CSS (if needed)**: Declare animations and custom variables inside `src/index.css`.
 
@@ -102,4 +102,4 @@ All work in `mayaagentjob-web` must strictly follow **Feature-Based Modular Clea
 ## Tooling: RTK Usage
 
 - All git commands run transparently via the **RTK (Rust Token Killer)** hook (`rtk gain`, `rtk discover`).
-- Graphify is not available in this environment — code knowledge graphs are maintained manually.
+- **Graphify** (if the `graphify` CLI is available): keep the code knowledge graph fresh with `graphify update .` after large changes — graph output lives in `graphify-out/`. Rebuild it whenever you change the file layout or add routes/components.
