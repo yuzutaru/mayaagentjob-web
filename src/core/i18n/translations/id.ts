@@ -252,6 +252,7 @@ export const id = {
     startDate: 'Mulai',
     endDate: 'Selesai',
     present: 'Saat Ini',
+    currentlyWorking: 'Masih bekerja di sini',
     description: 'Deskripsi',
     projects: 'Proyek',
     addProject: 'Tambah proyek',

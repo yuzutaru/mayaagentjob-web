@@ -25,7 +25,7 @@ The UI is a single-page scrollable experience (`src/presentation/pages/HomeLandi
 
 ### Dedicated feature routes
 - **`/cv-export` (CV Export)** — `CvExportPage.tsx`, reached from the "PDF & CV Export" feature card. A **blank-start CV builder** that goes straight to a manual editor (`PortfolioEditor`) beside a **live WYSIWYG A4 paper preview** (`ResumePreview`) on a fixed default template (`ats-minimal`, resolved from `cvTemplatesMockData`). The **Download CV (PDF)** button calls `builder.exportPdf()` and is disabled until a full name is entered.
-- **`/portfolio` (Portfolio Builder)** — `PortfolioBuilderPage.tsx`: blank-start manual editor → customize → live site preview → export self-contained HTML or PDF CV.
+- **`/portfolio` (Portfolio Builder)** — `PortfolioBuilderPage.tsx`: blank-start manual editor → customize → live site preview → export self-contained HTML or PDF CV. Experience start/end dates use native month/year pickers (`<input type="month">`, stored as `YYYY-MM`); a **"Currently working here"** checkbox sets the end date to `null` (rendered as `Present`), while education dates stay free-form text. Label key: `portfolio.currentlyWorking`.
 - **`/jobs` (Job Search)** — `FindJobsPage.tsx`: paginated job grid with category/keyword/country filtering.
 
 > **Manual input only (for now):** platform import UI (`SourcePicker`/`ProviderImportForm` — GitHub/GitLab/Bitbucket/Dev.to/Stack Overflow/WakaTime/LinkedIn PDF) and "Load Sample" are hidden. Users start from a blank profile and enter their own data. Import components are kept in place for later re-enable; the backend import endpoints and `usePortfolioBuilder.import*` code remain intact.
@@ -75,7 +75,7 @@ All code inside `src/domain/` (`HomePortalContract.ts`, `JobListing.ts`, `Candid
 - Automated tests in Vitest run instantaneously without native emulators or DOM mocks.
 - Tests are co-located next to source files with `.test.ts(x)` suffix.
 - `src/test/setup.ts` provides browser API mocks (localStorage) for jsdom environment.
-- **93 tests** across 17 test files covering DTO mapping, use cases, repositories (geolocation + job listing + portfolio), hooks, components, and CV-template golden-parity rendering.
+- **99 tests** across 17 test files covering DTO mapping, use cases, repositories (geolocation + job listing + portfolio), hooks, components, and CV-template golden-parity rendering.
 - Clear decoupling of domain logic from network client details and UI presentation frameworks.
 
 ---

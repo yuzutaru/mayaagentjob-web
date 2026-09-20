@@ -194,15 +194,34 @@ export const PortfolioEditor: React.FC<PortfolioEditorProps> = ({ profile, updat
                   <input className={inputCls} value={e.company} onChange={(ev) => updateExperience(i, { company: ev.target.value })} />
                 </Field>
                 <Field label={t('portfolio.startDate')}>
-                  <input className={inputCls} value={e.startDate} onChange={(ev) => updateExperience(i, { startDate: ev.target.value })} />
+                  <input
+                    type="month"
+                    className={inputCls}
+                    value={e.startDate}
+                    onChange={(ev) => updateExperience(i, { startDate: ev.target.value })}
+                  />
                 </Field>
                 <Field label={t('portfolio.endDate')}>
-                  <input
-                    className={inputCls}
-                    placeholder={t('portfolio.present')}
-                    value={e.endDate ?? ''}
-                    onChange={(ev) => updateExperience(i, { endDate: ev.target.value || null })}
-                  />
+                  <div className="flex flex-col gap-2">
+                    {e.endDate !== null && (
+                      <input
+                        type="month"
+                        className={inputCls}
+                        value={e.endDate ?? ''}
+                        onChange={(ev) => updateExperience(i, { endDate: ev.target.value || null })}
+                      />
+                    )}
+                    <div className="inline-flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
+                      <input
+                        type="checkbox"
+                        className="rounded border-slate-300 dark:border-slate-700"
+                        checked={e.endDate === null}
+                        aria-label={t('portfolio.currentlyWorking')}
+                        onChange={(ev) => updateExperience(i, { endDate: ev.target.checked ? null : '' })}
+                      />
+                      <span>{t('portfolio.currentlyWorking')}</span>
+                    </div>
+                  </div>
                 </Field>
                 <div className="sm:col-span-2">
                   <Field label={t('portfolio.description')}>

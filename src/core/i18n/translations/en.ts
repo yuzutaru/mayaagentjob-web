@@ -252,6 +252,7 @@ export const en = {
     startDate: 'Start',
     endDate: 'End',
     present: 'Present',
+    currentlyWorking: 'Currently working here',
     description: 'Description',
     projects: 'Projects',
     addProject: 'Add project',
