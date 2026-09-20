@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from '../../../core/i18n/TranslationContext';
+import { inlineMarkdownToHtml, multilineToHtml } from '../../../core/format/inlineMarkdown';
 import { PortfolioProfile } from '../../../domain/entities/PortfolioContract';
 
 interface PortfolioPreviewProps {
@@ -86,7 +87,10 @@ export const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ profile }) =
       {/* Summary */}
       {profile.summary && (
         <Section label="About">
-          <p className="text-sm text-slate-300 leading-relaxed max-w-2xl">{profile.summary}</p>
+          <p
+            className="text-sm text-slate-300 leading-relaxed max-w-2xl"
+            dangerouslySetInnerHTML={{ __html: multilineToHtml(profile.summary) }}
+          />
         </Section>
       )}
 
@@ -122,7 +126,12 @@ export const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ profile }) =
                   <span style={{ color: accent }} className="font-semibold">{e.company}</span>
                   <span className="text-slate-400"> · {e.startDate} - {e.endDate || t('portfolio.present')}</span>
                 </div>
-                {e.description && <p className="text-sm text-slate-300 mt-1.5">{e.description}</p>}
+                {e.description && (
+                  <p
+                    className="text-sm text-slate-300 mt-1.5"
+                    dangerouslySetInnerHTML={{ __html: inlineMarkdownToHtml(e.description) }}
+                  />
+                )}
               </div>
             ))}
           </div>
@@ -137,7 +146,12 @@ export const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ profile }) =
               <div key={i} className="rounded-2xl p-5 border border-white/10 bg-white/[0.04] flex flex-col gap-2 hover:-translate-y-0.5 transition-transform">
                 {p.language && <div className="text-xs font-bold" style={{ color: accent }}>{p.language}</div>}
                 <h3 className="text-white font-bold text-sm">{p.name}</h3>
-                {p.description && <p className="text-xs text-slate-400 flex-1">{p.description}</p>}
+                {p.description && (
+                  <p
+                    className="text-xs text-slate-400 flex-1"
+                    dangerouslySetInnerHTML={{ __html: multilineToHtml(p.description) }}
+                  />
+                )}
                 {p.techStack.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 mt-2">
                     {p.techStack.slice(0, 6).map((tech) => (

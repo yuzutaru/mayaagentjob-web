@@ -1,4 +1,5 @@
 import { PortfolioProfile } from '../../../domain/entities/PortfolioContract';
+import { escapeHtml, inlineMarkdownToHtml, multilineToHtml } from '../../../core/format/inlineMarkdown';
 import { loadCvTemplateSkeleton } from './resumeTemplates';
 
 /**
@@ -10,14 +11,7 @@ import { loadCvTemplateSkeleton } from './resumeTemplates';
 
 export const EMPTY_FRAGMENT = '';
 
-function esc(value: string | null | undefined): string {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#x27;');
-}
+const esc = escapeHtml;
 
 function contact(profile: PortfolioProfile): string {
   const pieces = [profile.email, profile.phone, profile.location, profile.website].filter(Boolean);
@@ -31,7 +25,7 @@ function summary(profile: PortfolioProfile): string {
   return (
     '<section class="summary">' +
     '<h2 class="block-title">Summary</h2>' +
-    `<p>${esc(text)}</p>` +
+    `<p>${multilineToHtml(text)}</p>` +
     '</section>'
   );
 }
@@ -70,7 +64,7 @@ function experience(profile: PortfolioProfile): string {
     let company = `<p class="exp-company">${esc(exp.company)}`;
     if (exp.location) company += ` | ${esc(exp.location)}`;
     company += '</p>';
-    const desc = exp.description ? `<p class="exp-desc">${esc(exp.description)}</p>` : '';
+    const desc = exp.description ? `<p class="exp-desc">${inlineMarkdownToHtml(exp.description)}</p>` : '';
     const bullets = exp.highlights.length
       ? `<ul class="exp-bullets">${exp.highlights.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>`
       : '';
@@ -89,7 +83,7 @@ function education(profile: PortfolioProfile): string {
       meta += ` | ${esc(edu.startDate)} - ${esc(end)}`;
     }
     meta += '</p>';
-    const desc = edu.description ? `<p class="edu-desc">${esc(edu.description)}</p>` : '';
+    const desc = edu.description ? `<p class="edu-desc">${multilineToHtml(edu.description)}</p>` : '';
     items +=
       '<article class="edu-item">' +
       `<h3 class="edu-degree">${esc(edu.degree)}</h3>` +
