@@ -265,6 +265,7 @@ export const en = {
     addEducation: 'Add education',
     institution: 'Institution',
     degree: 'Degree',
+    graduationYear: 'Year of graduation',
     certifications: 'Certifications',
     addCertification: 'Add certification',
     certName: 'Certification',

@@ -265,6 +265,7 @@ export const id = {
     addEducation: 'Tambah pendidikan',
     institution: 'Institusi',
     degree: 'Gelar',
+    graduationYear: 'Tahun kelulusan',
     certifications: 'Sertifikasi',
     addCertification: 'Tambah sertifikasi',
     certName: 'Sertifikasi',

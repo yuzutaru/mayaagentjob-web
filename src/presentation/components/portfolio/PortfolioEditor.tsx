@@ -288,10 +288,16 @@ export const PortfolioEditor: React.FC<PortfolioEditorProps> = ({ profile, updat
             <div key={i} className="grid grid-cols-1 sm:grid-cols-[1fr_1fr_1fr_auto] gap-2 items-center">
               <input className={inputCls} placeholder={t('portfolio.institution')} value={e.institution} onChange={(ev) => updateEducation(i, { institution: ev.target.value })} />
               <input className={inputCls} placeholder={t('portfolio.degree')} value={e.degree} onChange={(ev) => updateEducation(i, { degree: ev.target.value })} />
-              <input className={inputCls} placeholder="2019 - 2024" value={e.startDate && e.endDate ? `${e.startDate} - ${e.endDate}` : e.startDate} onChange={(ev) => {
-                const parts = ev.target.value.split('-').map((x) => x.trim());
-                updateEducation(i, { startDate: parts[0] || '', endDate: parts[1] || null });
-              }} />
+              <select
+                className={inputCls}
+                value={e.endDate ?? ''}
+                onChange={(ev) => updateEducation(i, { endDate: ev.target.value || null })}
+              >
+                <option value="" disabled>{t('portfolio.graduationYear')}</option>
+                {graduationYears().map((year) => (
+                  <option key={year} value={String(year)}>{year}</option>
+                ))}
+              </select>
               <RemoveButton onClick={() => removeEducation(i)} />
             </div>
           ))}
@@ -429,6 +435,13 @@ function MarkdownTextarea({
       />
     </div>
   );
+}
+
+function graduationYears(): number[] {
+  const current = new Date().getFullYear();
+  const years: number[] = [];
+  for (let y = current + 4; y >= current - 40; y--) years.push(y);
+  return years;
 }
 
 function themeGradient(theme: string): string {
