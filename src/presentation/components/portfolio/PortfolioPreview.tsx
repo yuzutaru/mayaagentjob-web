@@ -177,7 +177,7 @@ export const PortfolioPreview: React.FC<PortfolioPreviewProps> = ({ profile }) =
           {profile.education.map((e, i) => (
             <div key={i} className="mb-4">
               <h3 className="text-white font-bold text-sm">{e.degree}</h3>
-              <div className="text-xs text-slate-400">{e.institution} · {e.startDate} - {e.endDate || t('portfolio.present')}</div>
+              <div className="text-xs text-slate-400">{[e.institution, e.endDate].filter(Boolean).join(' · ')}</div>
             </div>
           ))}
         </Section>

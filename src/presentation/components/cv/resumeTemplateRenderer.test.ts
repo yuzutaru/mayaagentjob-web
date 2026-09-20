@@ -43,7 +43,7 @@ function goldenSample(): PortfolioProfile {
       },
     ],
     education: [
-      { institution: 'MIT', degree: 'BSc', startDate: '2012', endDate: '2016', description: '' },
+      { institution: 'MIT', degree: 'BSc', startDate: '', endDate: '2016', description: '' },
     ],
     certifications: [{ name: 'AWS SA', issuer: 'Amazon', year: '2021', url: '' }],
   };

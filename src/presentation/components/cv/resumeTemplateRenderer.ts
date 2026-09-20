@@ -78,9 +78,8 @@ function education(profile: PortfolioProfile): string {
   let items = '';
   for (const edu of profile.education) {
     let meta = `<p class="edu-meta">${esc(edu.institution)}`;
-    if (edu.startDate || edu.endDate) {
-      const end = edu.endDate || 'Present';
-      meta += ` | ${esc(edu.startDate)} - ${esc(end)}`;
+    if (edu.endDate) {
+      meta += ` | ${esc(edu.endDate)}`;
     }
     meta += '</p>';
     const desc = edu.description ? `<p class="edu-desc">${multilineToHtml(edu.description)}</p>` : '';
