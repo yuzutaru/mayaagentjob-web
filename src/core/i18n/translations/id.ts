@@ -254,6 +254,8 @@ export const id = {
     present: 'Saat Ini',
     currentlyWorking: 'Masih bekerja di sini',
     description: 'Deskripsi',
+    bold: 'Tebal',
+    italic: 'Miring',
     projects: 'Proyek',
     addProject: 'Tambah proyek',
     projectName: 'Proyek',

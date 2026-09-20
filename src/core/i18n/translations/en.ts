@@ -254,6 +254,8 @@ export const en = {
     present: 'Present',
     currentlyWorking: 'Currently working here',
     description: 'Description',
+    bold: 'Bold',
+    italic: 'Italic',
     projects: 'Projects',
     addProject: 'Add project',
     projectName: 'Project',

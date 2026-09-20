@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus, Trash2 } from 'lucide-react';
+import { Bold, Italic, Plus, Trash2 } from 'lucide-react';
 import { useTranslation } from '../../../core/i18n/TranslationContext';
 import {
   PortfolioProfile,
@@ -19,6 +19,8 @@ interface PortfolioEditorProps {
 const inputCls =
   'w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500/50';
 const labelCls = 'text-sm font-medium text-slate-700 dark:text-slate-300';
+const toolbarBtnCls =
+  'inline-flex items-center justify-center w-7 h-7 rounded-md text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors';
 const sectionTitleCls =
   'text-base font-bold text-slate-900 dark:text-white border-b border-slate-200 dark:border-slate-800 pb-2 mb-4';
 
@@ -224,9 +226,11 @@ export const PortfolioEditor: React.FC<PortfolioEditorProps> = ({ profile, updat
                   </div>
                 </Field>
                 <div className="sm:col-span-2">
-                  <Field label={t('portfolio.description')}>
-                    <textarea className={`${inputCls} min-h-[70px]`} value={e.description} onChange={(ev) => updateExperience(i, { description: ev.target.value })} />
-                  </Field>
+                  <MarkdownTextarea
+                    label={t('portfolio.description')}
+                    value={e.description}
+                    onChange={(next) => updateExperience(i, { description: next })}
+                  />
                 </div>
               </div>
             </div>
@@ -358,6 +362,72 @@ function Field({ label, children, span }: { label: string; children: React.React
 function EmptyHint({ text }: { text: string }) {
   return (
     <p className="text-sm text-slate-400 dark:text-slate-500 italic px-1">{text}</p>
+  );
+}
+
+/**
+ * Multiline textarea with a compact Bold/Italic toolbar. The value is stored
+ * as inline markdown (`**bold**` / `*italic*`) which the preview and CV
+ * renderers convert back to HTML.
+ */
+function MarkdownTextarea({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  onChange: (next: string) => void;
+}) {
+  const { t } = useTranslation();
+  const ref = React.useRef<HTMLTextAreaElement | null>(null);
+
+  const wrapSelection = (marker: string) => {
+    const el = ref.current;
+    if (!el) return;
+    const start = el.selectionStart ?? 0;
+    const end = el.selectionEnd ?? 0;
+    const selected = value.slice(start, end) || 'text';
+    onChange(`${value.slice(0, start)}${marker}${selected}${marker}${value.slice(end)}`);
+    const caretStart = start + marker.length;
+    requestAnimationFrame(() => {
+      el.focus();
+      el.setSelectionRange(caretStart, caretStart + selected.length);
+    });
+  };
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="flex items-center justify-between">
+        <span className={labelCls}>{label}</span>
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={() => wrapSelection('**')}
+            className={toolbarBtnCls}
+            aria-label={t('portfolio.bold')}
+            title={t('portfolio.bold')}
+          >
+            <Bold className="w-4 h-4" />
+          </button>
+          <button
+            type="button"
+            onClick={() => wrapSelection('*')}
+            className={toolbarBtnCls}
+            aria-label={t('portfolio.italic')}
+            title={t('portfolio.italic')}
+          >
+            <Italic className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+      <textarea
+        ref={ref}
+        className={`${inputCls} min-h-[280px]`}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+    </div>
   );
 }
 

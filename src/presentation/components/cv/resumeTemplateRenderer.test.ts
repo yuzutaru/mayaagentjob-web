@@ -25,7 +25,7 @@ function goldenSample(): PortfolioProfile {
     phone: '(555) 555-5555',
     location: 'Jakarta, ID',
     website: 'james.dev',
-    summary: 'Experienced engineer passionate about clean architecture and developer tooling.',
+    summary: 'Experienced engineer passionate about clean architecture\nand developer tooling.',
     skills: [
       { name: 'TypeScript', category: 'Language' },
       { name: 'Python', category: 'Language' },
@@ -38,7 +38,7 @@ function goldenSample(): PortfolioProfile {
         startDate: '04/2016',
         endDate: null,
         location: 'New York',
-        description: 'Led checkout systems.',
+        description: 'Led **checkout** systems *with* a team.\nShipped across regions.',
         highlights: ['Open and close the registers', 'Mentored juniors'],
       },
     ],
@@ -73,6 +73,69 @@ describe('resumeTemplateRenderer (web twin)', () => {
     expect(html).not.toContain('<script>');
     expect(html).toContain('&quot;quoted&quot;');
     expect(html).toContain('&amp;');
+  });
+
+  it('renders inline markdown bold/italic in experience descriptions', () => {
+    const profile = {
+      ...createEmptyPortfolio(),
+      fullName: 'Ada Lovelace',
+      experience: [
+        {
+          company: 'ACME',
+          role: 'Engineer',
+          startDate: '2020',
+          endDate: null,
+          location: '',
+        description: 'Led **checkout** systems *with* a team.\nShipped across regions.',
+          highlights: [],
+        },
+      ],
+    };
+    const html = renderResumeHtml('ats-minimal', profile);
+    expect(html).toContain('Led <strong>checkout</strong> systems <em>with</em> a team.');
+  });
+
+  it('preserves newlines in summary and experience description', () => {
+    const profile = {
+      ...createEmptyPortfolio(),
+      fullName: 'Ada',
+      summary: 'Line one\nLine two',
+      experience: [
+        {
+          company: 'C',
+          role: 'R',
+          startDate: '',
+          endDate: null,
+          location: '',
+          description: 'A\nB',
+          highlights: [],
+        },
+      ],
+    };
+    const html = renderResumeHtml('ats-minimal', profile);
+    expect(html).toContain('Line one<br>Line two');
+    expect(html).toContain('A<br>B');
+  });
+
+  it('does not let description markdown smuggle raw HTML', () => {
+    const profile = {
+      ...createEmptyPortfolio(),
+      fullName: 'Ada',
+      experience: [
+        {
+          company: 'C',
+          role: 'R',
+          startDate: '',
+          endDate: null,
+          location: '',
+          description: '**<script>alert(1)</script>**',
+          highlights: [],
+        },
+      ],
+    };
+    const html = renderResumeHtml('ats-minimal', profile);
+    expect(html).not.toContain('<script>');
+    expect(html).toContain('&lt;script&gt;');
   });
 
   it('omits empty sections', () => {
