@@ -423,7 +423,7 @@ function MarkdownTextarea({
       </div>
       <textarea
         ref={ref}
-        className={`${inputCls} min-h-[120px]`}
+        className={`${inputCls} min-h-[280px]`}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
